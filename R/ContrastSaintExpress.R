@@ -9,7 +9,7 @@
 #' @family modelling
 #'
 #' @examples
-#' seout <- prolfqua_data("data_SAINTe_output")
+#' seout <- prolfqua::prolfqua_data("data_SAINTe_output")
 #' cse <- ContrastsSAINTexpress$new(seout$list)
 #' stopifnot(dim(cse$to_wide()) == c(64,13))
 #' cse$get_contrast_sides()
@@ -43,12 +43,12 @@ ContrastsSAINTexpress <- R6::R6Class(
       self$modelName = modelName
 
       if ( "AvgIntensity" %in% colnames(contrastsdf)) {
-        self$contrast_result <- contrastsdf |> mutate(log2_EFCs = log2(FoldChange),
+        self$contrast_result <- contrastsdf |> dplyr::mutate(log2_EFCs = log2(FoldChange),
                                                       avgAbd = log2(AvgIntensity),
                                                       modelName = modelName)
 
       }else{
-        self$contrast_result <- contrastsdf |> mutate(log2_EFCs = log2(FoldChange),
+        self$contrast_result <- contrastsdf |> dplyr::mutate(log2_EFCs = log2(FoldChange),
                                                       avgAbd = log2(AvgSpec) ,
                                                       modelName = modelName)
 
@@ -79,8 +79,8 @@ ContrastsSAINTexpress <- R6::R6Class(
     #' @param all should all columns be returned (default FALSE)
     #' @param global use a global linear function (determined by get_linfct)
     get_contrasts = function(all = FALSE){
-      res <- self$contrast_result |> select(
-        all_of(c(self$subject_Id,
+      res <- self$contrast_result |> dplyr::select(
+        tidyselect::all_of(c(self$subject_Id,
                  "modelName",
                  "Bait",
                  "avgAbd",
@@ -96,7 +96,7 @@ ContrastsSAINTexpress <- R6::R6Class(
     #' @param BFDRthreshold BDRF threshold
     #' @return \code{\link{ContrastsPlotter}}
     get_Plotter = function(FCthreshold = 1, SaintScore = 0.75, BFDRthreshold = 0.1){
-      res <- ContrastsPlotter$new(
+      res <- prolfqua::ContrastsPlotter$new(
         self$contrast_result,
         subject_Id = self$subject_Id,
         fcthresh = FCthreshold,
@@ -113,7 +113,7 @@ ContrastsSAINTexpress <- R6::R6Class(
     #' @return data.frame
     to_wide = function(columns = c("SaintScore", "BFDR")){
       contrast_minimal <- self$get_contrasts()
-      contrasts_wide <- pivot_model_contrasts_2_Wide(contrast_minimal,
+      contrasts_wide <- prolfqua::pivot_model_contrasts_2_Wide(contrast_minimal,
                                                      subject_Id = self$subject_Id,
                                                      columns = c("log2_EFCs", columns),
                                                      contrast = 'Bait')

@@ -12,7 +12,7 @@ Wrapper to results produced by SAINTexpress
 SAINTexpress writes
 }
 \examples{
-seout <- prolfqua_data("data_SAINTe_output")
+seout <- prolfqua::prolfqua_data("data_SAINTe_output")
 cse <- ContrastsSAINTexpress$new(seout$list)
 stopifnot(dim(cse$to_wide()) == c(64,13))
 cse$get_contrast_sides()

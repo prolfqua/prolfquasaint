@@ -9,4 +9,13 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    prolfqua,
+    prolfquapp,
+    tidyr
 RoxygenNote: 7.3.1
+Roxygen: list(r6 = TRUE)
+Depends: 
+    R (>= 4.1)
+biocViews: MassSpectrometry, Proteomics, Metabolomics, ExperimentHubSoftware, Normalization, Preprocessing, QualityControl

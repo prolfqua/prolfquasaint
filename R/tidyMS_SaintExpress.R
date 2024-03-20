@@ -31,9 +31,9 @@ add_protein_lengths <- function(
 #' @param CorTCol is it control or TRUE (SaintExpress speach)
 #' @examples
 #'
-#' bb <- prolfqua_data('data_IonstarProtein_subsetNorm')
-#' bb$config <- old2new(config = bb$config$clone( deep = TRUE))
-#' xx <- LFQData$new(bb$data, bb$config)
+#' bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
+#' bb$config <- prolfqua::old2new(config = bb$config$clone( deep = TRUE))
+#' xx <- prolfqua::LFQData$new(bb$data, bb$config)
 #' exampleDat <- xx$data |> dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
 #' # sample protein lengths
 #'
@@ -72,20 +72,20 @@ protein_2localSaint <- function(xx,
     stop("columns not found ", paste0(reqcolumns[which(!reqcolumns %in% colnames(xx))]))
   }
   res <- list()
-  bait <- xx |> dplyr::select(!!!syms(c(IP_name,baitCol,CorTCol)))
+  bait <- xx |> dplyr::select(!!!rlang::syms(c(IP_name,baitCol,CorTCol)))
   bait <- dplyr::distinct(bait)
   res$bait <- bait
-  prey <- xx |> dplyr::select(proteinID = !!sym(proteinID),
-                              proteinLength = !!sym(proteinLength),
-                              geneNames = !!sym(geneNames))
-  prey <- distinct(prey)
+  prey <- xx |> dplyr::select(proteinID = !!rlang::sym(proteinID),
+                              proteinLength = !!rlang::sym(proteinLength),
+                              geneNames = !!rlang::sym(geneNames))
+  prey <- dplyr::distinct(prey)
   res$prey <- prey
   inter <- xx |>
-    dplyr::select(!!!syms(c(IP_name,
+    dplyr::select(!!!rlang::syms(c(IP_name,
                             baitCol,
                             proteinID ,
                             quantcolumn))) |>
-    filter(!!sym(quantcolumn) > 0)
+    filter(!!rlang::sym(quantcolumn) > 0)
   res$inter <- inter
   res <- res[c("inter","prey","bait")]
   return(res)

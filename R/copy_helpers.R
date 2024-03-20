@@ -6,7 +6,7 @@
 #' copy_SAINTe_doc(workdir = tempdir())
 copy_SAINTe_doc <- function(workdir = getwd()){
   runscripts <- c("SaintExpress/SAINTexpress-manual.docx")
-  .scriptCopyHelperVec(runscripts, workdir = workdir)
+  prolfqua:::.scriptCopyHelperVec(runscripts, workdir = workdir)
 }
 
 .run_markdown_with_params <-
