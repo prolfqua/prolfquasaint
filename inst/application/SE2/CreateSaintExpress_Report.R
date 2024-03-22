@@ -74,9 +74,9 @@ ata$factorDepth <- 2
 ata$hierarchy[["protein_Id"]] = "protein"
 
 if (REPORTDATA$spc) {
-    ata$workIntensity = "razor.spectral.count"
+  ata$workIntensity = "razor.spectral.count"
 } else {
-    ata$workIntensity = "razor.intensity"
+  ata$workIntensity = "razor.intensity"
 }
 
 
@@ -99,8 +99,8 @@ RESULTS$annotation <- lfqdata$factors()
 intdata <- lfqdata$data
 
 intdata <- dplyr::inner_join(intdata ,
-                      dplyr::distinct( dplyr::select(pdata, protein, protein.length)),
-                      by = c(protein_Id = "protein"),multiple = "all")
+                             dplyr::distinct( dplyr::select(pdata, protein, protein.length)),
+                             by = c(protein_Id = "protein"),multiple = "all")
 
 localSAINTinput <- prolfquasaint::protein_2localSaint(
   intdata,
@@ -178,13 +178,13 @@ rm(list = setdiff(ls(), c("REPORTDATA","ZIPDIR","treat"))) # delete all variable
 SEP <- REPORTDATA
 
 text <- c(
-"The LC-MS data was processed using the [FragPipe proteomics pipeline](https://fragpipe.nesvilab.org/).",
-"The protein quantification results were extracted from the _combined_protein.tsv_ file.",
-"We used the columns with the ",
-if(SEP$spc){'Spectral Count' }else{'Intensity'},
-" suffix, which stores the ",
-if(SEP$spc){'total number of PSMs in support of the protein identification'} else {'normalized protein intensity using the sequences after razor assignment'},
-". For more information about the _combined_protein.tsv_ file see [FragPipe output tutorial]( https://fragpipe.nesvilab.org/docs/tutorial_fragpipe_outputs.html#combined_proteintsv)."
+  "The LC-MS data was processed using the [FragPipe proteomics pipeline](https://fragpipe.nesvilab.org/).",
+  "The protein quantification results were extracted from the _combined_protein.tsv_ file.",
+  "We used the columns with the ",
+  if(SEP$spc){'Spectral Count' }else{'Intensity'},
+  " suffix, which stores the ",
+  if(SEP$spc){'total number of PSMs in support of the protein identification'} else {'normalized protein intensity using the sequences after razor assignment'},
+  ". For more information about the _combined_protein.tsv_ file see [FragPipe output tutorial]( https://fragpipe.nesvilab.org/docs/tutorial_fragpipe_outputs.html#combined_proteintsv)."
 )
 
 
@@ -193,11 +193,11 @@ text <- paste(text, collapse="")
 rmarkdown::render("SaintExpressReportMsFragger.Rmd",
                   params = list(sep = REPORTDATA, textpreprocessing = text),
                   output_format = bookdown::html_document2())
-                  #,envir = new.env())
+#,envir = new.env())
 
 
 file.copy("SaintExpressReportMsFragger.html",
- file.path(ZIPDIR, paste0(treat, "SaintExpressReportMsFragger.html")),
- overwrite = TRUE)
+          file.path(ZIPDIR, paste0(treat, "SaintExpressReportMsFragger.html")),
+          overwrite = TRUE)
 
 
