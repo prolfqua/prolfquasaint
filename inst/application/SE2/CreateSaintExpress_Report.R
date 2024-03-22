@@ -101,13 +101,14 @@ intdata <- lfqdata$data
 intdata <- dplyr::inner_join(intdata ,
                       dplyr::distinct( dplyr::select(pdata, protein, protein.length)),
                       by = c(protein_Id = "protein"),multiple = "all")
-localSAINTinput <- prolfqua::protein_2localSaint(
+
+localSAINTinput <- prolfquasaint::protein_2localSaint(
   intdata,
   quantcolumn = lfqdata$config$table$get_response())
 
 
 RESULTS <- c(RESULTS, localSAINTinput)
-resSaint <- prolfqua::runSaint(localSAINTinput, spc = REPORTDATA$spc)
+resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
 
 
 resSaint$list <- dplyr::inner_join(prot_annot, resSaint$list,
@@ -120,7 +121,7 @@ RESULTS <- c(RESULTS, resSaint)
 # write analysis results
 
 # Prepare result visualization and render report
-cse <- prolfqua::ContrastsSAINTexpress$new(resSaint$list)
+cse <- prolfquasaint::ContrastsSAINTexpress$new(resSaint$list)
 
 
 resContrasts <- cse$get_contrasts()
@@ -168,7 +169,7 @@ if (nrow(sigg) > 0) {
   }
 }
 
-prolfqua::copy_SAINTe_doc(workdir = ZIPDIR)
+prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
 
 SEP <- REPORTDATA
 
