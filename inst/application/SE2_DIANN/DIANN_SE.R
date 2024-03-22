@@ -100,7 +100,7 @@ atable$hierarchy[["peptide_Id"]] <- c("Stripped.Sequence")
 atable$set_response("Peptide.Quantity")
 atable$hierarchyDepth <- 1
 
-res <- prolfquapp::dataset_set_factors(atable, peptide, SAINT = TRUE)
+res <- prolfquapp::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
 
 # attach annotation to combined_protein data
 # annotation$raw.file <- basename(annotation$relative.path)
@@ -136,12 +136,12 @@ if(BFABRIC$Normalization == "vsn"){
   tr$lfq$config$table$is_response_transformed <- FALSE
   lfqdataProt <- tr$lfq
 } else if (BFABRIC$Normalization == "robscale"){
-    lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "robscale")
-    tr <- lfqTrans$get_Transformer()
-    tr <- lfqTrans$get_Transformer()
-    tr$intensity_array(exp, force = TRUE)
-    tr$lfq$config$table$is_response_transformed <- FALSE
-    lfqdataProt <- tr$lfq
+  lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "robscale")
+  tr <- lfqTrans$get_Transformer()
+  tr <- lfqTrans$get_Transformer()
+  tr$intensity_array(exp, force = TRUE)
+  tr$lfq$config$table$is_response_transformed <- FALSE
+  lfqdataProt <- tr$lfq
 } else {
   lfqdataProt <- lfqdataProt
 }
@@ -167,7 +167,8 @@ RESULTS$annotation <- lfqdata$factors()
 
 intdata <- dplyr::inner_join(protAnnot$row_annot, lfqdata$data, multiple = "all")
 
-localSAINTinput <- prolfqua::protein_2localSaint(
+#debug(protein_2localSaint)
+localSAINTinput <- prolfquasaint::protein_2localSaint(
   intdata,
   quantcolumn = lfqdata$config$table$get_response(),
   proteinID = "protein_Id",
@@ -176,10 +177,11 @@ localSAINTinput <- prolfqua::protein_2localSaint(
   baitCol = "Bait_",
   CorTCol = "CONTROL")
 
-localSAINTinput$inter$srm_sum_N |> summary()
+localSAINTinput$inter$exp_transformedIntensity |> summary()
 
 RESULTS <- c(RESULTS, localSAINTinput)
-resSaint <- prolfqua::runSaint(localSAINTinput, spc = REPORTDATA$spc)
+#debug(prolfquasaint::runSaint)
+resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
 
 
 resSaint$list <- dplyr::inner_join(protAnnot$row_annot, resSaint$list,
@@ -195,7 +197,7 @@ RESULTS <- c(RESULTS, resSaint)
 # write analysis results
 
 # Prepare result visualization and render report
-cse <- prolfqua::ContrastsSAINTexpress$new(resSaint$list)
+cse <- prolfquasaint::ContrastsSAINTexpress$new(resSaint$list)
 
 resContrasts <- cse$get_contrasts()
 

@@ -85,7 +85,7 @@ protein_2localSaint <- function(xx,
                             baitCol,
                             proteinID ,
                             quantcolumn))) |>
-    filter(!!rlang::sym(quantcolumn) > 0)
+    dplyr::filter(!!rlang::sym(quantcolumn) > 0)
   res$inter <- inter
   res <- res[c("inter","prey","bait")]
   return(res)
@@ -121,9 +121,11 @@ runSaint <- function(si,
 
   if (Sys.info()["sysname"] == "Windows") {
     if (spc) {
-      exeS2 <- system_file("SaintExpress/bin/Windows64/SAINTexpress-spc.exe", package = "prolfqua")
+      exeS2 <- prolfqua::system_file("SaintExpress/bin/Windows64/SAINTexpress-spc.exe",
+                           package = "prolfquasaint")
     } else {
-      exeS2 <- system_file("SaintExpress/bin/Windows64/SAINTexpress-int.exe", package = "prolfqua")
+      exeS2 <- prolfqua::system_file("SaintExpress/bin/Windows64/SAINTexpress-int.exe",
+                           package = "prolfquasaint")
     }
 
     out <- system2(exeS2,
@@ -134,9 +136,11 @@ runSaint <- function(si,
                    minimized = TRUE)
   } else if (Sys.info()["sysname"] == "Linux") {
     if (spc) {
-      exeS2 <-  system_file("SaintExpress/bin/Linux64/SAINTexpress-spc",  package = "prolfqua")
+      exeS2 <-  prolfqua::system_file("SaintExpress/bin/Linux64/SAINTexpress-spc",
+                            package = "prolfquasaint")
     } else {
-      exeS2 <-  system_file("SaintExpress/bin/Linux64/SAINTexpress-int", package = "prolfqua")
+      exeS2 <-  prolfqua::system_file("SaintExpress/bin/Linux64/SAINTexpress-int",
+                            package = "prolfquasaint")
     }
 
     out <- system2(exeS2,

@@ -21,6 +21,6 @@ copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {
     if (run_script) {"application/SE2/CreateSaintExpress_Report.R"},
     if (run_script) {"application/SE2_DIANN/DIANN_SE.R"}
   )
-  prolfqua:::.scriptCopyHelperVec(runscripts, workdir = workdir, packagename = "prolfquapp")
+  prolfqua:::.scriptCopyHelperVec(runscripts, workdir = workdir, packagename = "prolfquasaint")
 }
 
