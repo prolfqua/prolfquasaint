@@ -6,24 +6,22 @@ prolfquasaint::copy_SAINT_express(run_script = FALSE)
 # Read b-fabric related information
 yml <- yaml::read_yaml("config.yaml")
 
-
 BFABRIC <- list()
 BFABRIC$workunitID = yml$job_configuration$workunit_id
 BFABRIC$workunitURL = paste0("https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",BFABRIC$workunitID,"&tab=details")
-
-#BFABRIC$projectID = yml$job_configuration$project_id
 BFABRIC$orderID = yml$job_configuration$order_id
-
 BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], "resource_id")
 BFABRIC$inputID = tail(BFABRIC$inputID,n = 1)
 BFABRIC$inputURL = purrr::map_chr(yml$job_configuration$input[[1]], "resource_url")
 BFABRIC$inputURL = tail(BFABRIC$inputURL, n = 1)
-BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
 
+BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
 BFABRIC$Normalization <- yml$application$parameters$`11|Normalization`
 BFABRIC$Transformation <- yml$application$parameters$`51|Transformation`
+BFABRIC$nrPeptides <- 1
 
 ZIPDIR = paste0("C",BFABRIC$orderID,"WU",BFABRIC$workunitID)
+
 dir.create(ZIPDIR)
 
 
@@ -66,15 +64,11 @@ if (length(fasta.files) == 0) {
   stop()
 }
 
-
-
 peptide <- prolfquapp::read_DIANN_output(
   diann.path = diann.path,
   fasta.file = fasta.files,
-  nrPeptides = 1,
+  nrPeptides = BFABRIC$nrPeptides,
   Q.Value = 0.01 )
-
-
 
 prot_annot <- prolfquapp::dataset_protein_annot(
   peptide,
@@ -89,8 +83,6 @@ nr <- sum(annot$raw.file %in% sort(unique(peptide$raw.file)))
 logger::log_info("nr : ", nr, " files annotated")
 annot$Relative.Path <- NULL
 peptide <- dplyr::inner_join(annot, peptide, multiple = "all")
-
-
 
 #### this comes from DIANN
 atable <- prolfqua::AnalysisTableAnnotation$new()
@@ -107,14 +99,12 @@ res <- prolfquapp::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
 # annotation <- dplyr::mutate(annotation, raw.file = gsub(".raw", "", raw.file))
 # annotation$relative.path <- NULL
 
-
 atable <- res$atable
 peptide <- res$msdata
 
 # Preprocess data - aggregate proteins.
 config <- prolfqua::AnalysisConfiguration$new(atable)
 adata <- prolfqua::setup_analysis(peptide, config)
-length(unique(adata$protein_Id))
 
 lfqdata <- prolfqua::LFQData$new(adata, config)
 lfqdata$remove_small_intensities()
@@ -127,37 +117,8 @@ lfqdataProt <- prolfquapp::aggregate_data(
   agg_method = "topN")
 
 
-# transformation on
-
-if(BFABRIC$Normalization == "vsn"){
-  lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "vsn")
-  tr <- lfqTrans$get_Transformer()
-  tr$intensity_array(exp, force = TRUE)
-  tr$lfq$config$table$is_response_transformed <- FALSE
-  lfqdataProt <- tr$lfq
-} else if (BFABRIC$Normalization == "robscale"){
-  lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "robscale")
-  tr <- lfqTrans$get_Transformer()
-  tr <- lfqTrans$get_Transformer()
-  tr$intensity_array(exp, force = TRUE)
-  tr$lfq$config$table$is_response_transformed <- FALSE
-  lfqdataProt <- tr$lfq
-} else {
-  lfqdataProt <- lfqdataProt
-}
-
-if (BFABRIC$Transformation == "sqrt") {
-  tr <- lfqdataProt$get_Transformer()
-  tr$intensity_array(sqrt, force = TRUE)
-  tr$lfq$config$table$is_response_transformed <- FALSE
-  lfqdataProt <- tr$lfq
-} else if(BFABRIC$Transformation == "log2") {
-  tr <- lfqdataProt$get_Transformer()
-  tr$intensity_array(log2, force = TRUE)
-  tr$lfq$config$table$is_response_transformed <- FALSE
-  lfqdataProt <- tr$lfq
-}
-
+lfqdataProt <- proflquasaint::normalize_exp(lfqdataProt, normalization = BFABRIC$Normalization)
+lfqdataProt <- proflquasaint::transform_force(lfqdataProt, transformation = BFABRIC$Transformation)
 
 lfqdata <- lfqdataProt
 protAnnot <- prolfqua::ProteinAnnotation$new(lfqdata , prot_annot)
