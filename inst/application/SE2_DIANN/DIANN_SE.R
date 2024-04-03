@@ -18,7 +18,8 @@ BFABRIC$inputURL = tail(BFABRIC$inputURL, n = 1)
 BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
 BFABRIC$Normalization <- yml$application$parameters$`11|Normalization`
 BFABRIC$Transformation <- yml$application$parameters$`51|Transformation`
-BFABRIC$nrPeptides <- 1
+BFABRIC$nrPeptides <- yml$application$parameters$`$61|nrPeptides`
+
 
 ZIPDIR = paste0("C",BFABRIC$orderID,"WU",BFABRIC$workunitID)
 
