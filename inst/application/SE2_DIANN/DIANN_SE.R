@@ -14,7 +14,7 @@ BFABRIC <- prolfquasaint::get_params_Bfabric(yml)
 
 # list with data used with the markdown report
 REPORTDATA <- prolfquasaint::apparams_Bfabric(yml)
-REPORTDATA$nrPeptides <- 2
+
 ZIPDIR = paste0("C",BFABRIC$orderID,"WU", BFABRIC$workunitID, "NRpep", REPORTDATA$nrPeptides )
 dir.create(ZIPDIR)
 
