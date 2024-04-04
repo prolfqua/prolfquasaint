@@ -15,7 +15,7 @@ BFABRIC <- prolfquasaint::get_params_Bfabric(yml)
 # list with data used with the markdown report
 REPORTDATA <- prolfquasaint::apparams_Bfabric(yml)
 
-ZIPDIR = paste0("C",BFABRIC$orderID,"WU", BFABRIC$workunitID, "NRpep", REPORTDATA$nrPeptides )
+ZIPDIR = paste0("C",BFABRIC$orderID,"WU", BFABRIC$workunitID )
 dir.create(ZIPDIR)
 
 # Prefix for exported files
@@ -163,7 +163,7 @@ gs <- lfqdata$get_Summariser()
 RESULTS$MissingInformation <- gs$interaction_missing_stats()$data
 RESULTS$MissingInformation$isotopeLabel <- NULL
 RESULTS$listFile <- NULL
-writexl::write_xlsx(RESULTS, path = file.path(ZIPDIR,paste0(treat, "_data.xlsx")))
+writexl::write_xlsx(RESULTS, path = file.path(ZIPDIR,paste0(treat,"WU",BFABRIC$workunitID, "_data.xlsx")))
 
 REPORTDATA$BFABRIC <- BFABRIC
 REPORTDATA$lfqdata_transformed <- lfqdata_transformed
@@ -214,6 +214,6 @@ rmarkdown::render("SaintExpressReportMsFragger.Rmd",
 
 
 file.copy("SaintExpressReportMsFragger.html",
-          file.path(ZIPDIR, paste0(treat, "SaintExpressReportMsFragger.html")),
+          file.path(ZIPDIR, paste0(treat, paste0("SaintExpressReportMsFragger_WU",BFABRIC$workunitID,".html"))),
           overwrite = TRUE)
 
