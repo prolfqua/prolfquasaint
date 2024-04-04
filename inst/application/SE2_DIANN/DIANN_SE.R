@@ -6,35 +6,17 @@ prolfquasaint::copy_SAINT_express(run_script = FALSE)
 # Read b-fabric related information
 yml <- yaml::read_yaml("config.yaml")
 
-BFABRIC <- list()
-BFABRIC$workunitID = yml$job_configuration$workunit_id
-BFABRIC$workunitURL = paste0("https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",BFABRIC$workunitID,"&tab=details")
-BFABRIC$orderID = yml$job_configuration$order_id
-BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], "resource_id")
-BFABRIC$inputID = tail(BFABRIC$inputID,n = 1)
-BFABRIC$inputURL = purrr::map_chr(yml$job_configuration$input[[1]], "resource_url")
-BFABRIC$inputURL = tail(BFABRIC$inputURL, n = 1)
-
-BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
-BFABRIC$Normalization <- yml$application$parameters$`11|Normalization`
-BFABRIC$Transformation <- yml$application$parameters$`51|Transformation`
-BFABRIC$nrPeptides <- yml$application$parameters$`$61|nrPeptides`
+BFABRIC <- prolfquasaint::get_params_Bfabric(yml)
 
 
-ZIPDIR = paste0("C",BFABRIC$orderID,"WU",BFABRIC$workunitID)
 
-dir.create(ZIPDIR)
 
 
 # list with data used with the markdown report
-REPORTDATA <- list()
-
-# Application parameters
-REPORTDATA$spc <- FALSE
-REPORTDATA$FCthreshold <- if(!is.null(as.numeric( yml$application$parameters$`22|FCthreshold` ))){
-  as.numeric( yml$application$parameters$`22|FCthreshold` ) } else { 2 }
-REPORTDATA$FDRthreshold <- if(!is.null(as.numeric( yml$application$parameters$`21|BFDRsignificance` ))){
-  as.numeric(yml$application$parameters$`21|BFDRsignificance`) } else {0.1}
+REPORTDATA <- prolfquasaint::apparams_Bfabric(yml)
+REPORTDATA$nrPeptides <- 2
+ZIPDIR = paste0("C",BFABRIC$orderID,"WU", BFABRIC$workunitID, "NRpep", REPORTDATA$nrPeptides )
+dir.create(ZIPDIR)
 
 # Prefix for exported files
 treat <- "DIANN_"
@@ -68,7 +50,7 @@ if (length(fasta.files) == 0) {
 peptide <- prolfquapp::read_DIANN_output(
   diann.path = diann.path,
   fasta.file = fasta.files,
-  nrPeptides = BFABRIC$nrPeptides,
+  nrPeptides = REPORTDATA$nrPeptides,
   Q.Value = 0.01 )
 
 prot_annot <- prolfquapp::dataset_protein_annot(
@@ -118,8 +100,8 @@ lfqdataProt <- prolfquapp::aggregate_data(
   agg_method = "topN")
 
 
-lfqdataProt <- proflquasaint::normalize_exp(lfqdataProt, normalization = BFABRIC$Normalization)
-lfqdataProt <- proflquasaint::transform_force(lfqdataProt, transformation = BFABRIC$Transformation)
+lfqdataProt <- prolfquasaint::normalize_exp(lfqdataProt, normalization = REPORTDATA$Normalization)
+lfqdataProt <- prolfquasaint::transform_force(lfqdataProt, transformation = REPORTDATA$Transformation)
 
 lfqdata <- lfqdataProt
 protAnnot <- prolfqua::ProteinAnnotation$new(lfqdata , prot_annot)
@@ -142,7 +124,6 @@ localSAINTinput <- prolfquasaint::protein_2localSaint(
 localSAINTinput$inter$exp_transformedIntensity |> summary()
 
 RESULTS <- c(RESULTS, localSAINTinput)
-#debug(prolfquasaint::runSaint)
 resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
 
 
@@ -211,7 +192,7 @@ if (nrow(sigg) > 0) {
   }
 }
 
-prolfqua::copy_SAINTe_doc(workdir = ZIPDIR)
+prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
 
 SEP <- REPORTDATA
 

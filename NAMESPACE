@@ -2,8 +2,10 @@
 
 export(ContrastsSAINTexpress)
 export(add_protein_lengths)
+export(apparams_Bfabric)
 export(copy_SAINT_express)
 export(copy_SAINTe_doc)
+export(get_params_Bfabric)
 export(normalize_exp)
 export(protein_2localSaint)
 export(runSaint)

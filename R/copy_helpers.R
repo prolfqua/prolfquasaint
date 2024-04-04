@@ -6,7 +6,7 @@
 #' copy_SAINTe_doc(workdir = tempdir())
 copy_SAINTe_doc <- function(workdir = getwd()){
   runscripts <- c("SaintExpress/SAINTexpress-manual.docx")
-  prolfqua:::.scriptCopyHelperVec(runscripts, workdir = workdir)
+  prolfqua::scriptCopyHelperVec(runscripts, workdir = workdir)
 }
 
 
@@ -21,6 +21,6 @@ copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {
     if (run_script) {"application/SE2/CreateSaintExpress_Report.R"},
     if (run_script) {"application/SE2_DIANN/DIANN_SE.R"}
   )
-  prolfqua:::.scriptCopyHelperVec(runscripts, workdir = workdir, packagename = "prolfquasaint")
+  prolfqua::scriptCopyHelperVec(runscripts, workdir = workdir, packagename = "prolfquasaint")
 }
 

@@ -67,7 +67,7 @@ DT::datatable(SEP$lfqdata_transformed$factors(),
 ## Peptide and Protein identification
 
 
-In total `r SEP$lfqdata_transformed$hierarchy_counts()[2]` proteins (min. 2 peptides per protein) were identified and quantified using `r sp_string` across all samples (we will denote this as the protein abundance estimate from here on). Bar plot below shows the number of identified proteins per raw file.
+In total `r SEP$lfqdata_transformed$hierarchy_counts()[2]` proteins, with minimum of **`r SEP$nrPeptides`** peptides per protein, were identified and quantified using `r sp_string` across all samples (we will denote this as the protein abundance estimate from here on). Bar plot below shows the number of identified proteins per raw file.
 
 ```{r nrPerSample, fig.cap="Number of identified proteins across raw files.", fig.with=10, fig.height=7}
 sum <- SEP$lfqdata_transformed$get_Summariser()
