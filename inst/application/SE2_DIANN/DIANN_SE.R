@@ -194,7 +194,7 @@ prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
 SEP <- REPORTDATA
 
 saveRDS(REPORTDATA, file = "REPORTDATA.rds")
-rm(list = setdiff(ls(), c("REPORTDATA","ZIPDIR","treat","yml"))) # delete all variables not needed for rendering
+rm(list = setdiff(ls(), c("REPORTDATA","ZIPDIR","treat","yml","BFABRIC"))) # delete all variables not needed for rendering
 SEP <- REPORTDATA
 
 fragPipeDIA <- names(yml$application$input) == "FragPipeDIA-dataset"
@@ -205,12 +205,14 @@ text <-  c( "The LC-MS data was processed using the ",
 
 text <- paste(text, collapse = "")
 
+fileNameHTML <-  paste0("SaintExpressReportMsFragger_WU",BFABRIC$workunitID,".html")
+
 rmarkdown::render("SaintExpressReportMsFragger.Rmd",
                   params = list(sep = REPORTDATA, textpreprocessing = text),
-                  output_format = bookdown::html_document2())
+                  output_format = bookdown::html_document2(),
+                  output_file = fileNameHTML)
 
-
-file.copy("SaintExpressReportMsFragger.html",
-          file.path(ZIPDIR, paste0(treat, paste0("SaintExpressReportMsFragger_WU",BFABRIC$workunitID,".html"))),
+file.copy(fileNameHTML,
+          file.path(ZIPDIR, fileNameHTML),
           overwrite = TRUE)
 

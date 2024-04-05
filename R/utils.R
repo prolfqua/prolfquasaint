@@ -12,7 +12,8 @@ apparams_Bfabric <- function(yml) {
   REPORTDATA$Normalization <- yml$application$parameters$`11|Normalization`
   REPORTDATA$Transformation <- yml$application$parameters$`51|Transformation`
   nrPeptides <- yml$application$parameters$`61|nrPeptides`
-  REPORTDATA$nrPeptides <- if(!is.null( nrPeptides )) { nrPeptides } else { 2 }
+  REPORTDATA$nrPeptides <- if(!is.null( nrPeptides )) { as.numeric(nrPeptides) } else { 2 }
+  if(is.null( nrPeptides )) {warning("no prameter nrPeptides in yaml setting to 2")}
   return(REPORTDATA)
 }
 
