@@ -9,9 +9,6 @@ yml <- yaml::read_yaml("config.yaml")
 BFABRIC <- prolfquasaint::get_params_Bfabric(yml)
 
 
-
-
-
 # list with data used with the markdown report
 REPORTDATA <- prolfquasaint::apparams_Bfabric(yml)
 

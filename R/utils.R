@@ -11,7 +11,7 @@ apparams_Bfabric <- function(yml) {
     as.numeric(yml$application$parameters$`21|BFDRsignificance`) } else {0.1}
   REPORTDATA$Normalization <- yml$application$parameters$`11|Normalization`
   REPORTDATA$Transformation <- yml$application$parameters$`51|Transformation`
-  nrPeptides <- yml$application$parameters$`$61|nrPeptides`
+  nrPeptides <- yml$application$parameters$`61|nrPeptides`
   REPORTDATA$nrPeptides <- if(!is.null( nrPeptides )) { nrPeptides } else { 2 }
   return(REPORTDATA)
 }
