@@ -32,7 +32,7 @@ REPORTDATA <- list()
 REPORTDATA$spc <- if ( yml$application$parameters$`31|SpcInt` == "Spectral Count") { TRUE } else {FALSE}
 REPORTDATA$FCthreshold <- as.numeric( yml$application$parameters$`22|FCthreshold` )
 REPORTDATA$FDRthreshold <- as.numeric(yml$application$parameters$`21|BFDRsignificance`)
-
+REPORTDATA$nrPeptides <- 2 # as.numeric(yml$application$parameters$`61|nrPeptides`)
 # Prefix for exported files
 treat <- "FRAGPIPE_"
 
@@ -41,7 +41,7 @@ annotation <- readr::read_csv("dataset.csv")
 colnames(annotation) <- tolower(make.names(colnames(annotation)))
 annotation
 
-pp <- prolfqua::tidy_FragPipe_combined_protein("combined_protein.tsv")
+pp <- prolfquapp::tidy_FragPipe_combined_protein("combined_protein.tsv")
 prot_annot <- dplyr::select(pp,protein , description) |> dplyr::distinct()
 pp$raw.file |> unique()
 
@@ -56,7 +56,7 @@ stopifnot(sum(annotation$raw.file %in% pp$raw.file) > 0) # check that some files
 pdata <- dplyr::inner_join(annotation, pp, multiple = "all" , by = "raw.file")
 
 # filter for more than 2 peptides per protein
-pdata <- pdata |> dplyr::filter(combined.total.peptides > 1)
+pdata <- pdata |> dplyr::filter(combined.total.peptides >= REPORTDATA$nrPeptides)
 # configure prolfqua
 ata <- prolfqua::AnalysisTableAnnotation$new()
 
