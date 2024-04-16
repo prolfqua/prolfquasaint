@@ -20,6 +20,7 @@ treat <- "DIANN_"
 # load data
 
 dataset <- dir(".", pattern = 'dataset.csv', full.names = TRUE, recursive = TRUE)[1]
+
 annot <- read.csv(dataset)
 annot <- data.frame(lapply(annot, as.character))
 annot <- annot |> dplyr::mutate(
@@ -32,30 +33,14 @@ annotation <- annot
 colnames(annotation) <- tolower(make.names(colnames(annotation)))
 
 path = "."
-diann.path <- grep("report\\.tsv$|diann-output\\.tsv", dir(path = path, recursive = TRUE), value = TRUE)
-fasta.files <- grep("*\\.fasta$|*\\.fas$", dir(path = path, recursive = TRUE), value = TRUE)
-
-if (any(grepl("database[0-9]*.fasta$", fasta.files))) {
-  fasta.files <- grep("database[0-9]*.fasta$", fasta.files, value = TRUE)
-}
-
-if (length(fasta.files) == 0) {
-  logger::log_error("No fasta file found!")
-  stop()
-}
+files <- prolfquasaint::get_files_DIANN(path)
 
 peptide <- prolfquapp::read_DIANN_output(
-  diann.path = diann.path,
-  fasta.file = fasta.files,
+  diann.path = files$reporttsv,
+  fasta.file = files$fasta,
   nrPeptides = REPORTDATA$nrPeptides,
   Q.Value = 0.01 )
 
-prot_annot <- prolfquapp::dataset_protein_annot(
-  peptide,
-  c("protein_Id" = "Protein.Group"),
-  protein_annot = "fasta.header",
-  more_columns = c("nrPeptides", "fasta.id", "Protein.Group.2", "protein_length")
-)
 
 
 annot$raw.file[ !annot$raw.file %in% sort(unique(peptide$raw.file)) ]
@@ -84,10 +69,22 @@ peptide <- res$msdata
 
 # Preprocess data - aggregate proteins.
 config <- prolfqua::AnalysisConfiguration$new(atable)
+
 adata <- prolfqua::setup_analysis(peptide, config)
 
 lfqdata <- prolfqua::LFQData$new(adata, config)
 lfqdata$remove_small_intensities()
+
+prot_annot <- prolfquapp::build_protein_annot(
+  lfqdata,
+  peptide,
+  idcol = c("protein_Id" = "Protein.Group"),
+  cleaned_protein_id =  "Protein.Group.2",
+  protein_description = "fasta.header",
+  nr_children  = "nrPeptides",
+  more_columns = c( "fasta.id", "protein_length")
+)
+
 
 
 logger::log_info("AGGREGATING PEPTIDE DATA!")
@@ -101,12 +98,10 @@ lfqdataProt <- prolfquasaint::normalize_exp(lfqdataProt, normalization = REPORTD
 lfqdataProt <- prolfquasaint::transform_force(lfqdataProt, transformation = REPORTDATA$Transformation)
 
 lfqdata <- lfqdataProt
-protAnnot <- prolfqua::ProteinAnnotation$new(lfqdata , prot_annot)
-
 RESULTS <- list() # RESULT is stored in excel table
 RESULTS$annotation <- lfqdata$factors()
 
-intdata <- dplyr::inner_join(protAnnot$row_annot, lfqdata$data, multiple = "all")
+intdata <- dplyr::inner_join(prot_annot$row_annot, lfqdata$data, multiple = "all")
 
 #debug(protein_2localSaint)
 localSAINTinput <- prolfquasaint::protein_2localSaint(
@@ -121,10 +116,11 @@ localSAINTinput <- prolfquasaint::protein_2localSaint(
 localSAINTinput$inter$exp_transformedIntensity |> summary()
 
 RESULTS <- c(RESULTS, localSAINTinput)
+
 resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
 
 
-resSaint$list <- dplyr::inner_join(protAnnot$row_annot, resSaint$list,
+resSaint$list <- dplyr::inner_join(prot_annot$row_annot, resSaint$list,
                                    by = c(protein_Id = "Prey"),
                                    keep = TRUE , multiple = "all")
 
@@ -134,11 +130,17 @@ RESULTS <- list() # RESULT is stored in excel table
 RESULTS$annotation <- lfqdata$factors()
 
 RESULTS <- c(RESULTS, resSaint)
+names(RESULTS)
+
+names(localSAINTinput) <- paste("input",names(localSAINTinput), sep="_")
+RESULTS <- c(RESULTS, localSAINTinput)
+names(RESULTS)
+
 # write analysis results
+
 
 # Prepare result visualization and render report
 cse <- prolfquasaint::ContrastsSAINTexpress$new(resSaint$list)
-
 resContrasts <- cse$get_contrasts()
 
 
@@ -160,13 +162,14 @@ gs <- lfqdata$get_Summariser()
 RESULTS$MissingInformation <- gs$interaction_missing_stats()$data
 RESULTS$MissingInformation$isotopeLabel <- NULL
 RESULTS$listFile <- NULL
+
 writexl::write_xlsx(RESULTS, path = file.path(ZIPDIR,paste0(treat,"WU",BFABRIC$workunitID, "_data.xlsx")))
 
 REPORTDATA$BFABRIC <- BFABRIC
 REPORTDATA$lfqdata_transformed <- lfqdata_transformed
 REPORTDATA$sig <- sig
 REPORTDATA$resContrasts <- resContrasts
-REPORTDATA$prot_annot <- dplyr::rename(prot_annot, protein = protein_Id)
+REPORTDATA$prot_annot <- dplyr::rename(prot_annot$row_annot, protein = protein_Id)
 
 
 tmp <- REPORTDATA$pups$data

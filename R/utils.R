@@ -75,3 +75,21 @@ transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none
   }
   return(lfqdataProt)
 }
+
+#' find DIANN files
+#' @export
+get_files_DIANN <- function(path) {
+  diann.path <- grep("report\\.tsv$|diann-output\\.tsv", dir(path = path, recursive = TRUE), value = TRUE)
+  fasta.files <- grep("*\\.fasta$|*\\.fas$", dir(path = path, recursive = TRUE), value = TRUE)
+
+  if (any(grepl("database[0-9]*.fasta$", fasta.files))) {
+    fasta.files <- grep("database[0-9]*.fasta$", fasta.files, value = TRUE)
+  }
+  if (length(fasta.files) == 0) {
+    logger::log_error("No fasta file found!")
+    stop()
+  }
+
+  return(list(reporttsv = diann.path, fasta = fasta.files))
+}
+
