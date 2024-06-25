@@ -81,7 +81,7 @@ prot_annot <- prolfquapp::build_protein_annot(
   idcol = c("protein_Id" = "Protein.Group"),
   cleaned_protein_id =  "Protein.Group.2",
   protein_description = "fasta.header",
-  nr_children  = "nrPeptides",
+  exp_nr_children  = "nrPeptides",
   more_columns = c( "fasta.id", "protein_length")
 )
 
