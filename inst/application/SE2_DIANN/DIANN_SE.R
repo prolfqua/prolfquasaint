@@ -35,11 +35,17 @@ colnames(annotation) <- tolower(make.names(colnames(annotation)))
 path = "."
 files <- prolfquasaint::get_files_DIANN(path)
 
-peptide <- prolfquapp::read_DIANN_output(
+undebug(prolfquasaint::read_DIANN_output)
+
+undebug(prolfquapp::diann_read_output)
+
+report2 <- prolfquapp::diann_read_output(data = readr::read_tsv(files$reporttsv),Lib.PG.Q.Value = 0.01, PG.Q.Value = 0.05)
+
+peptide <- read_DIANN_output(
   diann.path = files$reporttsv,
   fasta.file = files$fasta,
   nrPeptides = REPORTDATA$nrPeptides,
-  Q.Value = 0.01 )
+  q_value = 0.01 )
 
 
 
@@ -57,7 +63,7 @@ atable$hierarchy[["peptide_Id"]] <- c("Stripped.Sequence")
 atable$set_response("Peptide.Quantity")
 atable$hierarchyDepth <- 1
 
-res <- prolfquapp::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
+res <- prolfquasaint::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
 
 # attach annotation to combined_protein data
 # annotation$raw.file <- basename(annotation$relative.path)
