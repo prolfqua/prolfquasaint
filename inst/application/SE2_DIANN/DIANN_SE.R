@@ -35,13 +35,8 @@ colnames(annotation) <- tolower(make.names(colnames(annotation)))
 path = "."
 files <- prolfquasaint::get_files_DIANN(path)
 
-undebug(prolfquasaint::read_DIANN_output)
 
-undebug(prolfquapp::diann_read_output)
-
-report2 <- prolfquapp::diann_read_output(data = readr::read_tsv(files$reporttsv),Lib.PG.Q.Value = 0.01, PG.Q.Value = 0.05)
-
-peptide <- read_DIANN_output(
+peptide <- prolfquasaint::read_DIANN_output(
   diann.path = files$reporttsv,
   fasta.file = files$fasta,
   nrPeptides = REPORTDATA$nrPeptides,
