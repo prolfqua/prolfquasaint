@@ -35,7 +35,7 @@ read_DIANN_output <- function(diann.path,
   peptide <- dplyr::inner_join(nrPEP, peptide, by = c("Protein.Group","Protein.Group.2"))
   # we need to add the fasta.header information.
 
-  fasta_annot <- prolfquapp::get_annot_from_fasta(fasta.file, rev = rev, isUniprot = isUniprot)
+  fasta_annot <- prolfquapp::get_annot_from_fasta(fasta.file, pattern_decoys = rev, isUniprot = isUniprot)
   message("Percent of Proteins with description:" ,mean(peptide$Protein.Group.2 %in% fasta_annot$proteinname) * 100)
 
 
@@ -69,7 +69,7 @@ read_DIANN_output <- function(diann.path,
 #'   #atable$fileName = "channel"
 #'   atable$hierarchy[["protein_Id"]] <- c("Protein")
 #'   atable$hierarchy[["peptide_Id"]] <- c("Peptide")
-#'   tmp <- prolfquapp::dataset_set_factors_deprecated(atable, res[[i]] )
+#'   tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]] )
 #'   cat(i, " : " , length(tmp$atable$factors), "factors : ", paste(tmp$atable$factors, collapse = "; "), "\n")
 #' }
 #'
