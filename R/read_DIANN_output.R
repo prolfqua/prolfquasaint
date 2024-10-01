@@ -6,10 +6,11 @@
 #' @import data.table
 #' @export
 #' @examples
-#'
-#' x <- get_DIANN_files("inst/application/DIANN/2517219/")
+#' \dontrun{
+#' x <- prolfquapp::get_DIANN_files("inst/application/DIANN/2517219/")
 #' xd <- read_DIANN_output(x$data, x$fasta)
 #' debug(read_DIANN_output)
+#' }
 read_DIANN_output <- function(diann.path,
                               fasta.file,
                               nrPeptides = 2,
