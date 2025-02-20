@@ -39,7 +39,9 @@ treat <- "FRAGPIPE_"
 # load data
 annotation <- readr::read_csv("dataset.csv")
 colnames(annotation) <- tolower(make.names(colnames(annotation)))
-annotation
+
+ci <- grep("^group*",names(annotation))
+annotation[[ci]] <- gsub(" ","_", annotation[[ci]])
 
 pp <- prolfquapp::tidy_FragPipe_combined_protein("combined_protein.tsv")
 prot_annot <- dplyr::select(pp,protein , description) |> dplyr::distinct()
@@ -108,7 +110,7 @@ localSAINTinput <- prolfquasaint::protein_2localSaint(
 
 
 RESULTS <- c(RESULTS, localSAINTinput)
-resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
+resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc, CLEANUP=FALSE)
 
 
 resSaint$list <- dplyr::inner_join(prot_annot, resSaint$list,
@@ -134,8 +136,6 @@ sig <- resContrasts |>
 # Transform data for PCA visualization etc
 tt <- lfqdata$get_Transformer()$log2()
 lfqdata_transformed <- tt$lfq
-
-
 
 REPORTDATA$pups <- prolfqua::UpSet_interaction_missing_stats(lfqdata$data, lfqdata$config,tr = 2)
 RESULTS$InputData <- lfqdata$to_wide()$data
@@ -169,8 +169,22 @@ if (nrow(sigg) > 0) {
   }
 }
 
-prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
+resContrasts |> dplyr::group_by(Bait) |> tidyr::nest() -> resContr
+if (nrow(resContr) > 0) {
+  for (i in 1:nrow(resContr)) {
+    tmp <- resContr$data[[i]]
+    tmp$firstID <- sapply(tmp$Prey, function(x){strsplit(x,";")[[1]][1]})
+    tmp <- prolfqua::get_UniprotID_from_fasta_header(tmp, idcolumn = "firstID")
+    filename <- paste0("Bait_", resContr$Bait[i] , ".rnk")
+    write.table(data.frame(tmp$UniprotID, tmp$log2_EFCs),
+                file = file.path(ZIPDIR, filename),
+                col.names = FALSE,
+                row.names = FALSE,
+                quote = FALSE, sep = "\t" )
+  }
+}
 
+prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
 SEP <- REPORTDATA
 
 saveRDS(REPORTDATA, file = "REPORTDATA.rds")

@@ -28,7 +28,6 @@ annot <- annot |> dplyr::mutate(
                   (basename(annot$Relative.Path))
   )
 )
-
 annotation <- annot
 colnames(annotation) <- tolower(make.names(colnames(annotation)))
 
@@ -61,9 +60,6 @@ atable$hierarchyDepth <- 1
 res <- prolfquasaint::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
 
 # attach annotation to combined_protein data
-# annotation$raw.file <- basename(annotation$relative.path)
-# annotation <- dplyr::mutate(annotation, raw.file = gsub(".raw", "", raw.file))
-# annotation$relative.path <- NULL
 
 atable <- res$atable
 peptide <- res$msdata
@@ -118,7 +114,7 @@ localSAINTinput$inter$exp_transformedIntensity |> summary()
 
 RESULTS <- c(RESULTS, localSAINTinput)
 
-resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc)
+resSaint <- prolfquasaint::runSaint(localSAINTinput, spc = REPORTDATA$spc, CLEANUP=FALSE)
 
 
 resSaint$list <- dplyr::inner_join(prot_annot$row_annot, resSaint$list,
@@ -144,8 +140,6 @@ names(RESULTS)
 cse <- prolfquasaint::ContrastsSAINTexpress$new(resSaint$list)
 resContrasts <- cse$get_contrasts()
 
-
-
 sig <- resContrasts |>
   dplyr::filter(.data$BFDR  <  REPORTDATA$FDRthreshold &
                   .data$log2_EFCs  >  log2(REPORTDATA$FCthreshold))
@@ -164,6 +158,7 @@ RESULTS$MissingInformation <- gs$interaction_missing_stats()$data
 RESULTS$MissingInformation$isotopeLabel <- NULL
 RESULTS$listFile <- NULL
 
+
 writexl::write_xlsx(RESULTS, path = file.path(ZIPDIR,paste0(treat,"WU",BFABRIC$workunitID, "_data.xlsx")))
 
 REPORTDATA$BFABRIC <- BFABRIC
@@ -178,7 +173,6 @@ tmp$UniprotID <- sapply(tmp$protein_Id, function(x){strsplit(x,";")[[1]][1]})
 
 write.table(data.frame(tmp$UniprotID), file = file.path(ZIPDIR,"ORA_background.txt"), col.names = FALSE, row.names = FALSE, quote = FALSE )
 sig |> dplyr::group_by(Bait) |> tidyr::nest() -> sigg
-
 if (nrow(sigg) > 0) {
   for (i in 1:nrow(sigg)) {
     tmp <- sigg$data[[i]]
@@ -192,6 +186,24 @@ if (nrow(sigg) > 0) {
                 quote = FALSE )
   }
 }
+
+
+#readr::write_csv(resContrasts, file = "resContrasts.csv")
+resContrasts |> dplyr::group_by(Bait) |> tidyr::nest() -> resContr
+if (nrow(resContr) > 0) {
+  for (i in 1:nrow(resContr)) {
+    tmp <- resContr$data[[i]]
+    tmp$UniprotID <- sapply(tmp$Prey, function(x){strsplit(x,";")[[1]][1]})
+    filename <- paste0("Bait_", resContr$Bait[i] , ".rnk")
+    write.table(data.frame(tmp$UniprotID, tmp$log2_EFCs),
+                file = file.path(ZIPDIR, filename),
+                col.names = FALSE,
+                row.names = FALSE,
+                quote = FALSE )
+  }
+}
+
+
 
 prolfquasaint::copy_SAINTe_doc(workdir = ZIPDIR)
 
