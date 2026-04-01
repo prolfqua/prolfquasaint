@@ -5,6 +5,7 @@
 prolfquasaint::copy_SAINT_express(run_script = FALSE)
 # Read b-fabric related information
 yml <- yaml::read_yaml("config.yaml")
+undebug(prolfquasaint::get_params_Bfabric)
 
 BFABRIC <- prolfquasaint::get_params_Bfabric(yml)
 
@@ -51,11 +52,11 @@ peptide <- dplyr::inner_join(annot, peptide, multiple = "all")
 
 #### this comes from DIANN
 atable <- prolfqua::AnalysisTableAnnotation$new()
-atable$fileName = "raw.file"
+atable$file_name = "raw.file"
 atable$hierarchy[["protein_Id"]] <- c("Protein.Group")
 atable$hierarchy[["peptide_Id"]] <- c("Stripped.Sequence")
 atable$set_response("Peptide.Quantity")
-atable$hierarchyDepth <- 1
+atable$hierarchy_depth <- 1
 
 res <- prolfquasaint::dataset_set_factors_deprecated(atable, peptide, SAINT = TRUE)
 
@@ -65,7 +66,7 @@ atable <- res$atable
 peptide <- res$msdata
 
 # Preprocess data - aggregate proteins.
-config <- prolfqua::AnalysisConfiguration$new(atable)
+config <- atable$clone(deep = TRUE)
 
 adata <- prolfqua::setup_analysis(peptide, config)
 
@@ -103,7 +104,7 @@ intdata <- dplyr::inner_join(prot_annot$row_annot, lfqdata$data, multiple = "all
 #debug(protein_2localSaint)
 localSAINTinput <- prolfquasaint::protein_2localSaint(
   intdata,
-  quantcolumn = lfqdata$config$table$get_response(),
+  quantcolumn = lfqdata$config$get_response(),
   proteinID = "protein_Id",
   proteinLength = "protein_length",
   IP_name = "raw.file",

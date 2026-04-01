@@ -14,7 +14,15 @@ Imports:
     prolfqua,
     prolfquapp,
     tidyr
-RoxygenNote: 7.3.1
+Suggests:
+    covr,
+    devtools,
+    lintr,
+    pkgdown,
+    rcmdcheck,
+    roxygen2,
+    testthat (>= 3.0.0)
+RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
 Depends: 
     R (>= 4.1)

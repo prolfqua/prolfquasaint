@@ -64,26 +64,26 @@ ata <- prolfqua::AnalysisTableAnnotation$new()
 
 # check if there is a sample name if so use it.
 if (any(grepl("^name", colnames(annotation)))) {
-  ata$sampleName = grep("^name", colnames(annotation), value = TRUE)
+  ata$sample_name = grep("^name", colnames(annotation), value = TRUE)
 }
 
-ata$fileName = "raw.file"
+ata$file_name = "raw.file"
 ata$factors[["CorT"]] = grep("^control", colnames(annotation), value = TRUE)
 ata$factors[["bait"]] = grep("^bait|^group", colnames(annotation), value = TRUE)
 
-ata$factorDepth <- 2
+ata$factor_depth <- 2
 
 ata$hierarchy[["protein_Id"]] = "protein"
 
 if (REPORTDATA$spc) {
-  ata$workIntensity = "razor.spectral.count"
+  ata$work_intensity = "razor.spectral.count"
 } else {
-  ata$workIntensity = "razor.intensity"
+  ata$work_intensity = "razor.intensity"
 }
 
 
-config <- prolfqua::AnalysisConfiguration$new(ata)
-config$table$factors
+config <- ata$clone(deep = TRUE)
+config$factors
 
 sdata <- prolfqua::setup_analysis(pdata, config)
 
@@ -106,7 +106,7 @@ intdata <- dplyr::inner_join(intdata ,
 
 localSAINTinput <- prolfquasaint::protein_2localSaint(
   intdata,
-  quantcolumn = lfqdata$config$table$get_response())
+  quantcolumn = lfqdata$config$get_response())
 
 
 RESULTS <- c(RESULTS, localSAINTinput)

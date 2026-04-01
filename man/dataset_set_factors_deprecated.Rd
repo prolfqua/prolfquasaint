@@ -22,7 +22,7 @@ for (i in seq_along(files)) {
 
 for (i in seq_along(res)) {
   atable <- prolfqua::AnalysisTableAnnotation$new()
-  #atable$fileName = "channel"
+  #atable$file_name = "channel"
   atable$hierarchy[["protein_Id"]] <- c("Protein")
   atable$hierarchy[["peptide_Id"]] <- c("Peptide")
   tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]] )

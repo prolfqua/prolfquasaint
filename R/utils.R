@@ -24,7 +24,7 @@ get_params_Bfabric <- function(yml){
   BFABRIC$workunitID = yml$job_configuration$workunit_id
   BFABRIC$workunitURL = paste0("https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",BFABRIC$workunitID,"&tab=details")
   BFABRIC$orderID = yml$job_configuration$order_id
-  BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], "resource_id")
+  BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], ~ as.character(.x$resource_id))
   BFABRIC$inputID = tail(BFABRIC$inputID,n = 1)
   BFABRIC$inputURL = purrr::map_chr(yml$job_configuration$input[[1]], "resource_url")
   BFABRIC$inputURL = tail(BFABRIC$inputURL, n = 1)
@@ -41,13 +41,13 @@ normalize_exp <- function(lfqdataProt, normalization = c("vsn","robscale","none"
     lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "vsn")
     tr <- lfqTrans$get_Transformer()
     tr$intensity_array(exp, force = TRUE)
-    tr$lfq$config$table$is_response_transformed <- FALSE
+    tr$lfq$config$is_response_transformed <- FALSE
     lfqdataProt <- tr$lfq
   } else if (normalization == "robscale") {
     lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "robscale")
     tr <- lfqTrans$get_Transformer()
     tr$intensity_array(exp, force = TRUE)
-    tr$lfq$config$table$is_response_transformed <- FALSE
+    tr$lfq$config$is_response_transformed <- FALSE
     lfqdataProt <- tr$lfq
   } else {
     lfqdataProt <- lfqdataProt
@@ -63,12 +63,12 @@ transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none
   if (transformation == "sqrt") {
     tr <- lfqdataProt$get_Transformer()
     tr$intensity_array(sqrt, force = TRUE)
-    tr$lfq$config$table$is_response_transformed <- FALSE
+    tr$lfq$config$is_response_transformed <- FALSE
     lfqdataProt <- tr$lfq
   } else if (transformation == "log2") {
     tr <- lfqdataProt$get_Transformer()
     tr$intensity_array(log2, force = TRUE)
-    tr$lfq$config$table$is_response_transformed <- FALSE
+    tr$lfq$config$is_response_transformed <- FALSE
     lfqdataProt <- tr$lfq
   } else {
 
