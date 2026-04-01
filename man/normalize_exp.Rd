@@ -6,6 +6,11 @@
 \usage{
 normalize_exp(lfqdataProt, normalization = c("vsn", "robscale", "none"))
 }
+\arguments{
+\item{lfqdataProt}{an LFQData object}
+
+\item{normalization}{normalization method: "vsn", "robscale", or "none"}
+}
 \description{
 normalize and then exponentiate data.
 }

@@ -6,6 +6,9 @@
 \usage{
 get_files_DIANN(path)
 }
+\arguments{
+\item{path}{directory path to search for DIANN output files}
+}
 \description{
 find DIANN files
 }

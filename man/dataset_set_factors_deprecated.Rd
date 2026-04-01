@@ -6,27 +6,36 @@
 \usage{
 dataset_set_factors_deprecated(atable, msdata, repeated = TRUE, SAINT = FALSE)
 }
+\arguments{
+\item{atable}{an AnalysisConfiguration object}
+
+\item{msdata}{data.frame with annotation columns}
+
+\item{repeated}{logical, look for subject/BioReplicate column}
+
+\item{SAINT}{logical, use Bait_ instead of Group_ as factor name}
+}
 \description{
 set factors and sample names columns
 }
 \examples{
 
-dataset_csv_examples <- system.file("application/dataset_csv",package = "prolfquapp")
+dataset_csv_examples <- system.file("application/dataset_csv", package = "prolfquapp")
 files <- dir(dataset_csv_examples, pattern = "*.csv")
 
 res <- list()
 for (i in seq_along(files)) {
-  print(i)
-  res[[i]] <- readr::read_csv(file.path(dataset_csv_examples, files[i]))
+  res[[i]] <- readr::read_csv(file.path(dataset_csv_examples, files[i]),
+    show_col_types = FALSE)
 }
 
 for (i in seq_along(res)) {
-  atable <- prolfqua::AnalysisTableAnnotation$new()
-  #atable$file_name = "channel"
+  atable <- prolfqua::AnalysisConfiguration$new()
   atable$hierarchy[["protein_Id"]] <- c("Protein")
   atable$hierarchy[["peptide_Id"]] <- c("Peptide")
-  tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]] )
-  cat(i, " : " , length(tmp$atable$factors), "factors : ", paste(tmp$atable$factors, collapse = "; "), "\n")
+  tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]])
+  cat(i, " : ", length(tmp$atable$factors), "factors : ",
+    paste(tmp$atable$factors, collapse = "; "), "\n")
 }
 
 }

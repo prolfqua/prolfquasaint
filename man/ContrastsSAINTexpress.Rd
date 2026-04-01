@@ -22,7 +22,7 @@ pl <- cse$get_Plotter()
 stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$BFDR))
 }
 \seealso{
-\code{\link{summary_ROPECA_median_p.scaled}}
+\code{\link[prolfqua]{summary_ROPECA_median_p.scaled}}
 }
 \concept{modelling}
 \section{Super class}{
@@ -130,7 +130,7 @@ get contrasts
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_Plotter"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_Plotter}{}}}
 \subsection{Method \code{get_Plotter()}}{
-get \code{\link{ContrastsPlotter}}
+get \code{\link[prolfqua]{ContrastsPlotter}}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_Plotter(
   FCthreshold = 1,
@@ -151,7 +151,7 @@ get \code{\link{ContrastsPlotter}}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{\link{ContrastsPlotter}}
+\code{\link[prolfqua]{ContrastsPlotter}}
 }
 }
 \if{html}{\out{<hr>}}

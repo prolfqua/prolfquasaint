@@ -8,6 +8,8 @@ copy_SAINT_express(workdir = getwd(), run_script = FALSE)
 }
 \arguments{
 \item{workdir}{directory where to copy file - default is current working directory.}
+
+\item{run_script}{if TRUE, also copy the R run scripts}
 }
 \description{
 copy Markdown and runscript for DIANN diann-output.tsv

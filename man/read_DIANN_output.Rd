@@ -20,7 +20,11 @@ read_DIANN_output(
 
 \item{nrPeptides}{peptide threshold}
 
-\item{Q.Value}{q value threshold}
+\item{q_value}{q value threshold}
+
+\item{isUniprot}{logical, is the fasta file from UniProt}
+
+\item{rev}{prefix for reversed/decoy entries}
 }
 \description{
 DIANN helper functions

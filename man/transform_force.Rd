@@ -6,6 +6,11 @@
 \usage{
 transform_force(lfqdataProt, transformation = c("sqrt", "log2", "none"))
 }
+\arguments{
+\item{lfqdataProt}{an LFQData object}
+
+\item{transformation}{transformation method: "sqrt", "log2", or "none"}
+}
 \description{
 force data transformation
 }

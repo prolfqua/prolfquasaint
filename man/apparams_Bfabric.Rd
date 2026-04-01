@@ -6,6 +6,9 @@
 \usage{
 apparams_Bfabric(yml)
 }
+\arguments{
+\item{yml}{parsed YAML configuration list from B-Fabric}
+}
 \description{
 get apparams from bfabric executable
 }
