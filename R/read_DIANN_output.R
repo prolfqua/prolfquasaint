@@ -2,8 +2,10 @@
 #' @param diann.path path to diann-output.tsv
 #' @param fasta.file path to fasta file
 #' @param nrPeptides peptide threshold
-#' @param Q.Value q value threshold
-#' @import data.table
+#' @param q_value q value threshold
+#' @param isUniprot logical, is the fasta file from UniProt
+#' @param rev prefix for reversed/decoy entries
+#' @importFrom rlang .data
 #' @export
 #' @examples
 #' \dontrun{
@@ -27,7 +29,11 @@ read_DIANN_output <- function(diann.path,
   }
   peptide <- prolfquapp::diann_output_to_peptide(report2)
 
-  nrPEP <- prolfquapp:::get_nr_pep(peptide)
+  nrPEP <- peptide |>
+    dplyr::select(dplyr::all_of(c("Protein.Group", "Stripped.Sequence"))) |>
+    dplyr::distinct() |>
+    dplyr::group_by(.data$Protein.Group) |>
+    dplyr::summarize(nrPeptides = dplyr::n())
   nrPEP$Protein.Group.2 <- sapply(nrPEP$Protein.Group, function(x){ unlist(strsplit(x, "[ ;]"))[1]} )
   .nrPeptides <- nrPeptides
   nrPEP <- nrPEP |> dplyr::filter(.data$nrPeptides >= .nrPeptides)
@@ -53,25 +59,29 @@ read_DIANN_output <- function(diann.path,
 
 
 #' set factors and sample names columns
+#' @param atable an AnalysisConfiguration object
+#' @param msdata data.frame with annotation columns
+#' @param repeated logical, look for subject/BioReplicate column
+#' @param SAINT logical, use Bait_ instead of Group_ as factor name
 #' @export
 #' @examples
 #'
-#' dataset_csv_examples <- system.file("application/dataset_csv",package = "prolfquapp")
+#' dataset_csv_examples <- system.file("application/dataset_csv", package = "prolfquapp")
 #' files <- dir(dataset_csv_examples, pattern = "*.csv")
 #'
 #' res <- list()
 #' for (i in seq_along(files)) {
-#'   print(i)
-#'   res[[i]] <- readr::read_csv(file.path(dataset_csv_examples, files[i]))
+#'   res[[i]] <- readr::read_csv(file.path(dataset_csv_examples, files[i]),
+#'     show_col_types = FALSE)
 #' }
 #'
 #' for (i in seq_along(res)) {
-#'   atable <- prolfqua::AnalysisTableAnnotation$new()
-#'   #atable$file_name = "channel"
+#'   atable <- prolfqua::AnalysisConfiguration$new()
 #'   atable$hierarchy[["protein_Id"]] <- c("Protein")
 #'   atable$hierarchy[["peptide_Id"]] <- c("Peptide")
-#'   tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]] )
-#'   cat(i, " : " , length(tmp$atable$factors), "factors : ", paste(tmp$atable$factors, collapse = "; "), "\n")
+#'   tmp <- prolfquasaint::dataset_set_factors_deprecated(atable, res[[i]])
+#'   cat(i, " : ", length(tmp$atable$factors), "factors : ",
+#'     paste(tmp$atable$factors, collapse = "; "), "\n")
 #' }
 #'
 dataset_set_factors_deprecated <- function(atable, msdata, repeated = TRUE, SAINT = FALSE) {

@@ -244,7 +244,7 @@ runSaint <- function(si,
   message(cat(out, sep = "\n"))
   Sys.sleep(2)
 
-  res <- read.csv(file = listFile, sep = "\t")
+  res <- utils::read.csv(file = listFile, sep = "\t")
   if (CLEANUP) {
     if (!file.remove(listFile)) {
       warning("can't remove ", listFile)

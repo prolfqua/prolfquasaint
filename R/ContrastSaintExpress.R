@@ -75,7 +75,7 @@ ContrastsSAINTexpress <- R6::R6Class(
 
     #' @description
     #' get contrasts
-    #' @seealso \code{\link{summary_ROPECA_median_p.scaled}}
+    #' @seealso \code{\link[prolfqua]{summary_ROPECA_median_p.scaled}}
     #' @param all should all columns be returned (default FALSE)
     #' @param global use a global linear function (determined by get_linfct)
     get_contrasts = function(all = FALSE){
@@ -90,11 +90,11 @@ ContrastsSAINTexpress <- R6::R6Class(
         )))
       res
     },
-    #' @description get \code{\link{ContrastsPlotter}}
+    #' @description get \code{\link[prolfqua]{ContrastsPlotter}}
     #' @param FCthreshold fold change threshold to show
     #' @param SaintScore SaintScore threshold to show in the heatmap.
     #' @param BFDRthreshold BDRF threshold
-    #' @return \code{\link{ContrastsPlotter}}
+    #' @return \code{\link[prolfqua]{ContrastsPlotter}}
     get_Plotter = function(FCthreshold = 1, SaintScore = 0.75, BFDRthreshold = 0.1){
       res <- prolfqua::ContrastsPlotter$new(
         self$contrast_result,

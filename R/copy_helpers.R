@@ -12,6 +12,7 @@ copy_SAINTe_doc <- function(workdir = getwd()){
 
 #' copy Markdown and runscript for DIANN diann-output.tsv
 #' @param workdir directory where to copy file - default is current working directory.
+#' @param run_script if TRUE, also copy the R run scripts
 #' @export
 #'
 copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {

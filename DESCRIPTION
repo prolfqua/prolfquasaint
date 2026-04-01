@@ -1,19 +1,24 @@
 Package: prolfquasaint
 Type: Package
-Title: What the Package Does (Title Case)
+Title: SAINT-Based Protein Interaction Analysis with prolfqua
 Version: 0.1.1
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Witold Wolski
+Maintainer: Witold Wolski <wew@fgcz.ethz.ch>
+Description: Wraps SAINTexpress for protein interaction scoring
+    within the prolfqua ecosystem.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
+    dtplyr,
+    logger,
     prolfqua,
     prolfquapp,
-    tidyr
+    purrr,
+    readr,
+    rlang,
+    stringr
 Suggests:
     covr,
     devtools,

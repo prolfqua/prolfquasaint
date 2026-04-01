@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^inst/application/SE2_DIANN/(?=.*/).*
 ^inst/application/SE2/(?=.*/).*
+^Makefile$

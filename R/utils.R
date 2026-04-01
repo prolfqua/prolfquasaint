@@ -1,4 +1,5 @@
 #' get apparams from bfabric executable
+#' @param yml parsed YAML configuration list from B-Fabric
 #' @export
 apparams_Bfabric <- function(yml) {
   REPORTDATA <- list()
@@ -18,6 +19,7 @@ apparams_Bfabric <- function(yml) {
 }
 
 #' get params from bfabric executable
+#' @param yml parsed YAML configuration list from B-Fabric
 #' @export
 get_params_Bfabric <- function(yml){
   BFABRIC <- list()
@@ -25,15 +27,17 @@ get_params_Bfabric <- function(yml){
   BFABRIC$workunitURL = paste0("https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",BFABRIC$workunitID,"&tab=details")
   BFABRIC$orderID = yml$job_configuration$order_id
   BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], ~ as.character(.x$resource_id))
-  BFABRIC$inputID = tail(BFABRIC$inputID,n = 1)
+  BFABRIC$inputID = utils::tail(BFABRIC$inputID, n = 1)
   BFABRIC$inputURL = purrr::map_chr(yml$job_configuration$input[[1]], "resource_url")
-  BFABRIC$inputURL = tail(BFABRIC$inputURL, n = 1)
+  BFABRIC$inputURL = utils::tail(BFABRIC$inputURL, n = 1)
 
   BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
   return(BFABRIC)
 }
 
 #' normalize and then exponentiate data.
+#' @param lfqdataProt an LFQData object
+#' @param normalization normalization method: "vsn", "robscale", or "none"
 #' @export
 normalize_exp <- function(lfqdataProt, normalization = c("vsn","robscale","none")) {
   normalization <- match.arg(normalization)
@@ -57,6 +61,8 @@ normalize_exp <- function(lfqdataProt, normalization = c("vsn","robscale","none"
 
 
 #' force data transformation
+#' @param lfqdataProt an LFQData object
+#' @param transformation transformation method: "sqrt", "log2", or "none"
 #' @export
 transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none")) {
   transformation <- match.arg(transformation)
@@ -77,6 +83,7 @@ transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none
 }
 
 #' find DIANN files
+#' @param path directory path to search for DIANN output files
 #' @export
 get_files_DIANN <- function(path) {
   diann.path <- grep("report\\.tsv$|diann-output\\.tsv", dir(path = path, recursive = TRUE), value = TRUE)
