@@ -1,0 +1,128 @@
+---
+title: "SAINTexpress TIP49 comparison"
+format:
+  html:
+    toc: true
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(ggplot2)
+
+report_label <- Sys.getenv("SAINTEXPRESS_REPORT_LABEL", "SAINTexpress TIP49 comparison")
+native_file <- Sys.getenv("SAINTEXPRESS_NATIVE_LIST", "saintexpress-tip49-native/list.txt")
+reference_file <- Sys.getenv("SAINTEXPRESS_REFERENCE_LIST", "saintexpress-tip49-reference/list.txt")
+
+native <- read.delim(native_file, stringsAsFactors = FALSE, check.names = FALSE)
+reference <- read.delim(reference_file, stringsAsFactors = FALSE, check.names = FALSE)
+
+key_cols <- intersect(c("Bait", "Prey", "PreyGene"), intersect(names(native), names(reference)))
+stopifnot(length(key_cols) > 0)
+
+common_cols <- intersect(names(native), names(reference))
+candidate_cols <- setdiff(common_cols, key_cols)
+
+is_numeric_column <- function(x) {
+  converted <- suppressWarnings(as.numeric(x))
+  non_empty <- !is.na(x) & x != ""
+  any(non_empty) && all(!is.na(converted[non_empty]))
+}
+
+numeric_cols <- candidate_cols[
+  vapply(native[candidate_cols], is_numeric_column, logical(1)) &
+    vapply(reference[candidate_cols], is_numeric_column, logical(1))
+]
+
+native_numeric <- native[c(key_cols, numeric_cols)]
+reference_numeric <- reference[c(key_cols, numeric_cols)]
+
+for (column in numeric_cols) {
+  native_numeric[[column]] <- as.numeric(native_numeric[[column]])
+  reference_numeric[[column]] <- as.numeric(reference_numeric[[column]])
+}
+
+comparison <- merge(
+  reference_numeric,
+  native_numeric,
+  by = key_cols,
+  suffixes = c("_reference", "_native")
+)
+
+summary_table <- data.frame(
+  metric = numeric_cols,
+  n = integer(length(numeric_cols)),
+  correlation = numeric(length(numeric_cols)),
+  mean_abs_delta = numeric(length(numeric_cols)),
+  max_abs_delta = numeric(length(numeric_cols))
+)
+
+for (i in seq_along(numeric_cols)) {
+  metric <- numeric_cols[[i]]
+  reference_values <- comparison[[paste0(metric, "_reference")]]
+  native_values <- comparison[[paste0(metric, "_native")]]
+  complete <- complete.cases(reference_values, native_values)
+  delta <- native_values[complete] - reference_values[complete]
+  summary_table$n[[i]] <- sum(complete)
+  summary_table$correlation[[i]] <- if (sum(complete) > 1) {
+    cor(reference_values[complete], native_values[complete])
+  } else {
+    NA_real_
+  }
+  summary_table$mean_abs_delta[[i]] <- mean(abs(delta))
+  summary_table$max_abs_delta[[i]] <- max(abs(delta))
+}
+```
+
+## Inputs
+
+`r report_label`
+
+```{r}
+data.frame(
+  file = c(native_file, reference_file),
+  rows = c(nrow(native), nrow(reference)),
+  columns = c(ncol(native), ncol(reference))
+)
+```
+
+Joined rows: `r nrow(comparison)`
+
+Join columns: `r paste(key_cols, collapse = ", ")`
+
+Compared numeric columns: `r paste(numeric_cols, collapse = ", ")`
+
+## Numeric Summary
+
+```{r}
+summary_table
+```
+
+## Scatterplots
+
+```{r, results='asis', fig.width=5.5, fig.height=5.5}
+for (metric in numeric_cols) {
+  reference_col <- paste0(metric, "_reference")
+  native_col <- paste0(metric, "_native")
+  plot_data <- comparison[complete.cases(comparison[c(reference_col, native_col)]), ]
+  range_values <- range(c(plot_data[[reference_col]], plot_data[[native_col]]), finite = TRUE)
+
+  cat("###", metric, "\n\n")
+  print(
+    ggplot(plot_data, aes(x = .data[[reference_col]], y = .data[[native_col]])) +
+      geom_point(alpha = 0.35, size = 1) +
+      geom_abline(slope = 1, intercept = 0, color = "red", linewidth = 0.4) +
+      coord_equal(xlim = range_values, ylim = range_values) +
+      labs(
+        x = "Reference binary",
+        y = "Native CMake build",
+        title = metric
+      ) +
+      theme_minimal(base_size = 12)
+  )
+  cat("\n\n")
+}
+```

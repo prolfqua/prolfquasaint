@@ -51,7 +51,7 @@ annot$Relative.Path <- NULL
 peptide <- dplyr::inner_join(annot, peptide, multiple = "all")
 
 #### this comes from DIANN
-atable <- prolfqua::AnalysisTableAnnotation$new()
+atable <- prolfqua::AnalysisConfiguration$new()
 atable$file_name = "raw.file"
 atable$hierarchy[["protein_Id"]] <- c("Protein.Group")
 atable$hierarchy[["peptide_Id"]] <- c("Stripped.Sequence")
@@ -149,7 +149,7 @@ sig <- resContrasts |>
 tt <- lfqdata$get_Transformer()$log2()
 lfqdata_transformed <- tt$lfq
 
-REPORTDATA$pups <- prolfqua::UpSet_interaction_missing_stats(
+REPORTDATA$pups <- prolfqua::upset_interaction_missing_stats(
   lfqdataProt$data,
   lfqdata$config,tr = 2)
 RESULTS$InputData <- lfqdata$to_wide()$data

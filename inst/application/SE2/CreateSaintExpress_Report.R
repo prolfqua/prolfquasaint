@@ -60,7 +60,7 @@ pdata <- dplyr::inner_join(annotation, pp, multiple = "all" , by = "raw.file")
 # filter for more than 2 peptides per protein
 pdata <- pdata |> dplyr::filter(combined.total.peptides >= REPORTDATA$nrPeptides)
 # configure prolfqua
-ata <- prolfqua::AnalysisTableAnnotation$new()
+ata <- prolfqua::AnalysisConfiguration$new()
 
 # check if there is a sample name if so use it.
 if (any(grepl("^name", colnames(annotation)))) {
@@ -137,7 +137,7 @@ sig <- resContrasts |>
 tt <- lfqdata$get_Transformer()$log2()
 lfqdata_transformed <- tt$lfq
 
-REPORTDATA$pups <- prolfqua::UpSet_interaction_missing_stats(lfqdata$data, lfqdata$config,tr = 2)
+REPORTDATA$pups <- prolfqua::upset_interaction_missing_stats(lfqdata$data, lfqdata$config,tr = 2)
 RESULTS$InputData <- lfqdata$to_wide()$data
 
 gs <- lfqdata$get_Summariser()
@@ -153,13 +153,13 @@ REPORTDATA$sig <- sig
 REPORTDATA$resContrasts <- resContrasts
 REPORTDATA$prot_annot <- prot_annot
 
-tmp <- prolfqua::get_UniprotID_from_fasta_header(REPORTDATA$pups$data, "protein_Id")
+tmp <- prolfqua::get_uniprot_id_from_fasta_header(REPORTDATA$pups$data, "protein_Id")
 
 write.table(data.frame(tmp$UniprotID), file = file.path(ZIPDIR,"ORA_background.txt"), col.names = FALSE, row.names = FALSE, quote = FALSE )
 sig |> dplyr::group_by(Bait) |> tidyr::nest() -> sigg
 if (nrow(sigg) > 0) {
   for (i in 1:nrow(sigg)) {
-    tmp <- prolfqua::get_UniprotID_from_fasta_header(sigg$data[[i]], "Prey")
+    tmp <- prolfqua::get_uniprot_id_from_fasta_header(sigg$data[[i]], "Prey")
     filename <- paste0("ORA_Bait_", sigg$Bait[i] , ".txt")
     write.table(data.frame(tmp$UniprotID),
                 file = file.path(ZIPDIR, filename),
@@ -174,7 +174,7 @@ if (nrow(resContr) > 0) {
   for (i in 1:nrow(resContr)) {
     tmp <- resContr$data[[i]]
     tmp$firstID <- sapply(tmp$Prey, function(x){strsplit(x,";")[[1]][1]})
-    tmp <- prolfqua::get_UniprotID_from_fasta_header(tmp, idcolumn = "firstID")
+    tmp <- prolfqua::get_uniprot_id_from_fasta_header(tmp, idcolumn = "firstID")
     filename <- paste0("Bait_", resContr$Bait[i] , ".rnk")
     write.table(data.frame(tmp$UniprotID, tmp$log2_EFCs),
                 file = file.path(ZIPDIR, filename),

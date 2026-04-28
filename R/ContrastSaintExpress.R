@@ -25,21 +25,21 @@ ContrastsSAINTexpress <- R6::R6Class(
     contrast_result = NULL,
     #' @field modelName model name
     modelName = character(),
-    #' @field subject_Id subject id defualt 'Prey'
-    subject_Id = character(),
+    #' @field subject_id subject id defualt 'Prey'
+    subject_id = character(),
     #' @description
     #' initialize
     #' @param contrastsdf return value of \code{\link{runSaint}}
-    #' @param subject_Id default "Prey"
+    #' @param subject_id default "Prey"
     #' @param modelName name of model
     initialize = function(contrastsdf,
-                          subject_Id = "Prey",
+                          subject_id = "Prey",
                           modelName = "ContrastSaint"
     ){
 
 
       self$contrast_result = contrastsdf
-      self$subject_Id = subject_Id
+      self$subject_id = subject_id
       self$modelName = modelName
 
       if ( "AvgIntensity" %in% colnames(contrastsdf)) {
@@ -80,7 +80,7 @@ ContrastsSAINTexpress <- R6::R6Class(
     #' @param global use a global linear function (determined by get_linfct)
     get_contrasts = function(all = FALSE){
       res <- self$contrast_result |> dplyr::select(
-        tidyselect::all_of(c(self$subject_Id,
+        tidyselect::all_of(c(self$subject_id,
                  "modelName",
                  "Bait",
                  "avgAbd",
@@ -91,16 +91,16 @@ ContrastsSAINTexpress <- R6::R6Class(
       res
     },
     #' @description get \code{\link[prolfqua]{ContrastsPlotter}}
-    #' @param FCthreshold fold change threshold to show
+    #' @param fc_threshold fold change threshold to show
     #' @param SaintScore SaintScore threshold to show in the heatmap.
-    #' @param BFDRthreshold BDRF threshold
+    #' @param bfdr_threshold BFDR threshold
     #' @return \code{\link[prolfqua]{ContrastsPlotter}}
-    get_Plotter = function(FCthreshold = 1, SaintScore = 0.75, BFDRthreshold = 0.1){
+    get_Plotter = function(fc_threshold = 1, SaintScore = 0.75, bfdr_threshold = 0.1){
       res <- prolfqua::ContrastsPlotter$new(
         self$contrast_result,
-        subject_Id = self$subject_Id,
-        fcthresh = FCthreshold,
-        volcano = list(list(score = "BFDR", thresh = BFDRthreshold)),
+        subject_id = self$subject_id,
+        fcthresh = fc_threshold,
+        volcano = list(list(score = "BFDR", thresh = bfdr_threshold)),
         histogram = list(list(score = "BFDR", xlim = c(0,1,0.05)), list(score = "SaintScore", xlim = c(0,1,0.05))),
         score = list(list(score = "SaintScore", thresh = SaintScore )),
         modelName = "modelName",
@@ -113,8 +113,8 @@ ContrastsSAINTexpress <- R6::R6Class(
     #' @return data.frame
     to_wide = function(columns = c("SaintScore", "BFDR")){
       contrast_minimal <- self$get_contrasts()
-      contrasts_wide <- prolfqua::pivot_model_contrasts_2_Wide(contrast_minimal,
-                                                     subject_Id = self$subject_Id,
+      contrasts_wide <- prolfqua::pivot_model_contrasts_to_wide(contrast_minimal,
+                                                     subject_id = self$subject_id,
                                                      columns = c("log2_EFCs", columns),
                                                      contrast = 'Bait')
       return(contrasts_wide)

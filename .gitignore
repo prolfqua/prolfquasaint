@@ -2,3 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+*.zip
+inst/SAINTexpress-v3.0.1/
+inst/SAINTexpress-v3.6.3/

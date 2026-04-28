@@ -121,7 +121,7 @@ UpSetR::upset(SEP$pups$data, order.by = "freq", nsets = 1000)
 
 
 ```{r raster, echo=FALSE}
-hm <- pl$NA_heatmap()
+hm <- pl$na_heatmap()
 ```
 
 By transforming protein abundance estimates into present/absent calls a dichotomous view on the data (Figure \@ref(fig:naHeat) ) can be constructed.
