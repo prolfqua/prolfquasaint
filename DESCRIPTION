@@ -22,13 +22,17 @@ Imports:
 Suggests:
     covr,
     devtools,
+    ggplot2,
     lintr,
+    nloptr,
     pkgdown,
+    quarto,
     rcmdcheck,
     roxygen2,
     testthat (>= 3.0.0)
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
+VignetteBuilder: quarto
 Depends: 
     R (>= 4.1)
 biocViews: MassSpectrometry, Proteomics, Metabolomics, ExperimentHubSoftware, Normalization, Preprocessing, QualityControl

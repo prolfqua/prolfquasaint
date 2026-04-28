@@ -4,5 +4,9 @@
 .Ruserdata
 .DS_Store
 *.zip
+*.tar.gz
+*.Rcheck/
+vignettes/*.html
+vignettes/*_files/
 inst/SAINTexpress-v3.0.1/
 inst/SAINTexpress-v3.6.3/

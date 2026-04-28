@@ -35,7 +35,7 @@ stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$BFDR))
 
 \item{\code{modelName}}{model name}
 
-\item{\code{subject_Id}}{subject id defualt 'Prey'}
+\item{\code{subject_id}}{subject id defualt 'Prey'}
 }
 \if{html}{\out{</div>}}
 }
@@ -67,7 +67,7 @@ initialize
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$new(
   contrastsdf,
-  subject_Id = "Prey",
+  subject_id = "Prey",
   modelName = "ContrastSaint"
 )}\if{html}{\out{</div>}}
 }
@@ -77,7 +77,7 @@ initialize
 \describe{
 \item{\code{contrastsdf}}{return value of \code{\link{runSaint}}}
 
-\item{\code{subject_Id}}{default "Prey"}
+\item{\code{subject_id}}{default "Prey"}
 
 \item{\code{modelName}}{name of model}
 }
@@ -133,20 +133,20 @@ get contrasts
 get \code{\link[prolfqua]{ContrastsPlotter}}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_Plotter(
-  FCthreshold = 1,
+  fc_threshold = 1,
   SaintScore = 0.75,
-  BFDRthreshold = 0.1
+  bfdr_threshold = 0.1
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{FCthreshold}}{fold change threshold to show}
+\item{\code{fc_threshold}}{fold change threshold to show}
 
 \item{\code{SaintScore}}{SaintScore threshold to show in the heatmap.}
 
-\item{\code{BFDRthreshold}}{BDRF threshold}
+\item{\code{bfdr_threshold}}{BFDR threshold}
 }
 \if{html}{\out{</div>}}
 }

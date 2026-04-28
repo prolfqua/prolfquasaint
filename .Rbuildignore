@@ -1,5 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.DS_Store$
+^\.Rhistory$
+^\.git$
+^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/[.]git$
+^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/[.]gitignore$
 ^inst/application/SE2_DIANN/(?=.*/).*
 ^inst/application/SE2/(?=.*/).*
 ^Makefile$
+^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/build$
+^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/boost$
+^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/nlopt$

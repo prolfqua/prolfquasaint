@@ -1,0 +1,158 @@
+---
+title: "SAINTexpress-int: Native Binary vs R Implementation"
+format:
+  html:
+    toc: true
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+vignette: >
+  %\VignetteIndexEntry{SAINTexpress-int: Native Binary vs R Implementation}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(ggplot2)
+library(prolfquasaint)
+if (!exists(".saintexpress_executable", envir = asNamespace("prolfquasaint"), inherits = FALSE)) {
+  source_files <- list.files("../R", full.names = TRUE, pattern = "[.]R$")
+  invisible(lapply(source_files, source))
+}
+```
+
+```{r}
+fixture_dir <- system.file(
+  "test/saintexpress-363-tip49-reference-int",
+  package = "prolfquasaint"
+)
+if (!nzchar(fixture_dir) && file.exists("inst/test/saintexpress-363-tip49-reference-int")) {
+  fixture_dir <- "inst/test/saintexpress-363-tip49-reference-int"
+}
+if (!nzchar(fixture_dir) && file.exists("../inst/test/saintexpress-363-tip49-reference-int")) {
+  fixture_dir <- "../inst/test/saintexpress-363-tip49-reference-int"
+}
+stopifnot(nzchar(fixture_dir))
+
+si <- list(
+  inter = read.delim(
+    file.path(fixture_dir, "inter.dat"),
+    header = FALSE,
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  ),
+  prey = read.delim(
+    file.path(fixture_dir, "prey.dat"),
+    header = FALSE,
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  ),
+  bait = read.delim(
+    file.path(fixture_dir, "bait.dat"),
+    header = FALSE,
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
+)
+```
+
+```{r}
+find_saint_binary <- if (exists(".saintexpress_executable", envir = asNamespace("prolfquasaint"), inherits = FALSE)) {
+  getFromNamespace(".saintexpress_executable", "prolfquasaint")
+} else {
+  .saintexpress_executable
+}
+native_binary <- find_saint_binary("SAINTexpress-int")
+stopifnot(nzchar(native_binary))
+native_binary
+```
+
+```{r}
+native_dir <- tempfile("saintexpress-native-")
+dir.create(native_dir)
+
+native <- runSaint(
+  si,
+  filedir = native_dir,
+  spc = FALSE,
+  engine = "binary",
+  use_docker = FALSE,
+  CLEANUP = TRUE
+)$list
+
+r_implementation <- runSaint(
+  si,
+  spc = FALSE,
+  engine = "r",
+  optimizer = "base"
+)$list
+```
+
+```{r}
+key_cols <- c("Bait", "Prey", "PreyGene")
+comparison <- merge(
+  native,
+  r_implementation,
+  by = key_cols,
+  suffixes = c("_binary", "_r")
+)
+
+numeric_cols <- c(
+  "AvgP",
+  "MaxP",
+  "TopoAvgP",
+  "TopoMaxP",
+  "SaintScore",
+  "OddsScore",
+  "FoldChange",
+  "BFDR"
+)
+
+summary_table <- data.frame(
+  metric = numeric_cols,
+  n = integer(length(numeric_cols)),
+  correlation = numeric(length(numeric_cols)),
+  mean_abs_delta = numeric(length(numeric_cols)),
+  max_abs_delta = numeric(length(numeric_cols))
+)
+
+for (i in seq_along(numeric_cols)) {
+  metric <- numeric_cols[[i]]
+  binary_values <- comparison[[paste0(metric, "_binary")]]
+  r_values <- comparison[[paste0(metric, "_r")]]
+  complete <- complete.cases(binary_values, r_values)
+  delta <- r_values[complete] - binary_values[complete]
+  summary_table$n[[i]] <- sum(complete)
+  summary_table$correlation[[i]] <- cor(binary_values[complete], r_values[complete])
+  summary_table$mean_abs_delta[[i]] <- mean(abs(delta))
+  summary_table$max_abs_delta[[i]] <- max(abs(delta))
+}
+
+summary_table
+```
+
+```{r, results='asis', fig.width=5.5, fig.height=5.5}
+for (metric in numeric_cols) {
+  binary_col <- paste0(metric, "_binary")
+  r_col <- paste0(metric, "_r")
+  plot_data <- comparison[complete.cases(comparison[c(binary_col, r_col)]), ]
+  range_values <- range(c(plot_data[[binary_col]], plot_data[[r_col]]), finite = TRUE)
+
+  cat("##", metric, "\n\n")
+  print(
+    ggplot(plot_data, aes(x = .data[[binary_col]], y = .data[[r_col]])) +
+      geom_point(alpha = 0.35, size = 1) +
+      geom_abline(slope = 1, intercept = 0, color = "red", linewidth = 0.4) +
+      coord_equal(xlim = range_values, ylim = range_values) +
+      labs(
+        x = "Native SAINTexpress-int binary",
+        y = "R implementation",
+        title = metric
+      ) +
+      theme_minimal(base_size = 12)
+  )
+  cat("\n\n")
+}
+```
