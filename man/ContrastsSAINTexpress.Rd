@@ -19,10 +19,13 @@ cse$get_contrast_sides()
 stopifnot(dim(cse$get_contrasts()) == c(236,7))
 cse$get_linfct()
 pl <- cse$get_Plotter()
-stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$BFDR))
+stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$FDR))
 }
 \seealso{
 \code{\link[prolfqua]{summary_ROPECA_median_p.scaled}}
+
+Other modelling: 
+\code{\link{ContrastsSAINTFacade}}
 }
 \concept{modelling}
 \section{Super class}{
@@ -48,13 +51,19 @@ stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$BFDR))
 \item \href{#method-ContrastsSAINTexpress-get_contrasts}{\code{ContrastsSAINTexpress$get_contrasts()}}
 \item \href{#method-ContrastsSAINTexpress-get_Plotter}{\code{ContrastsSAINTexpress$get_Plotter()}}
 \item \href{#method-ContrastsSAINTexpress-to_wide}{\code{ContrastsSAINTexpress$to_wide()}}
+\item \href{#method-ContrastsSAINTexpress-get_rank}{\code{ContrastsSAINTexpress$get_rank()}}
+\item \href{#method-ContrastsSAINTexpress-get_ora}{\code{ContrastsSAINTexpress$get_ora()}}
 \item \href{#method-ContrastsSAINTexpress-clone}{\code{ContrastsSAINTexpress$clone()}}
 }
 }
 \if{html}{\out{
-<details open><summary>Inherited methods</summary>
+<details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="column_description"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-column_description'><code>prolfqua::ContrastsInterface$column_description()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="contrast_summary_table"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-contrast_summary_table'><code>prolfqua::ContrastsInterface$contrast_summary_table()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="extra_artifacts"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-extra_artifacts'><code>prolfqua::ContrastsInterface$extra_artifacts()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="filter_significant"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-filter_significant'><code>prolfqua::ContrastsInterface$filter_significant()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_config"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_config'><code>prolfqua::ContrastsInterface$get_config()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_missing"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_missing'><code>prolfqua::ContrastsInterface$get_missing()</code></a></span></li>
 </ul>
 </details>
@@ -172,6 +181,54 @@ convert to wide format
 }
 \subsection{Returns}{
 data.frame
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ContrastsSAINTexpress-get_rank"></a>}}
+\if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_rank}{}}}
+\subsection{Method \code{get_rank()}}{
+get signed rank-list input table for enrichment tools.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_rank(score = "log2_EFCs")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{score}}{column to use as rank score}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+data.frame with subject id, contrast, and score columns.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ContrastsSAINTexpress-get_ora"></a>}}
+\if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_ora}{}}}
+\subsection{Method \code{get_ora()}}{
+get SAINT ORA input table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_ora(
+  up = TRUE,
+  FDR_threshold = 0.05,
+  diff_threshold = 1
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{up}}{if TRUE return bait-enriched prey, otherwise negative effects}
+
+\item{\code{FDR_threshold}}{BFDR threshold}
+
+\item{\code{diff_threshold}}{log2 EFC threshold}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+filtered SAINT contrast data.frame for ORA input.
 }
 }
 \if{html}{\out{<hr>}}

@@ -64,30 +64,33 @@ runSaint(
 when available and falls back to Docker on macOS. TRUE forces Docker.
 FALSE forces native execution.}
 
-\item{engine}{execution engine. \code{"binary"} runs bundled SAINTexpress;
-\code{"r"} runs the R implementation.}
+\item{engine}{execution engine. \code{"binary"} runs bundled SAINTexpress
+via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
+\pkg{saintexpress}.}
 
 \item{optimizer}{optimizer for \code{engine = "r"}. \code{"base"} uses
 \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
 \pkg{nloptr} is installed.}
 }
 \description{
-Executes SAINTexpress on prepared input data. Uses a native executable when
-one is available for the current platform. On macOS, Docker can still be
-forced with \code{use_docker = TRUE}.
+Executes SAINTexpress on prepared input data. Delegates to the
+\pkg{saintexpressbin} package for the native binary / Docker engine, and to
+the \pkg{saintexpress} package for the pure-R engine. If `engine = "binary"`
+is requested but \pkg{saintexpressbin} is not installed, a warning is issued
+and the call falls back to the R engine.
 }
 \examples{
 
 bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
 bb$config <- bb$config$clone(deep = TRUE)
 xx <- prolfqua::LFQData$new(bb$data, bb$config)
-exampleDat <- xx$data |> dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
+exampleDat <- xx$data_long() |>
+  dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
 # sample protein lengths
 
 tmp <- data.frame(protein_Id = unique(exampleDat$protein_Id))
 tmp$proteinLength <- as.integer(runif(nrow(tmp), min = 150, max = 2500))
 exampleDat <- dplyr::inner_join(tmp, exampleDat)
-#undebug(protein_2localSaint)
 res <- protein_2localSaint(exampleDat,quantcolumn = "medpolish",
                    proteinID = "protein_Id",
                    proteinLength = "proteinLength",
@@ -97,10 +100,5 @@ res <- protein_2localSaint(exampleDat,quantcolumn = "medpolish",
                    )
 
 stopifnot(names(res) == c( "inter", "prey",  "bait"))
-if (Sys.info()["sysname"] == "Darwin" && Sys.which("docker") == "") {
-  testthat::expect_error(runSaint(res, filedir = tempdir()))
-} else {
-  data_SAINTe_output <- runSaint(res, filedir = tempdir())
-}
 
 }

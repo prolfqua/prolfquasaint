@@ -11,13 +11,11 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
-    dtplyr,
     logger,
     prolfqua,
-    prolfquapp,
     purrr,
-    readr,
     rlang,
+    saintexpress,
     stringr
 Suggests:
     covr,
@@ -28,8 +26,13 @@ Suggests:
     pkgdown,
     quarto,
     rcmdcheck,
+    readr,
     roxygen2,
+    saintexpressbin,
     testthat (>= 3.0.0)
+Remotes:
+    github::prolfqua/saintexpress,
+    github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
 VignetteBuilder: quarto

@@ -5,8 +5,18 @@
 #' @examples
 #' copy_SAINTe_doc(workdir = tempdir())
 copy_SAINTe_doc <- function(workdir = getwd()){
-  runscripts <- c("SaintExpress/SAINTexpress-manual.docx")
-  prolfqua::script_copy_helper_vec(runscripts, workdir = workdir,packagename = "prolfquasaint")
+  if (!requireNamespace("saintexpressbin", quietly = TRUE)) {
+    warning("copy_SAINTe_doc requires the 'saintexpressbin' package, which is not installed.")
+    return(invisible(character(0)))
+  }
+  src <- system.file("manual", "SAINTexpress-manual.docx", package = "saintexpressbin")
+  if (!nzchar(src)) {
+    warning("SAINTexpress-manual.docx not found in saintexpressbin.")
+    return(invisible(character(0)))
+  }
+  dest <- file.path(workdir, basename(src))
+  file.copy(src, dest, overwrite = TRUE)
+  invisible(dest)
 }
 
 

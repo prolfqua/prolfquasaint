@@ -40,13 +40,13 @@ add_protein_lengths <- function(
 #' bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
 #' bb$config <- bb$config$clone(deep = TRUE)
 #' xx <- prolfqua::LFQData$new(bb$data, bb$config)
-#' exampleDat <- xx$data |> dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
+#' exampleDat <- xx$data_long() |>
+#'   dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
 #' # sample protein lengths
 #'
 #' tmp <- data.frame(protein_Id = unique(exampleDat$protein_Id))
 #' tmp$proteinLength <- as.integer(runif(nrow(tmp), min = 150, max = 2500))
 #' exampleDat <- dplyr::inner_join(tmp, exampleDat)
-#' #undebug(protein_2localSaint)
 #' res <- protein_2localSaint(exampleDat,quantcolumn = "medpolish",
 #'                    proteinID = "protein_Id",
 #'                    proteinLength = "proteinLength",
@@ -56,11 +56,6 @@ add_protein_lengths <- function(
 #'                    )
 #'
 #' stopifnot(names(res) == c( "inter", "prey",  "bait"))
-#' if (Sys.info()["sysname"] == "Darwin" && Sys.which("docker") == "") {
-#'   testthat::expect_error(runSaint(res, filedir = tempdir()))
-#' } else {
-#'   data_SAINTe_output <- runSaint(res, filedir = tempdir())
-#' }
 #'
 protein_2localSaint <- function(
   xx,
@@ -110,159 +105,13 @@ protein_2localSaint <- function(
 }
 
 
-#' Ensure the SAINTexpress Docker image exists, building it if necessary
-#'
-#' Called automatically by \code{\link{runSaint}} on macOS. Checks for a local
-#' Docker image and builds it from the shipped Dockerfile + Linux binaries
-#' on first use (~10 seconds one-time cost).
-#'
-#' @param image_name Docker image name (default \code{"saintexpress:latest"})
-#' @return \code{TRUE} invisibly on success
-#' @keywords internal
-ensure_saintexpress_docker_image <- function(
-  image_name = "saintexpress:latest"
-) {
-  docker_path <- Sys.which("docker")
-  if (docker_path == "") {
-    stop(
-      "Docker is not installed or not in PATH. ",
-      "Install Docker Desktop from https://www.docker.com/products/docker-desktop/"
-    )
-  }
-
-  check <- system2(
-    "docker",
-    args = c("image", "inspect", image_name),
-    stdout = FALSE,
-    stderr = FALSE
-  )
-  if (check == 0) {
-    message("Docker image '", image_name, "' found.")
-    return(invisible(TRUE))
-  }
-
-  message("Building Docker image '", image_name, "' (one-time setup)...")
-
-  build_dir <- file.path(tempdir(), "saintexpress_build")
-  dir.create(build_dir, showWarnings = FALSE, recursive = TRUE)
-
-  dockerfile_path <- prolfqua::find_package_file(
-    "prolfquasaint",
-    "docker/Dockerfile"
-  )
-  bin_dir <- prolfqua::find_package_file(
-    "prolfquasaint",
-    "SaintExpress/bin/Linux64"
-  )
-  file.copy(dockerfile_path, build_dir, overwrite = TRUE)
-  file.copy(file.path(bin_dir, "SAINTexpress-spc"), build_dir, overwrite = TRUE)
-  file.copy(file.path(bin_dir, "SAINTexpress-int"), build_dir, overwrite = TRUE)
-
-  result <- system2(
-    "docker",
-    args = c(
-      "build",
-      "--platform",
-      "linux/amd64",
-      "-t",
-      image_name,
-      build_dir
-    ),
-    stdout = TRUE,
-    stderr = TRUE
-  )
-  status <- attr(result, "status")
-  if (!is.null(status) && status != 0) {
-    stop(
-      "Failed to build Docker image. Is Docker Desktop running?\n",
-      paste(result, collapse = "\n")
-    )
-  }
-
-  message("Docker image '", image_name, "' built successfully.")
-  invisible(TRUE)
-}
-
-.saintexpress_package_file <- function(...) {
-  rel <- file.path(...)
-  installed <- system.file(rel, package = "prolfquasaint")
-  if (nzchar(installed)) {
-    return(installed)
-  }
-  source_tree <- file.path(getwd(), "inst", rel)
-  if (file.exists(source_tree)) {
-    return(normalizePath(source_tree, mustWork = TRUE))
-  }
-  parent_source_tree <- file.path(getwd(), "..", "inst", rel)
-  if (file.exists(parent_source_tree)) {
-    return(normalizePath(parent_source_tree, mustWork = TRUE))
-  }
-  ""
-}
-
-.saintexpress_executable <- function(
-  binary_name,
-  sysname = Sys.info()[["sysname"]]
-) {
-  candidates <- switch(
-    sysname,
-    "Darwin" = c(
-      .saintexpress_package_file("SaintExpress", "bin", "Darwin", binary_name),
-      .saintexpress_package_file("SaintExpress", "bin", "macOS", binary_name),
-      .saintexpress_package_file("SAINTexpress-v3.6.3", "build", binary_name)
-    ),
-    "Windows" = c(
-      .saintexpress_package_file(
-        "SaintExpress",
-        "bin",
-        "Windows64",
-        paste0(binary_name, ".exe")
-      )
-    ),
-    "Linux" = c(
-      .saintexpress_package_file("SaintExpress", "bin", "Linux64", binary_name)
-    ),
-    character()
-  )
-  candidates <- candidates[nzchar(candidates)]
-  candidates <- candidates[
-    file.exists(candidates) & file.access(candidates, mode = 1) == 0
-  ]
-  if (!length(candidates)) {
-    return("")
-  }
-  candidates[[1]]
-}
-
-.saintexpress_run_native <- function(
-  exe,
-  paths,
-  filedir,
-  sysname = Sys.info()[["sysname"]]
-) {
-  oldwd <- getwd()
-  on.exit(setwd(oldwd), add = TRUE)
-  setwd(filedir)
-  args <- list(
-    command = exe,
-    args = paths,
-    stdout = TRUE,
-    stderr = TRUE,
-    wait = TRUE
-  )
-  if (identical(sysname, "Windows")) {
-    args$minimized <- TRUE
-  }
-  out <- do.call(system2, args)
-  list(out = out, listFile = file.path(filedir, "list.txt"))
-}
-
-
 #' Run SAINTexpress analysis
 #'
-#' Executes SAINTexpress on prepared input data. Uses a native executable when
-#' one is available for the current platform. On macOS, Docker can still be
-#' forced with \code{use_docker = TRUE}.
+#' Executes SAINTexpress on prepared input data. Delegates to the
+#' \pkg{saintexpressbin} package for the native binary / Docker engine, and to
+#' the \pkg{saintexpress} package for the pure-R engine. If `engine = "binary"`
+#' is requested but \pkg{saintexpressbin} is not installed, a warning is issued
+#' and the call falls back to the R engine.
 #'
 #' @export
 #' @rdname saintExpress
@@ -273,8 +122,9 @@ ensure_saintexpress_docker_image <- function(
 #' @param use_docker logical or NULL. NULL (default) uses a native executable
 #'   when available and falls back to Docker on macOS. TRUE forces Docker.
 #'   FALSE forces native execution.
-#' @param engine execution engine. \code{"binary"} runs bundled SAINTexpress;
-#'   \code{"r"} runs the R implementation.
+#' @param engine execution engine. \code{"binary"} runs bundled SAINTexpress
+#'   via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
+#'   \pkg{saintexpress}.
 #' @param optimizer optimizer for \code{engine = "r"}. \code{"base"} uses
 #'   \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
 #'   \pkg{nloptr} is installed.
@@ -291,14 +141,18 @@ runSaint <- function(
   engine <- match.arg(engine)
   optimizer <- match.arg(optimizer)
 
+  if (engine == "binary" && !requireNamespace("saintexpressbin", quietly = TRUE)) {
+    warning(
+      "engine = 'binary' requires the 'saintexpressbin' package, which is not installed. ",
+      "Falling back to engine = 'r'."
+    )
+    engine <- "r"
+  }
+
   if (engine == "r") {
-    if (isTRUE(spc)) {
-      res <- saint_spc_r(si, optimizer = optimizer)
-      implementation <- "spectral-count"
-    } else {
-      res <- saint_int_r(si, optimizer = optimizer)
-      implementation <- "intensity"
-    }
+    type <- if (isTRUE(spc)) "spc" else "int"
+    res <- saintexpress::run_saint(si, mode = type, optimizer = optimizer)
+    implementation <- if (type == "spc") "spectral-count" else "intensity"
     return(list(
       listFile = data.frame(listFile = NA_character_),
       list = res,
@@ -308,89 +162,12 @@ runSaint <- function(
     ))
   }
 
-  filedir <- normalizePath(filedir, mustWork = TRUE)
-
-  paths <- character(3)
-  for (i in seq_along(si)) {
-    filen <- file.path(filedir, paste0(names(si)[i], ".txt"))
-    paths[i] <- filen
-    message(filen)
-    readr::write_tsv(si[[i]], file = filen, col_names = FALSE)
-  }
-
-  sysname <- Sys.info()[["sysname"]]
-  binary_name <- if (spc) "SAINTexpress-spc" else "SAINTexpress-int"
-  native_exe <- .saintexpress_executable(binary_name, sysname = sysname)
-  if (is.null(use_docker)) {
-    use_docker <- identical(sysname, "Darwin") && !nzchar(native_exe)
-  }
-
-  if (use_docker) {
-    # --- Docker execution (macOS default, or forced) ---
-    ensure_saintexpress_docker_image()
-    container_dir <- "/data"
-    container_paths <- file.path(container_dir, basename(paths))
-
-    docker_args <- c(
-      "run",
-      "--rm",
-      "--platform",
-      "linux/amd64",
-      "-v",
-      paste0(filedir, ":", container_dir),
-      "-w",
-      container_dir,
-      "saintexpress:latest",
-      binary_name,
-      container_paths
-    )
-
-    out <- system2(
-      "docker",
-      args = docker_args,
-      stdout = TRUE,
-      stderr = TRUE,
-      wait = TRUE
-    )
-    listFile <- file.path(filedir, "list.txt")
-  } else if (nzchar(native_exe)) {
-    native <- .saintexpress_run_native(
-      native_exe,
-      paths = paths,
-      filedir = filedir,
-      sysname = sysname
-    )
-    out <- native$out
-    listFile <- native$listFile
-  } else {
-    stop(
-      "No native ",
-      binary_name,
-      " executable found for ",
-      sysname,
-      ". ",
-      if (identical(sysname, "Darwin")) {
-        "Build inst/SAINTexpress-v3.6.3 with CMake or set use_docker = TRUE."
-      } else {
-        "Install a platform binary or set use_docker = TRUE where Docker is supported."
-      }
-    )
-  }
-
-  message(cat(out, sep = "\n"))
-  Sys.sleep(2)
-
-  res <- utils::read.csv(file = listFile, sep = "\t")
-  if (CLEANUP) {
-    if (!file.remove(listFile)) {
-      warning("can't remove ", listFile)
-    }
-    file.remove(paths)
-  }
-  res <- list(
-    listFile = data.frame(listFile = listFile),
-    list = res,
-    out = data.frame(out = out)
+  type <- if (isTRUE(spc)) "spc" else "int"
+  saintexpressbin::saintexpress_run(
+    si,
+    type = type,
+    workdir = filedir,
+    cleanup = CLEANUP,
+    use_docker = use_docker
   )
-  return(res)
 }

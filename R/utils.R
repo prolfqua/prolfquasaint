@@ -6,29 +6,55 @@ apparams_Bfabric <- function(yml) {
 
   # Application parameters
   REPORTDATA$spc <- FALSE
-  REPORTDATA$FCthreshold <- if(!is.null(as.numeric( yml$application$parameters$`22|FCthreshold` ))){
-    as.numeric( yml$application$parameters$`22|FCthreshold` ) } else { 2 }
-  REPORTDATA$FDRthreshold <- if(!is.null(as.numeric( yml$application$parameters$`21|BFDRsignificance` ))){
-    as.numeric(yml$application$parameters$`21|BFDRsignificance`) } else {0.1}
+  REPORTDATA$FCthreshold <- if (
+    !is.null(as.numeric(yml$application$parameters$`22|FCthreshold`))
+  ) {
+    as.numeric(yml$application$parameters$`22|FCthreshold`)
+  } else {
+    2
+  }
+  REPORTDATA$FDRthreshold <- if (
+    !is.null(as.numeric(yml$application$parameters$`21|BFDRsignificance`))
+  ) {
+    as.numeric(yml$application$parameters$`21|BFDRsignificance`)
+  } else {
+    0.1
+  }
   REPORTDATA$Normalization <- yml$application$parameters$`11|Normalization`
   REPORTDATA$Transformation <- yml$application$parameters$`51|Transformation`
   nrPeptides <- yml$application$parameters$`61|nrPeptides`
-  REPORTDATA$nrPeptides <- if(!is.null( nrPeptides )) { as.numeric(nrPeptides) } else { 2 }
-  if(is.null( nrPeptides )) {warning("no prameter nrPeptides in yaml setting to 2")}
+  REPORTDATA$nrPeptides <- if (!is.null(nrPeptides)) {
+    as.numeric(nrPeptides)
+  } else {
+    2
+  }
+  if (is.null(nrPeptides)) {
+    warning("no prameter nrPeptides in yaml setting to 2")
+  }
   return(REPORTDATA)
 }
 
 #' get params from bfabric executable
 #' @param yml parsed YAML configuration list from B-Fabric
 #' @export
-get_params_Bfabric <- function(yml){
+get_params_Bfabric <- function(yml) {
   BFABRIC <- list()
   BFABRIC$workunitID = yml$job_configuration$workunit_id
-  BFABRIC$workunitURL = paste0("https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",BFABRIC$workunitID,"&tab=details")
+  BFABRIC$workunitURL = paste0(
+    "https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",
+    BFABRIC$workunitID,
+    "&tab=details"
+  )
   BFABRIC$orderID = yml$job_configuration$order_id
-  BFABRIC$inputID = purrr::map_chr(yml$job_configuration$input[[1]], ~ as.character(.x$resource_id))
+  BFABRIC$inputID = purrr::map_chr(
+    yml$job_configuration$input[[1]],
+    ~ as.character(.x$resource_id)
+  )
   BFABRIC$inputID = utils::tail(BFABRIC$inputID, n = 1)
-  BFABRIC$inputURL = purrr::map_chr(yml$job_configuration$input[[1]], "resource_url")
+  BFABRIC$inputURL = purrr::map_chr(
+    yml$job_configuration$input[[1]],
+    "resource_url"
+  )
   BFABRIC$inputURL = utils::tail(BFABRIC$inputURL, n = 1)
 
   BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
@@ -39,24 +65,17 @@ get_params_Bfabric <- function(yml){
 #' @param lfqdataProt an LFQData object
 #' @param normalization normalization method: "vsn", "robscale", or "none"
 #' @export
-normalize_exp <- function(lfqdataProt, normalization = c("vsn","robscale","none")) {
+normalize_exp <- function(
+  lfqdataProt,
+  normalization = c("vsn", "robscale", "none")
+) {
   normalization <- match.arg(normalization)
-  if (normalization == "vsn") {
-    lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "vsn")
-    tr <- lfqTrans$get_Transformer()
-    tr$intensity_array(exp, force = TRUE)
-    tr$lfq$config$is_response_transformed <- FALSE
-    lfqdataProt <- tr$lfq
-  } else if (normalization == "robscale") {
-    lfqTrans <- prolfquapp::transform_lfqdata(lfqdataProt, method = "robscale")
-    tr <- lfqTrans$get_Transformer()
-    tr$intensity_array(exp, force = TRUE)
-    tr$lfq$config$is_response_transformed <- FALSE
-    lfqdataProt <- tr$lfq
-  } else {
-    lfqdataProt <- lfqdataProt
-  }
-  return(lfqdataProt)
+  stop(
+    "normalize_exp() moved out of prolfquasaint because LFQData normalization ",
+    "belongs to the prolfquapp report facade. Use prolfquapp::transform_lfqdata() ",
+    "in prolfquapp before calling prolfquasaint::protein_2localSaint().",
+    call. = FALSE
+  )
 }
 
 
@@ -64,7 +83,10 @@ normalize_exp <- function(lfqdataProt, normalization = c("vsn","robscale","none"
 #' @param lfqdataProt an LFQData object
 #' @param transformation transformation method: "sqrt", "log2", or "none"
 #' @export
-transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none")) {
+transform_force <- function(
+  lfqdataProt,
+  transformation = c("sqrt", "log2", "none")
+) {
   transformation <- match.arg(transformation)
   if (transformation == "sqrt") {
     tr <- lfqdataProt$get_Transformer()
@@ -76,9 +98,7 @@ transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none
     tr$intensity_array(log2, force = TRUE)
     tr$lfq$config$is_response_transformed <- FALSE
     lfqdataProt <- tr$lfq
-  } else {
-
-  }
+  } else {}
   return(lfqdataProt)
 }
 
@@ -86,8 +106,16 @@ transform_force <- function(lfqdataProt,  transformation = c("sqrt","log2","none
 #' @param path directory path to search for DIANN output files
 #' @export
 get_files_DIANN <- function(path) {
-  diann.path <- grep("report\\.tsv$|diann-output\\.tsv", dir(path = path, recursive = TRUE), value = TRUE)
-  fasta.files <- grep("*\\.fasta$|*\\.fas$", dir(path = path, recursive = TRUE), value = TRUE)
+  diann.path <- grep(
+    "report\\.tsv$|diann-output\\.tsv",
+    dir(path = path, recursive = TRUE),
+    value = TRUE
+  )
+  fasta.files <- grep(
+    "*\\.fasta$|*\\.fas$",
+    dir(path = path, recursive = TRUE),
+    value = TRUE
+  )
 
   if (any(grepl("database[0-9]*.fasta$", fasta.files))) {
     fasta.files <- grep("database[0-9]*.fasta$", fasta.files, value = TRUE)
@@ -99,4 +127,3 @@ get_files_DIANN <- function(path) {
 
   return(list(reporttsv = diann.path, fasta = fasta.files))
 }
-

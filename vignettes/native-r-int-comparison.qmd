@@ -17,10 +17,6 @@ vignette: >
 ```{r}
 library(ggplot2)
 library(prolfquasaint)
-if (!exists(".saintexpress_executable", envir = asNamespace("prolfquasaint"), inherits = FALSE)) {
-  source_files <- list.files("../R", full.names = TRUE, pattern = "[.]R$")
-  invisible(lapply(source_files, source))
-}
 ```
 
 ```{r}
@@ -59,12 +55,7 @@ si <- list(
 ```
 
 ```{r}
-find_saint_binary <- if (exists(".saintexpress_executable", envir = asNamespace("prolfquasaint"), inherits = FALSE)) {
-  getFromNamespace(".saintexpress_executable", "prolfquasaint")
-} else {
-  .saintexpress_executable
-}
-native_binary <- find_saint_binary("SAINTexpress-int")
+native_binary <- saintexpressbin::saintexpress_executable("int")
 stopifnot(nzchar(native_binary))
 native_binary
 ```
