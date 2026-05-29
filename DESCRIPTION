@@ -1,7 +1,7 @@
 Package: prolfquasaint
 Type: Package
 Title: SAINT-Based Protein Interaction Analysis with prolfqua
-Version: 0.1.3
+Version: 0.1.4
 Author: Witold Wolski
 Maintainer: Witold Wolski <wew@fgcz.ethz.ch>
 Description: Wraps SAINTexpress for protein interaction scoring
