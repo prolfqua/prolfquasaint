@@ -13,3 +13,7 @@
 ^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/nlopt$
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
