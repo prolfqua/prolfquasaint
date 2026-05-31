@@ -5,6 +5,8 @@ layer for SAINTexpress-based protein interaction scoring. It converts prolfqua
 `LFQData` objects into SAINT input tables, runs SAINTexpress, and exposes the
 results through `prolfqua` contrast adapters.
 
+📖 Documentation: <https://prolfqua.github.io/prolfquasaint/>
+
 ## Architecture
 
 The SAINTexpress concerns are split across three packages:

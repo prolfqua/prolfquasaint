@@ -7,6 +7,8 @@ Maintainer: Witold Wolski <wew@fgcz.ethz.ch>
 Description: Wraps SAINTexpress for protein interaction scoring
     within the prolfqua ecosystem.
 License: MIT + file LICENSE
+URL: https://prolfqua.github.io/prolfquasaint/, https://github.com/prolfqua/prolfquasaint
+BugReports: https://github.com/prolfqua/prolfquasaint/issues
 Encoding: UTF-8
 LazyData: true
 Imports:
