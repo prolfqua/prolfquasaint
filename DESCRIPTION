@@ -33,7 +33,7 @@ Suggests:
     saintexpressbin,
     testthat (>= 3.0.0)
 Remotes:
-    github::fgcz/prolfqua@Modelling2R6,
+    github::fgcz/prolfqua@main,
     github::prolfqua/saintexpress,
     github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
