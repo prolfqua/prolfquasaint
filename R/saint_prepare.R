@@ -80,9 +80,9 @@
   if (is.na(length_col)) {
     data$.saint_protein_length <- 400L
   } else {
-    data$.saint_protein_length <- suppressWarnings(as.integer(data[[
+    data$.saint_protein_length <- .saint_parse_protein_length(data[[
       length_col
-    ]]))
+    ]])
     fallback <- mean(data$.saint_protein_length, na.rm = TRUE)
     if (is.nan(fallback)) {
       fallback <- 400L
@@ -113,4 +113,20 @@
     bait_col = .saint_bait_col(lfq_data),
     control_col = .saint_control_col(data)
   )
+}
+
+.saint_parse_protein_length <- function(x) {
+  if (is.numeric(x)) {
+    return(as.integer(x))
+  }
+
+  x <- trimws(as.character(x))
+  numeric_pattern <- paste0(
+    "^[-+]?(?:\\d+\\.?\\d*|\\.\\d+)",
+    "(?:[eE][-+]?\\d+)?$"
+  )
+  is_number <- nzchar(x) & grepl(numeric_pattern, x)
+  values <- rep(NA_integer_, length(x))
+  values[is_number] <- as.integer(as.numeric(x[is_number]))
+  values
 }

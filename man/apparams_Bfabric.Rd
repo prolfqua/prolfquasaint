@@ -9,6 +9,19 @@ apparams_Bfabric(yml)
 \arguments{
 \item{yml}{parsed YAML configuration list from B-Fabric}
 }
+\value{
+list of SAINTexpress application parameters.
+}
 \description{
 get apparams from bfabric executable
+}
+\examples{
+yml <- list(application = list(parameters = list(
+  `22|FCthreshold` = "2",
+  `21|BFDRsignificance` = "0.1",
+  `11|Normalization` = "none",
+  `51|Transformation` = "none",
+  `61|nrPeptides` = "2"
+)))
+apparams_Bfabric(yml)
 }

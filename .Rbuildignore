@@ -8,6 +8,7 @@
 ^inst/application/SE2_DIANN/(?=.*/).*
 ^inst/application/SE2/(?=.*/).*
 ^Makefile$
+^BinaryFiles$
 ^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/build$
 ^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/boost$
 ^inst/SAINTexpress-v3[.][0-9]+[.][0-9]+/nlopt$

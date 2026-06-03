@@ -2,15 +2,16 @@ Package: prolfquasaint
 Type: Package
 Title: SAINT-Based Protein Interaction Analysis with prolfqua
 Version: 0.1.5
-Author: Witold Wolski
-Maintainer: Witold Wolski <wew@fgcz.ethz.ch>
+Authors@R: 
+    person("Witold", "Wolski", , "wew@fgcz.ethz.ch",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-6468-120X"))
 Description: Wraps SAINTexpress for protein interaction scoring
     within the prolfqua ecosystem.
 License: MIT + file LICENSE
 URL: https://prolfqua.github.io/prolfquasaint/, https://github.com/prolfqua/prolfquasaint
 BugReports: https://github.com/prolfqua/prolfquasaint/issues
 Encoding: UTF-8
-LazyData: true
 Imports:
     dplyr,
     logger,
@@ -23,6 +24,7 @@ Suggests:
     covr,
     devtools,
     ggplot2,
+    knitr,
     lintr,
     nloptr,
     pkgdown,
@@ -32,13 +34,11 @@ Suggests:
     roxygen2,
     saintexpressbin,
     testthat (>= 3.0.0)
-Remotes:
-    github::fgcz/prolfqua@main,
-    github::prolfqua/saintexpress,
-    github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
 VignetteBuilder: quarto
+SystemRequirements: quarto
+Config/testthat/edition: 3
 Depends: 
-    R (>= 4.1)
+    R (>= 4.5.0)
 biocViews: MassSpectrometry, Proteomics, Metabolomics, ExperimentHubSoftware, Normalization, Preprocessing, QualityControl

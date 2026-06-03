@@ -9,6 +9,15 @@ get_files_DIANN(path)
 \arguments{
 \item{path}{directory path to search for DIANN output files}
 }
+\value{
+list with report TSV and FASTA file paths.
+}
 \description{
 find DIANN files
+}
+\examples{
+td <- tempdir()
+writeLines("protein", file.path(td, "database.fasta"))
+writeLines("report", file.path(td, "report.tsv"))
+get_files_DIANN(td)
 }

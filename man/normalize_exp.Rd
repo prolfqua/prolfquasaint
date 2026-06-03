@@ -11,6 +11,12 @@ normalize_exp(lfqdataProt, normalization = c("vsn", "robscale", "none"))
 
 \item{normalization}{normalization method: "vsn", "robscale", or "none"}
 }
+\value{
+This function now errors and points users to prolfquapp.
+}
 \description{
 normalize and then exponentiate data.
+}
+\examples{
+try(normalize_exp(NULL, normalization = "none"), silent = TRUE)
 }

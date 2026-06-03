@@ -15,6 +15,9 @@ dataset_set_factors_deprecated(atable, msdata, repeated = TRUE, SAINT = FALSE)
 
 \item{SAINT}{logical, use Bait_ instead of Group_ as factor name}
 }
+\value{
+list with updated `atable` and `msdata`.
+}
 \description{
 set factors and sample names columns
 }

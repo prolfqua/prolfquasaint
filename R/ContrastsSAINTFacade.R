@@ -24,6 +24,8 @@
 #' @return An R6 class generator.
 #' @export
 #' @family modelling
+#' @examples
+#' ContrastsSAINTFacade
 ContrastsSAINTFacade <- R6::R6Class(
   "ContrastsSAINTFacade",
   inherit = prolfqua::ContrastsInterface,

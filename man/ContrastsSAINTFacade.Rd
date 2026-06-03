@@ -31,6 +31,9 @@ Differs from LM-style facades in three ways:
         downstream report rendering.
 }
 }
+\examples{
+ContrastsSAINTFacade
+}
 \seealso{
 Other modelling: 
 \code{\link{ContrastsSAINTexpress}}

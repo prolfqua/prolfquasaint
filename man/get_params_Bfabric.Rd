@@ -9,6 +9,20 @@ get_params_Bfabric(yml)
 \arguments{
 \item{yml}{parsed YAML configuration list from B-Fabric}
 }
+\value{
+list with B-Fabric workunit, order, and input identifiers.
+}
 \description{
 get params from bfabric executable
+}
+\examples{
+yml <- list(
+  job_configuration = list(
+    workunit_id = "1",
+    order_id = "2",
+    input = list(list(list(resource_id = "3", resource_url = "https://example.org")))
+  ),
+  application = list(parameters = list(`10|datasetId` = "4"))
+)
+get_params_Bfabric(yml)
 }

@@ -11,6 +11,13 @@ transform_force(lfqdataProt, transformation = c("sqrt", "log2", "none"))
 
 \item{transformation}{transformation method: "sqrt", "log2", or "none"}
 }
+\value{
+transformed LFQData object.
+}
 \description{
 force data transformation
+}
+\examples{
+obj <- list()
+transform_force(obj, transformation = "none")
 }

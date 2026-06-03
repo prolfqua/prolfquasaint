@@ -3,7 +3,13 @@
 #' @param intdata data.frame
 #' @param fasta list of sequences created with \code{\link[seqinr]{read.fasta}}
 #' @param id_col column with protein ids/accessions.
+#' @return `intdata` with an added `protein.length` column.
 #' @export
+#' @examples
+#' add_protein_lengths(
+#'   data.frame(protein_Id = "P1"),
+#'   list(P1 = "MPEPTIDE")
+#' )
 #'
 add_protein_lengths <- function(
   intdata,
@@ -35,6 +41,7 @@ add_protein_lengths <- function(
 #' @param IP_name raw.file
 #' @param baitCol column with bait definition (condition)
 #' @param CorTCol is it control or TRUE (SaintExpress speach)
+#' @return named list with `inter`, `prey`, and `bait` SAINT input tables.
 #' @examples
 #'
 #' bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
@@ -77,9 +84,10 @@ protein_2localSaint <- function(
     CorTCol
   )
   if (!all(reqcolumns %in% colnames(xx))) {
+    missing_columns <- reqcolumns[which(!reqcolumns %in% colnames(xx))]
     stop(
       "columns not found ",
-      paste0(reqcolumns[which(!reqcolumns %in% colnames(xx))])
+      toString(missing_columns)
     )
   }
   res <- list()
@@ -128,6 +136,7 @@ protein_2localSaint <- function(
 #' @param optimizer optimizer for \code{engine = "r"}. \code{"base"} uses
 #'   \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
 #'   \pkg{nloptr} is installed.
+#' @return list with SAINTexpress `listFile`, parsed `list`, and run `out`.
 runSaint <- function(
   si,
   filedir = getwd(),

@@ -1,6 +1,16 @@
 #' get apparams from bfabric executable
 #' @param yml parsed YAML configuration list from B-Fabric
+#' @return list of SAINTexpress application parameters.
 #' @export
+#' @examples
+#' yml <- list(application = list(parameters = list(
+#'   `22|FCthreshold` = "2",
+#'   `21|BFDRsignificance` = "0.1",
+#'   `11|Normalization` = "none",
+#'   `51|Transformation` = "none",
+#'   `61|nrPeptides` = "2"
+#' )))
+#' apparams_Bfabric(yml)
 apparams_Bfabric <- function(yml) {
   REPORTDATA <- list()
 
@@ -36,26 +46,37 @@ apparams_Bfabric <- function(yml) {
 
 #' get params from bfabric executable
 #' @param yml parsed YAML configuration list from B-Fabric
+#' @return list with B-Fabric workunit, order, and input identifiers.
 #' @export
+#' @examples
+#' yml <- list(
+#'   job_configuration = list(
+#'     workunit_id = "1",
+#'     order_id = "2",
+#'     input = list(list(list(resource_id = "3", resource_url = "https://example.org")))
+#'   ),
+#'   application = list(parameters = list(`10|datasetId` = "4"))
+#' )
+#' get_params_Bfabric(yml)
 get_params_Bfabric <- function(yml) {
   BFABRIC <- list()
-  BFABRIC$workunitID = yml$job_configuration$workunit_id
-  BFABRIC$workunitURL = paste0(
+  BFABRIC$workunitID <- yml$job_configuration$workunit_id
+  BFABRIC$workunitURL <- paste0(
     "https://fgcz-bfabric.uzh.ch/bfabric/workunit/show.html?id=",
     BFABRIC$workunitID,
     "&tab=details"
   )
-  BFABRIC$orderID = yml$job_configuration$order_id
-  BFABRIC$inputID = purrr::map_chr(
+  BFABRIC$orderID <- yml$job_configuration$order_id
+  BFABRIC$inputID <- purrr::map_chr(
     yml$job_configuration$input[[1]],
     ~ as.character(.x$resource_id)
   )
-  BFABRIC$inputID = utils::tail(BFABRIC$inputID, n = 1)
-  BFABRIC$inputURL = purrr::map_chr(
+  BFABRIC$inputID <- utils::tail(BFABRIC$inputID, n = 1)
+  BFABRIC$inputURL <- purrr::map_chr(
     yml$job_configuration$input[[1]],
     "resource_url"
   )
-  BFABRIC$inputURL = utils::tail(BFABRIC$inputURL, n = 1)
+  BFABRIC$inputURL <- utils::tail(BFABRIC$inputURL, n = 1)
 
   BFABRIC$datasetID <- yml$application$parameters$`10|datasetId`
   return(BFABRIC)
@@ -64,7 +85,10 @@ get_params_Bfabric <- function(yml) {
 #' normalize and then exponentiate data.
 #' @param lfqdataProt an LFQData object
 #' @param normalization normalization method: "vsn", "robscale", or "none"
+#' @return This function now errors and points users to prolfquapp.
 #' @export
+#' @examples
+#' try(normalize_exp(NULL, normalization = "none"), silent = TRUE)
 normalize_exp <- function(
   lfqdataProt,
   normalization = c("vsn", "robscale", "none")
@@ -82,7 +106,11 @@ normalize_exp <- function(
 #' force data transformation
 #' @param lfqdataProt an LFQData object
 #' @param transformation transformation method: "sqrt", "log2", or "none"
+#' @return transformed LFQData object.
 #' @export
+#' @examples
+#' obj <- list()
+#' transform_force(obj, transformation = "none")
 transform_force <- function(
   lfqdataProt,
   transformation = c("sqrt", "log2", "none")
@@ -104,7 +132,13 @@ transform_force <- function(
 
 #' find DIANN files
 #' @param path directory path to search for DIANN output files
+#' @return list with report TSV and FASTA file paths.
 #' @export
+#' @examples
+#' td <- tempdir()
+#' writeLines("protein", file.path(td, "database.fasta"))
+#' writeLines("report", file.path(td, "report.tsv"))
+#' get_files_DIANN(td)
 get_files_DIANN <- function(path) {
   diann.path <- grep(
     "report\\.tsv$|diann-output\\.tsv",

@@ -72,6 +72,13 @@ via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
 \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
 \pkg{nloptr} is installed.}
 }
+\value{
+`intdata` with an added `protein.length` column.
+
+named list with `inter`, `prey`, and `bait` SAINT input tables.
+
+list with SAINTexpress `listFile`, parsed `list`, and run `out`.
+}
 \description{
 Executes SAINTexpress on prepared input data. Delegates to the
 \pkg{saintexpressbin} package for the native binary / Docker engine, and to
@@ -80,6 +87,11 @@ is requested but \pkg{saintexpressbin} is not installed, a warning is issued
 and the call falls back to the R engine.
 }
 \examples{
+add_protein_lengths(
+  data.frame(protein_Id = "P1"),
+  list(P1 = "MPEPTIDE")
+)
+
 
 bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
 bb$config <- bb$config$clone(deep = TRUE)

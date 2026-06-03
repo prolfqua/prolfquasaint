@@ -7,6 +7,7 @@
 #'
 #' @export
 #' @family modelling
+#' @return An R6 class generator.
 #'
 #' @examples
 #' seout <- prolfqua::prolfqua_data("data_SAINTe_output")
@@ -37,10 +38,10 @@ ContrastsSAINTexpress <- R6::R6Class(
       subject_id = "Prey",
       modelName = "ContrastSaint"
     ) {
-      self$contrast_result = contrastsdf
-      self$subject_id = subject_id
-      self$modelName = modelName
-      self$config = prolfqua::ContrastConfiguration$new(
+      self$contrast_result <- contrastsdf
+      self$subject_id <- subject_id
+      self$modelName <- modelName
+      self$config <- prolfqua::ContrastConfiguration$new(
         subject_id = subject_id,
         contrast_col = "Bait",
         effect_col = "log2_EFCs",

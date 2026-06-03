@@ -26,13 +26,12 @@ read_DIANN_output(
 
 \item{rev}{prefix for reversed/decoy entries}
 }
+\value{
+This function now errors and points users to prolfquapp.
+}
 \description{
 DIANN helper functions
 }
 \examples{
-\dontrun{
-x <- prolfquapp::get_DIANN_files("inst/application/DIANN/2517219/")
-xd <- read_DIANN_output(x$data, x$fasta)
-debug(read_DIANN_output)
-}
+try(read_DIANN_output("report.tsv", "database.fasta"), silent = TRUE)
 }

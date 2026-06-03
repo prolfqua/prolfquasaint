@@ -3,6 +3,9 @@
 \name{ContrastsSAINTexpress}
 \alias{ContrastsSAINTexpress}
 \title{Wrapper to results produced by SAINTexpress}
+\value{
+An R6 class generator.
+}
 \description{
 Wrapper to results produced by SAINTexpress
 

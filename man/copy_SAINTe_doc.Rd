@@ -9,6 +9,10 @@ copy_SAINTe_doc(workdir = getwd())
 \arguments{
 \item{workdir}{directory where to copy file - default is current working directory.}
 }
+\value{
+Invisibly returns the copied file path, or `character(0)` if the
+  companion package/manual is unavailable.
+}
 \description{
 copy SAINTexpress doc file
 }

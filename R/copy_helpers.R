@@ -1,10 +1,12 @@
 #' copy SAINTexpress doc file
 #' @param workdir directory where to copy file - default is current working directory.
+#' @return Invisibly returns the copied file path, or `character(0)` if the
+#'   companion package/manual is unavailable.
 #' @keywords internal
 #' @export
 #' @examples
 #' copy_SAINTe_doc(workdir = tempdir())
-copy_SAINTe_doc <- function(workdir = getwd()){
+copy_SAINTe_doc <- function(workdir = getwd()) {
   if (!requireNamespace("saintexpressbin", quietly = TRUE)) {
     warning("copy_SAINTe_doc requires the 'saintexpressbin' package, which is not installed.")
     return(invisible(character(0)))
@@ -23,8 +25,10 @@ copy_SAINTe_doc <- function(workdir = getwd()){
 #' copy Markdown and runscript for DIANN diann-output.tsv
 #' @param workdir directory where to copy file - default is current working directory.
 #' @param run_script if TRUE, also copy the R run scripts
+#' @return return value from `prolfqua::script_copy_helper_vec()`.
 #' @export
-#'
+#' @examples
+#' copy_SAINT_express(workdir = tempdir(), run_script = FALSE)
 copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {
   runscripts <- c(
     "application/bibliography.bib",
@@ -34,4 +38,3 @@ copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {
   )
   prolfqua::script_copy_helper_vec(runscripts, workdir = workdir, packagename = "prolfquasaint")
 }
-
