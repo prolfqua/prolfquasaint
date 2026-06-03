@@ -41,12 +41,12 @@ read_DIANN_output(
 
   prefix for reversed/decoy entries
 
+## Value
+
+This function now errors and points users to prolfquapp.
+
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-x <- prolfquapp::get_DIANN_files("inst/application/DIANN/2517219/")
-xd <- read_DIANN_output(x$data, x$fasta)
-debug(read_DIANN_output)
-} # }
+try(read_DIANN_output("report.tsv", "database.fasta"), silent = TRUE)
 ```

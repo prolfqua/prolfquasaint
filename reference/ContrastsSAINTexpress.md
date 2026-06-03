@@ -4,6 +4,10 @@ Wrapper to results produced by SAINTexpress
 
 Wrapper to results produced by SAINTexpress
 
+## Value
+
+An R6 class generator.
+
 ## Details
 
 SAINTexpress writes

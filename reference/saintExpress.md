@@ -113,9 +113,25 @@ runSaint(
   [`optim`](https://rdrr.io/r/stats/optim.html); `"nloptr"` uses NLopt
   COBYLA when nloptr is installed.
 
+## Value
+
+\`intdata\` with an added \`protein.length\` column.
+
+named list with \`inter\`, \`prey\`, and \`bait\` SAINT input tables.
+
+list with SAINTexpress \`listFile\`, parsed \`list\`, and run \`out\`.
+
 ## Examples
 
 ``` r
+add_protein_lengths(
+  data.frame(protein_Id = "P1"),
+  list(P1 = "MPEPTIDE")
+)
+#>   protein_Id protein.length
+#> 1         P1              8
+
+
 bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
 bb$config <- bb$config$clone(deep = TRUE)
 xx <- prolfqua::LFQData$new(bb$data, bb$config)

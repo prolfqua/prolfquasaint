@@ -26,6 +26,10 @@ dataset_set_factors_deprecated(atable, msdata, repeated = TRUE, SAINT = FALSE)
 
   logical, use Bait\_ instead of Group\_ as factor name
 
+## Value
+
+list with updated \`atable\` and \`msdata\`.
+
 ## Examples
 
 ``` r

@@ -285,3 +285,31 @@ The objects of this class are cloneable with this method.
 - `deep`:
 
   Whether to make a deep clone.
+
+## Examples
+
+``` r
+ContrastsSAINTFacade
+#> <ContrastsSAINTFacade> object generator
+#>   Inherits from: <prolfqua::ContrastsInterface>
+#>   Public:
+#>     contrast: NULL
+#>     saint_input: NULL
+#>     saint_result: NULL
+#>     protein_id: 
+#>     .lfqdata: NULL
+#>     .row_annot: NULL
+#>     initialize: function (lfqdata, modelstr = NULL, contrasts = NULL, row_annot = NULL, 
+#>     get_contrasts: function (...) 
+#>     get_Plotter: function (...) 
+#>     to_wide: function (...) 
+#>     get_missing: function () 
+#>     get_ora: function (up = TRUE, FDR_threshold = 0.05, diff_threshold = 1) 
+#>     get_rank: function (score = "log2_EFCs") 
+#>     extra_artifacts: function () 
+#>     clone: function (deep = FALSE) 
+#>   Parent env: <environment: namespace:prolfquasaint>
+#>   Locked objects: TRUE
+#>   Locked class: FALSE
+#>   Portable: TRUE
+```

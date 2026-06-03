@@ -56,6 +56,7 @@
 <div class="page-header"><h1 id="prolfquasaint">prolfquasaint<a class="anchor" aria-label="anchor" href="#prolfquasaint"></a>
 </h1></div>
 <p><code>prolfquasaint</code> is the <a href="https://github.com/fgcz/prolfqua" class="external-link">prolfqua</a> integration layer for SAINTexpress-based protein interaction scoring. It converts prolfqua <code>LFQData</code> objects into SAINT input tables, runs SAINTexpress, and exposes the results through <code>prolfqua</code> contrast adapters.</p>
+<p>📖 Documentation: <a href="https://prolfqua.github.io/prolfquasaint/" class="uri">https://prolfqua.github.io/prolfquasaint/</a></p>
 <div class="section level2">
 <h2 id="architecture">Architecture<a class="anchor" aria-label="anchor" href="#architecture"></a>
 </h2>
@@ -88,7 +89,7 @@
 <li>
 <code><a href="reference/saintExpress.html">protein_2localSaint()</a></code> — convert a tidy long-format protein quantification table into SAINT <code>inter / prey / bait</code> data frames.</li>
 <li>
-<code>runSaint(si, ..., engine = c("binary", "r"), optimizer = c("base", "nloptr"))</code> — run SAINTexpress. <code>engine = "binary"</code> delegates to <code><a href="https://rdrr.io/pkg/saintexpressbin/man/saintexpress_run.html" class="external-link">saintexpressbin::saintexpress_run()</a></code>; <code>engine = "r"</code> delegates to <code><a href="https://rdrr.io/pkg/saintexpress/man/run_saint.html" class="external-link">saintexpress::run_saint()</a></code>.</li>
+<code>runSaint(si, ..., engine = c("binary", "r"), optimizer = c("base", "nloptr"))</code> — run SAINTexpress. <code>engine = "binary"</code> delegates to <code><a href="https://rdrr.io/pkg/saintexpressbin/man/saintexpress_run.html" class="external-link">saintexpressbin::saintexpress_run()</a></code>; <code>engine = "r"</code> delegates to <code><a href="https://prolfqua.github.io/saintexpress/reference/run_saint.html" class="external-link">saintexpress::run_saint()</a></code>.</li>
 <li>
 <code>ContrastsSAINTexpress</code>, <code>ContrastsSAINTFacade</code> — prolfqua R6 adapters that expose SAINT results through the prolfqua contrast interface.</li>
 </ul>
@@ -126,7 +127,15 @@
 <p>The extracted and cleaned C++ source lives in a separate repository; this package depends only on prebuilt binaries shipped by <code>saintexpressbin</code>.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/prolfqua/prolfquasaint/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/prolfqua/prolfquasaint/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
@@ -146,7 +155,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Witold Wolski <br><small class="roles"> Maintainer </small>   </li>
+<li>Witold Wolski <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6468-120X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 

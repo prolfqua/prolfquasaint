@@ -59,7 +59,7 @@
 
 
 
-
+      <small class="dont-index">Source: <a href="https://github.com/prolfqua/prolfquasaint/blob/main/vignettes/native-r-int-comparison.qmd" class="external-link"><code>vignettes/native-r-int-comparison.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
     </div>
 
@@ -70,11 +70,6 @@
 
     <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">prolfquasaint</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fixture_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>  <span class="st">"test/saintexpress-363-tip49-reference-int"</span>,</span>
 <span>  package <span class="op">=</span> <span class="st">"prolfquasaint"</span></span>
@@ -109,43 +104,27 @@
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">native_binary</span> <span class="op">&lt;-</span> <span class="fu">saintexpressbin</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/saintexpressbin/man/saintexpress_executable.html" class="external-link">saintexpress_executable</a></span><span class="op">(</span><span class="st">"int"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nzchar</a></span><span class="op">(</span><span class="va">native_binary</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">native_binary</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/runner/work/_temp/Library/saintexpressbin/bin/Linux64/SAINTexpress-int"</code></pre>
-</div>
+<span><span class="va">native_binary</span></span>
+<span><span class="co">#&gt; [1] "/home/runner/work/_temp/Library/saintexpressbin/bin/Linux64/SAINTexpress-int"</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">native_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"saintexpress-native-"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">native_dir</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">native</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/saintExpress.html">runSaint</a></span><span class="op">(</span></span>
+<span><span class="va">native</span> <span class="op">&lt;-</span> <span class="fu">prolfquasaint</span><span class="fu">::</span><span class="fu"><a href="../reference/saintExpress.html">runSaint</a></span><span class="op">(</span></span>
 <span>  <span class="va">si</span>,</span>
 <span>  filedir <span class="op">=</span> <span class="va">native_dir</span>,</span>
 <span>  spc <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  engine <span class="op">=</span> <span class="st">"binary"</span>,</span>
 <span>  use_docker <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  CLEANUP <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="va">list</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Input files are: /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/inter.txt, /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/prey.txt, /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/bait.txt
-Interaction file: "/tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/inter.txt"
-Prey file: "/tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/prey.txt"
-Bait file: "/tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/bait.txt"
-GO file: ""
-Parsing prey file /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/prey.txt ...done.
-Parsing prey file /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/bait.txt ...done.
-Parsing interaction file /tmp/RtmpAaqNHH/saintexpress-native-2093124998f1/inter.txt ...done.
-Setting matrix indices for each interaction...done.
-Creating matrix...done.
-Creating a list of unique interactions...done.
-L is larger than the number of control IPs.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">r_implementation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/saintExpress.html">runSaint</a></span><span class="op">(</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">list</span></span>
+<span></span>
+<span><span class="va">r_implementation</span> <span class="op">&lt;-</span> <span class="fu">prolfquasaint</span><span class="fu">::</span><span class="fu"><a href="../reference/saintExpress.html">runSaint</a></span><span class="op">(</span></span>
 <span>  <span class="va">si</span>,</span>
 <span>  spc <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  engine <span class="op">=</span> <span class="st">"r"</span>,</span>
@@ -153,7 +132,7 @@ L is larger than the number of control IPs.</code></pre>
 <span><span class="op">)</span><span class="op">$</span><span class="va">list</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">key_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bait"</span>, <span class="st">"Prey"</span>, <span class="st">"PreyGene"</span><span class="op">)</span></span>
 <span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span></span>
 <span>  <span class="va">native</span>,</span>
@@ -193,20 +172,18 @@ L is larger than the number of control IPs.</code></pre>
 <span>  <span class="va">summary_table</span><span class="op">$</span><span class="va">max_abs_delta</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">summary_table</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      metric    n correlation mean_abs_delta max_abs_delta
-1       AvgP 5521   0.9999919   0.0001206303         0.004
-2       MaxP 5521   0.9999918   0.0001606593         0.004
-3   TopoAvgP 5521   0.9999919   0.0001206303         0.004
-4   TopoMaxP 5521   0.9999918   0.0001606593         0.004
-5 SaintScore 5521   0.9999919   0.0001206303         0.004
-6  OddsScore 5521   0.9999870   0.0256140192         0.086
-7 FoldChange 5521   0.9999250   0.0336111212        11.946
-8       BFDR 5521   0.9999847   0.0003908712         0.020</code></pre>
+<span><span class="va">summary_table</span></span>
+<span><span class="co">#&gt;       metric    n correlation mean_abs_delta max_abs_delta</span></span>
+<span><span class="co">#&gt; 1       AvgP 5521   0.9999919   0.0001206303         0.004</span></span>
+<span><span class="co">#&gt; 2       MaxP 5521   0.9999918   0.0001606593         0.004</span></span>
+<span><span class="co">#&gt; 3   TopoAvgP 5521   0.9999919   0.0001206303         0.004</span></span>
+<span><span class="co">#&gt; 4   TopoMaxP 5521   0.9999918   0.0001606593         0.004</span></span>
+<span><span class="co">#&gt; 5 SaintScore 5521   0.9999919   0.0001206303         0.004</span></span>
+<span><span class="co">#&gt; 6  OddsScore 5521   0.9999870   0.0256140192         0.086</span></span>
+<span><span class="co">#&gt; 7 FoldChange 5521   0.9999250   0.0336111212        11.946</span></span>
+<span><span class="co">#&gt; 8       BFDR 5521   0.9999847   0.0003908712         0.020</span></span></code></pre></div>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">metric</span> <span class="kw">in</span> <span class="va">numeric_cols</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">binary_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">metric</span>, <span class="st">"_binary"</span><span class="op">)</span></span>
 <span>  <span class="va">r_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">metric</span>, <span class="st">"_r"</span><span class="op">)</span></span>
@@ -215,43 +192,104 @@ L is larger than the number of control IPs.</code></pre>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"##"</span>, <span class="va">metric</span>, <span class="st">"\n\n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">plot_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">binary_col</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">r_col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.35</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_abline</a></span><span class="op">(</span>slope <span class="op">=</span> <span class="fl">1</span>, intercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="va">range_values</span>, ylim <span class="op">=</span> <span class="va">range_values</span><span class="op">)</span> <span class="op">+</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>      <span class="va">plot_data</span>,</span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">binary_col</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">r_col</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.35</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_abline</a></span><span class="op">(</span>slope <span class="op">=</span> <span class="fl">1</span>, intercept <span class="op">=</span> <span class="fl">0</span>, color <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal</a></span><span class="op">(</span>xlim <span class="op">=</span> <span class="va">range_values</span>, ylim <span class="op">=</span> <span class="va">range_values</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>        x <span class="op">=</span> <span class="st">"Native SAINTexpress-int binary"</span>,</span>
 <span>        y <span class="op">=</span> <span class="st">"R implementation"</span>,</span>
 <span>        title <span class="op">=</span> <span class="va">metric</span></span>
 <span>      <span class="op">)</span> <span class="op">+</span></span>
-<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\n\n"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <section class="level2"><h2 id="avgp">AvgP<a class="anchor" aria-label="anchor" href="#avgp"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-1.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-1.png" width="528"></p>
 </section><section class="level2"><h2 id="maxp">MaxP<a class="anchor" aria-label="anchor" href="#maxp"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-2.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-2.png" width="528"></p>
 </section><section class="level2"><h2 id="topoavgp">TopoAvgP<a class="anchor" aria-label="anchor" href="#topoavgp"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-3.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-3.png" width="528"></p>
 </section><section class="level2"><h2 id="topomaxp">TopoMaxP<a class="anchor" aria-label="anchor" href="#topomaxp"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-4.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-4.png" width="528"></p>
 </section><section class="level2"><h2 id="saintscore">SaintScore<a class="anchor" aria-label="anchor" href="#saintscore"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-5.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-5.png" width="528"></p>
 </section><section class="level2"><h2 id="oddsscore">OddsScore<a class="anchor" aria-label="anchor" href="#oddsscore"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-6.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-6.png" width="528"></p>
 </section><section class="level2"><h2 id="foldchange">FoldChange<a class="anchor" aria-label="anchor" href="#foldchange"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-7.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-7.png" width="528"></p>
 </section><section class="level2"><h2 id="bfdr">BFDR<a class="anchor" aria-label="anchor" href="#bfdr"></a>
 </h2>
-<p><img src="native-r-int-comparison_files/figure-html/unnamed-chunk-6-8.png" width="528"></p>
+<p><img src="native-r-int-comparison_files/figure-html/comparison-plots-8.png" width="528"></p>
+</section><section class="level2"><h2 id="session-information">Session information<a class="anchor" aria-label="anchor" href="#session-information"></a>
+</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.6.0 (2026-04-24)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 24.04.4 LTS</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
+<span><span class="co">#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          </span></span>
+<span><span class="co">#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: UTC</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           </span></span>
+<span><span class="co">#&gt;  [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.5   </span></span>
+<span><span class="co">#&gt;  [7] fastmap_1.2.0          lazyeval_0.2.3         digest_0.6.39         </span></span>
+<span><span class="co">#&gt; [10] rpart_4.1.27           prolfqua_1.6.2         lifecycle_1.0.5       </span></span>
+<span><span class="co">#&gt; [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        </span></span>
+<span><span class="co">#&gt; [16] compiler_4.6.0         rlang_1.2.0            tools_4.6.0           </span></span>
+<span><span class="co">#&gt; [19] yaml_2.3.12            data.table_1.18.4      knitr_1.51            </span></span>
+<span><span class="co">#&gt; [22] labeling_0.4.3         htmlwidgets_1.6.4      bit_4.6.0             </span></span>
+<span><span class="co">#&gt; [25] plyr_1.8.9             RColorBrewer_1.1-3     withr_3.0.2           </span></span>
+<span><span class="co">#&gt; [28] purrr_1.2.2            nnet_7.3-20            grid_4.6.0            </span></span>
+<span><span class="co">#&gt; [31] saintexpress_0.0.1     jomo_2.7-6             mice_3.19.0           </span></span>
+<span><span class="co">#&gt; [34] ggplot2_4.0.3          scales_1.4.0           iterators_1.0.14      </span></span>
+<span><span class="co">#&gt; [37] MASS_7.3-65            cli_3.6.6              crayon_1.5.3          </span></span>
+<span><span class="co">#&gt; [40] UpSetR_1.4.1           rmarkdown_2.31         reformulas_0.4.4      </span></span>
+<span><span class="co">#&gt; [43] generics_0.1.4         otel_0.2.0             httr_1.4.8            </span></span>
+<span><span class="co">#&gt; [46] tzdb_0.5.0             minqa_1.2.8            operator.tools_1.6.3.1</span></span>
+<span><span class="co">#&gt; [49] splines_4.6.0          parallel_4.6.0         vctrs_0.7.3           </span></span>
+<span><span class="co">#&gt; [52] boot_1.3-32            glmnet_5.0             Matrix_1.7-5          </span></span>
+<span><span class="co">#&gt; [55] jsonlite_2.0.0         saintexpressbin_0.0.1  hms_1.1.4             </span></span>
+<span><span class="co">#&gt; [58] bit64_4.8.2            mitml_0.4-5            ggrepel_0.9.8         </span></span>
+<span><span class="co">#&gt; [61] foreach_1.5.2          limma_3.68.4           plotly_4.12.0         </span></span>
+<span><span class="co">#&gt; [64] tidyr_1.3.2            glue_1.8.1             nloptr_2.2.1          </span></span>
+<span><span class="co">#&gt; [67] pan_1.9                codetools_0.2-20       shape_1.4.6.1         </span></span>
+<span><span class="co">#&gt; [70] gtable_0.3.6           lme4_2.0-1             tibble_3.3.1          </span></span>
+<span><span class="co">#&gt; [73] pillar_1.11.1          htmltools_0.5.9        R6_2.6.1              </span></span>
+<span><span class="co">#&gt; [76] Rdpack_2.6.6           formula.tools_1.7.1    vroom_1.7.1           </span></span>
+<span><span class="co">#&gt; [79] evaluate_1.0.5         lattice_0.22-9         readr_2.2.0           </span></span>
+<span><span class="co">#&gt; [82] rbibutils_2.4.1        backports_1.5.1        pheatmap_1.0.13       </span></span>
+<span><span class="co">#&gt; [85] broom_1.0.13           Rcpp_1.1.1-1.1         gridExtra_2.3         </span></span>
+<span><span class="co">#&gt; [88] nlme_3.1-169           mgcv_1.9-4             logistf_1.26.1        </span></span>
+<span><span class="co">#&gt; [91] xfun_0.58              forcats_1.0.1          pkgconfig_2.0.3</span></span></code></pre></div>
+</div>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);

@@ -33,7 +33,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>copy Markdown and runscript for DIANN diann-output.tsv</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/prolfqua/prolfquasaint/blob/main/R/copy_helpers.R" class="external-link"><code>R/copy_helpers.R</code></a></small>
       <div class="d-none name"><code>copy_SAINT_express.Rd</code></div>
     </div>
 
@@ -58,7 +58,21 @@
 <dd><p>if TRUE, also copy the R run scripts</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>return value from `prolfqua::script_copy_helper_vec()`.</p>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">copy_SAINT_express</span><span class="op">(</span>workdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, run_script <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> copy /home/runner/work/_temp/Library/prolfquasaint/application/bibliography.bib to /tmp/Rtmpfoz8EO/bibliography.bib</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> copy /home/runner/work/_temp/Library/prolfquasaint/application/SE2/SaintExpressReportMsFragger.Rmd to /tmp/Rtmpfoz8EO/SaintExpressReportMsFragger.Rmd</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> your working directory now should contain: 2 new files:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpfoz8EO/bibliography.bib"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "/tmp/Rtmpfoz8EO/SaintExpressReportMsFragger.Rmd"</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

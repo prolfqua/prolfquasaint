@@ -17,3 +17,15 @@ transform_force(lfqdataProt, transformation = c("sqrt", "log2", "none"))
 - transformation:
 
   transformation method: "sqrt", "log2", or "none"
+
+## Value
+
+transformed LFQData object.
+
+## Examples
+
+``` r
+obj <- list()
+transform_force(obj, transformation = "none")
+#> list()
+```
