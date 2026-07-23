@@ -1,7 +1,11 @@
 .onLoad <- function(libname, pkgname) {
   if (
     requireNamespace("prolfqua", quietly = TRUE) &&
-      exists("register_facade", where = asNamespace("prolfqua"), inherits = FALSE)
+      exists(
+        "register_facade",
+        where = asNamespace("prolfqua"),
+        inherits = FALSE
+      )
   ) {
     prolfqua::register_facade(
       "saint",

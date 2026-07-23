@@ -150,7 +150,7 @@ ContrastsSAINTexpress <- R6::R6Class(
         contrast_minimal,
         subject_id = self$subject_id,
         columns = c("log2_EFCs", columns),
-        contrast = 'Bait'
+        contrast = "Bait"
       )
       return(contrasts_wide)
     },

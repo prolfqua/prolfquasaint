@@ -8,10 +8,16 @@
 #' copy_SAINTe_doc(workdir = tempdir())
 copy_SAINTe_doc <- function(workdir = getwd()) {
   if (!requireNamespace("saintexpressbin", quietly = TRUE)) {
-    warning("copy_SAINTe_doc requires the 'saintexpressbin' package, which is not installed.")
+    warning(
+      "copy_SAINTe_doc requires the 'saintexpressbin' package, which is not installed."
+    )
     return(invisible(character(0)))
   }
-  src <- system.file("manual", "SAINTexpress-manual.docx", package = "saintexpressbin")
+  src <- system.file(
+    "manual",
+    "SAINTexpress-manual.docx",
+    package = "saintexpressbin"
+  )
   if (!nzchar(src)) {
     warning("SAINTexpress-manual.docx not found in saintexpressbin.")
     return(invisible(character(0)))
@@ -33,8 +39,16 @@ copy_SAINT_express <- function(workdir = getwd(), run_script = FALSE) {
   runscripts <- c(
     "application/bibliography.bib",
     "application/SE2/SaintExpressReportMsFragger.Rmd",
-    if (run_script) {"application/SE2/CreateSaintExpress_Report.R"},
-    if (run_script) {"application/SE2_DIANN/DIANN_SE.R"}
+    if (run_script) {
+      "application/SE2/CreateSaintExpress_Report.R"
+    },
+    if (run_script) {
+      "application/SE2_DIANN/DIANN_SE.R"
+    }
   )
-  prolfqua::script_copy_helper_vec(runscripts, workdir = workdir, packagename = "prolfquasaint")
+  prolfqua::script_copy_helper_vec(
+    runscripts,
+    workdir = workdir,
+    packagename = "prolfquasaint"
+  )
 }

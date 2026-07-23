@@ -126,7 +126,7 @@ dataset_set_factors_deprecated <- function(
       colnames(msdata),
       ignore.case = TRUE
     )) ==
-      1 &
+      1 &&
       repeated
   ) {
     subvar <- grep(

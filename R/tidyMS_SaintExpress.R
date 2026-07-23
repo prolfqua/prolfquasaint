@@ -150,7 +150,9 @@ runSaint <- function(
   engine <- match.arg(engine)
   optimizer <- match.arg(optimizer)
 
-  if (engine == "binary" && !requireNamespace("saintexpressbin", quietly = TRUE)) {
+  if (
+    engine == "binary" && !requireNamespace("saintexpressbin", quietly = TRUE)
+  ) {
     warning(
       "engine = 'binary' requires the 'saintexpressbin' package, which is not installed. ",
       "Falling back to engine = 'r'."

@@ -35,7 +35,9 @@ Suggests:
     saintexpressbin,
     testthat (>= 3.0.0)
 Remotes:
-    github::prolfqua/saintexpress
+    github::fgcz/prolfqua,
+    github::prolfqua/saintexpress,
+    github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
 VignetteBuilder: quarto
