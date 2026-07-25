@@ -112,7 +112,7 @@ summary_table
 #> 5 SaintScore 5521   0.9999919   0.0001206303         0.004
 #> 6  OddsScore 5521   0.9999870   0.0256140192         0.086
 #> 7 FoldChange 5521   0.9999250   0.0336111212        11.946
-#> 8       BFDR 5521   0.9999847   0.0003908712         0.020
+#> 8       BFDR 5521   0.9999847   0.0003912335         0.020
 ```
 
 ``` r
@@ -178,7 +178,7 @@ for (metric in numeric_cols) {
 
 ``` r
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
+#> R version 4.6.1 (2026-06-24)
 #> Platform: x86_64-pc-linux-gnu
 #> Running under: Ubuntu 24.04.4 LTS
 #> 
@@ -199,35 +199,40 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           
-#>  [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.5   
-#>  [7] fastmap_1.2.0          lazyeval_0.2.3         digest_0.6.39         
-#> [10] rpart_4.1.27           prolfqua_1.6.2         lifecycle_1.0.5       
-#> [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        
-#> [16] compiler_4.6.0         rlang_1.2.0            tools_4.6.0           
-#> [19] yaml_2.3.12            data.table_1.18.4      knitr_1.51            
-#> [22] labeling_0.4.3         htmlwidgets_1.6.4      bit_4.6.0             
-#> [25] plyr_1.8.9             RColorBrewer_1.1-3     withr_3.0.2           
-#> [28] purrr_1.2.2            nnet_7.3-20            grid_4.6.0            
-#> [31] saintexpress_0.0.1     jomo_2.7-6             mice_3.19.0           
-#> [34] ggplot2_4.0.3          scales_1.4.0           iterators_1.0.14      
-#> [37] MASS_7.3-65            cli_3.6.6              crayon_1.5.3          
-#> [40] UpSetR_1.4.1           rmarkdown_2.31         reformulas_0.4.4      
-#> [43] generics_0.1.4         otel_0.2.0             httr_1.4.8            
-#> [46] tzdb_0.5.0             minqa_1.2.8            operator.tools_1.6.3.1
-#> [49] splines_4.6.0          parallel_4.6.0         vctrs_0.7.3           
-#> [52] boot_1.3-32            glmnet_5.0             Matrix_1.7-5          
-#> [55] jsonlite_2.0.0         saintexpressbin_0.0.1  hms_1.1.4             
-#> [58] bit64_4.8.2            mitml_0.4-5            ggrepel_0.9.8         
-#> [61] foreach_1.5.2          limma_3.68.4           plotly_4.12.0         
-#> [64] tidyr_1.3.2            glue_1.8.1             nloptr_2.2.1          
-#> [67] pan_1.9                codetools_0.2-20       shape_1.4.6.1         
-#> [70] gtable_0.3.6           lme4_2.0-1             tibble_3.3.1          
-#> [73] pillar_1.11.1          htmltools_0.5.9        R6_2.6.1              
-#> [76] Rdpack_2.6.6           formula.tools_1.7.1    vroom_1.7.1           
-#> [79] evaluate_1.0.5         lattice_0.22-9         readr_2.2.0           
-#> [82] rbibutils_2.4.1        backports_1.5.1        pheatmap_1.0.13       
-#> [85] broom_1.0.13           Rcpp_1.1.1-1.1         gridExtra_2.3         
-#> [88] nlme_3.1-169           mgcv_1.9-4             logistf_1.26.1        
-#> [91] xfun_0.58              forcats_1.0.1          pkgconfig_2.0.3
+#>   [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           
+#>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.5   
+#>   [7] fastmap_1.2.0          rpart_4.1.27           digest_0.6.39         
+#>  [10] prolfqua_1.7.0         lifecycle_1.0.5        cluster_2.1.8.2       
+#>  [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        
+#>  [16] compiler_4.6.1         rlang_1.3.0            tools_4.6.1           
+#>  [19] yaml_2.3.12            data.table_1.18.4      knitr_1.51            
+#>  [22] labeling_0.4.3         htmlwidgets_1.6.4      bit_4.6.0             
+#>  [25] plyr_1.8.9             RColorBrewer_1.1-3     withr_3.0.3           
+#>  [28] purrr_1.2.2            BiocGenerics_0.58.1    nnet_7.3-20           
+#>  [31] grid_4.6.1             stats4_4.6.1           saintexpress_0.0.1    
+#>  [34] jomo_2.7-6             colorspace_2.1-3       mice_3.19.0           
+#>  [37] ggplot2_4.0.3          scales_1.4.0           iterators_1.0.14      
+#>  [40] MASS_7.3-65            cli_3.6.6              UpSetR_1.4.1          
+#>  [43] rmarkdown_2.31         crayon_1.5.3           reformulas_0.4.4      
+#>  [46] generics_0.1.4         otel_0.2.0             tzdb_0.5.0            
+#>  [49] httr_1.4.8             rjson_0.2.23           minqa_1.2.8           
+#>  [52] operator.tools_1.6.3.1 splines_4.6.1          parallel_4.6.1        
+#>  [55] matrixStats_1.5.0      vctrs_0.7.3            boot_1.3-32           
+#>  [58] glmnet_5.0             Matrix_1.7-5           jsonlite_2.0.0        
+#>  [61] saintexpressbin_0.0.1  hms_1.1.4              IRanges_2.46.0        
+#>  [64] GetoptLong_1.1.1       S4Vectors_0.50.1       bit64_4.8.2           
+#>  [67] mitml_0.4-5            ggrepel_0.9.8          clue_0.3-68           
+#>  [70] foreach_1.5.2          plotly_4.12.1          limma_3.68.4          
+#>  [73] tidyr_1.3.2            glue_1.8.1             pan_2.0               
+#>  [76] nloptr_2.2.1           codetools_0.2-20       shape_1.4.6.1         
+#>  [79] gtable_0.3.6           lme4_2.0-6             ComplexHeatmap_2.28.0 
+#>  [82] tibble_3.3.1           pillar_1.11.1          htmltools_0.5.9       
+#>  [85] circlize_0.4.18        R6_2.6.1               Rdpack_2.6.6          
+#>  [88] formula.tools_1.7.1    doParallel_1.0.17      vroom_1.7.1           
+#>  [91] evaluate_1.0.5         lattice_0.22-9         readr_2.2.0           
+#>  [94] rbibutils_2.4.1        png_0.1-9              backports_1.5.1       
+#>  [97] broom_1.0.13           Rcpp_1.1.2             gridExtra_2.3.1       
+#> [100] nlme_3.1-169           mgcv_1.9-4             logistf_1.26.1        
+#> [103] xfun_0.60              forcats_1.0.1          pkgconfig_2.0.3       
+#> [106] GlobalOptions_0.1.4
 ```
