@@ -26,9 +26,9 @@ return value from \`prolfqua::script_copy_helper_vec()\`.
 
 ``` r
 copy_SAINT_express(workdir = tempdir(), run_script = FALSE)
-#> copy /home/runner/work/_temp/Library/prolfquasaint/application/bibliography.bib to /tmp/Rtmp2n4RUz/bibliography.bib
-#> copy /home/runner/work/_temp/Library/prolfquasaint/application/SE2/SaintExpressReportMsFragger.Rmd to /tmp/Rtmp2n4RUz/SaintExpressReportMsFragger.Rmd
+#> copy /home/runner/work/_temp/Library/prolfquasaint/application/bibliography.bib to /tmp/RtmpuNLuBW/bibliography.bib
+#> copy /home/runner/work/_temp/Library/prolfquasaint/application/SE2/SaintExpressReportMsFragger.Rmd to /tmp/RtmpuNLuBW/SaintExpressReportMsFragger.Rmd
 #> your working directory now should contain: 2 new files:
-#> [1] "/tmp/Rtmp2n4RUz/bibliography.bib"               
-#> [2] "/tmp/Rtmp2n4RUz/SaintExpressReportMsFragger.Rmd"
+#> [1] "/tmp/RtmpuNLuBW/bibliography.bib"               
+#> [2] "/tmp/RtmpuNLuBW/SaintExpressReportMsFragger.Rmd"
 ```
