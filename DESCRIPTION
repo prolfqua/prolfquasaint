@@ -22,6 +22,7 @@ Imports:
     stringr
 Suggests:
     covr,
+    cyclocomp,
     devtools,
     ggplot2,
     knitr,
