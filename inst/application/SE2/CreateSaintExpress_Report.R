@@ -36,9 +36,7 @@ dir.create(ZIPDIR)
 REPORTDATA <- list()
 
 # Applciation parameters
-REPORTDATA$spc <- if (
-  yml$application$parameters$`31|SpcInt` == "Spectral Count"
-) {
+REPORTDATA$spc <- if (yml$application$parameters$`31|SpcInt` == "Spectral Count") {
   TRUE
 } else {
   FALSE

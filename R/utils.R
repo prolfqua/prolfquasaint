@@ -16,16 +16,12 @@ apparams_Bfabric <- function(yml) {
 
   # Application parameters
   REPORTDATA$spc <- FALSE
-  REPORTDATA$FCthreshold <- if (
-    !is.null(as.numeric(yml$application$parameters$`22|FCthreshold`))
-  ) {
+  REPORTDATA$FCthreshold <- if (!is.null(as.numeric(yml$application$parameters$`22|FCthreshold`))) {
     as.numeric(yml$application$parameters$`22|FCthreshold`)
   } else {
     2
   }
-  REPORTDATA$FDRthreshold <- if (
-    !is.null(as.numeric(yml$application$parameters$`21|BFDRsignificance`))
-  ) {
+  REPORTDATA$FDRthreshold <- if (!is.null(as.numeric(yml$application$parameters$`21|BFDRsignificance`))) {
     as.numeric(yml$application$parameters$`21|BFDRsignificance`)
   } else {
     0.1
