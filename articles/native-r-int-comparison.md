@@ -112,7 +112,7 @@ summary_table
 #> 5 SaintScore 5521   0.9999919   0.0001206303         0.004
 #> 6  OddsScore 5521   0.9999870   0.0256140192         0.086
 #> 7 FoldChange 5521   0.9999250   0.0336111212        11.946
-#> 8       BFDR 5521   0.9999847   0.0003908712         0.020
+#> 8       BFDR 5521   0.9999847   0.0003912335         0.020
 ```
 
 ``` r
@@ -200,7 +200,7 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           
-#>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.5   
+#>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.6   
 #>   [7] fastmap_1.2.0          rpart_4.1.27           digest_0.6.39         
 #>  [10] prolfqua_1.7.0         lifecycle_1.0.5        cluster_2.1.8.2       
 #>  [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        

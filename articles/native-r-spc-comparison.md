@@ -200,7 +200,7 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           
-#>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.5   
+#>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.1.6   
 #>   [7] fastmap_1.2.0          rpart_4.1.27           digest_0.6.39         
 #>  [10] prolfqua_1.7.0         lifecycle_1.0.5        cluster_2.1.8.2       
 #>  [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        

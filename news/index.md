@@ -1,5 +1,11 @@
 # Changelog
 
+## prolfquasaint 0.1.6
+
+- Require the SAINTexpress control-variance fix so container
+  installations cannot reuse an older `saintexpress` revision that fails
+  on constant control profiles.
+
 ## prolfquasaint 0.1.5
 
 - Declared `cyclocomp` as a development dependency so package linting
