@@ -1,7 +1,7 @@
 Package: prolfquasaint
 Type: Package
 Title: SAINT-Based Protein Interaction Analysis with prolfqua
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: 
     person("Witold", "Wolski", , "wew@fgcz.ethz.ch",
         role = c("aut", "cre"),
@@ -37,7 +37,7 @@ Suggests:
     testthat (>= 3.0.0)
 Remotes:
     github::fgcz/prolfqua,
-    github::prolfqua/saintexpress,
+    github::prolfqua/saintexpress@e64aa1e4a361005bfe5fa67cc5e2a4e851a5eaf3,
     github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
