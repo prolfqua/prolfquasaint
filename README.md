@@ -35,7 +35,7 @@ remotes::install_github("prolfqua/prolfquasaint")
 `prolfqua/saintexpressbin`, so `pak::pkg_install("prolfqua/prolfquasaint")`
 should resolve them transitively. If your dependency resolver does not walk
 nested `Remotes:`, install `saintexpress` and `saintexpressbin` explicitly
-first (see [TODO/TODO_transitive_remotes.md](TODO/TODO_transitive_remotes.md)).
+first (see [TODO_transitive_remotes.md](../TODO/prolfquasaint/TODO_transitive_remotes.md)).
 
 ## Public API
 
