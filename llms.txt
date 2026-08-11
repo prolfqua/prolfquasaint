@@ -38,7 +38,7 @@ and `prolfqua/saintexpressbin`, so
 transitively. If your dependency resolver does not walk nested
 `Remotes:`, install `saintexpress` and `saintexpressbin` explicitly
 first (see
-[TODO/TODO_transitive_remotes.md](https://prolfqua.github.io/prolfquasaint/TODO/TODO_transitive_remotes.md)).
+[TODO_transitive_remotes.md](https://prolfqua.github.io/TODO/prolfquasaint/TODO_transitive_remotes.md)).
 
 ## Public API
 
