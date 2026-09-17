@@ -155,9 +155,16 @@ ContrastsSAINTexpress <- R6::R6Class(
       return(contrasts_wide)
     },
     #' @description get signed rank-list input table for enrichment tools.
-    #' @param score column to use as rank score
+    #' @param score column to use as rank score, or NULL for the
+    #'   effect size this backend reports
     #' @return data.frame with subject id, contrast, and score columns.
-    get_rank = function(score = "log2_EFCs") {
+    get_rank = function(score = NULL) {
+      # NULL means "choose for me", as ContrastsInterface$get_rank() defines
+      # it. The effect size is this backend's rank: SaintScore is a bounded
+      # probability and carries no direction, so it cannot order a ranked list.
+      if (is.null(score)) {
+        score <- "log2_EFCs"
+      }
       contrasts <- self$get_contrasts()
       required <- c(self$subject_id, "Bait", score)
       missing_columns <- setdiff(required, colnames(contrasts))

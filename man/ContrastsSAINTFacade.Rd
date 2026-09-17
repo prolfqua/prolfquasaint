@@ -224,13 +224,14 @@ ORA input table (delegates)
 rank table for enrichment tools (delegates; default
   score is \code{log2_EFCs} because SAINTexpress has no p-value)
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTFacade$get_rank(score = "log2_EFCs")}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTFacade$get_rank(score = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{score}}{column to use as rank score}
+\item{\code{score}}{column to use as rank score, or NULL for the
+effect size this backend reports}
 }
 \if{html}{\out{</div>}}
 }

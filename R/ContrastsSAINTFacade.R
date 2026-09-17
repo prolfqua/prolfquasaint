@@ -174,8 +174,9 @@ ContrastsSAINTFacade <- R6::R6Class(
     },
     #' @description rank table for enrichment tools (delegates; default
     #'   score is \code{log2_EFCs} because SAINTexpress has no p-value)
-    #' @param score column to use as rank score
-    get_rank = function(score = "log2_EFCs") {
+    #' @param score column to use as rank score, or NULL for the
+    #'   effect size this backend reports
+    get_rank = function(score = NULL) {
       self$contrast$get_rank(score = score)
     },
     #' @description SAINT-specific artifacts to surface in
