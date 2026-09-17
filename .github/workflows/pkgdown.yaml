@@ -35,9 +35,6 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            github::fgcz/prolfqua
-            github::prolfqua/saintexpress
-            github::prolfqua/saintexpressbin
             any::pkgdown
             local::.
           needs: website

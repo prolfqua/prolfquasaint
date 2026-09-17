@@ -35,9 +35,6 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            github::fgcz/prolfqua
-            github::prolfqua/saintexpress
-            github::prolfqua/saintexpressbin
             any::rcmdcheck
             local::.
           needs: check
@@ -70,9 +67,6 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            github::fgcz/prolfqua
-            github::prolfqua/saintexpress
-            github::prolfqua/saintexpressbin
             bioc::BiocCheck
             local::.
           needs: check

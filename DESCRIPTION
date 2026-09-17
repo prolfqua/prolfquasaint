@@ -37,7 +37,7 @@ Suggests:
     testthat (>= 3.0.0)
 Remotes:
     github::fgcz/prolfqua,
-    github::prolfqua/saintexpress@e64aa1e4a361005bfe5fa67cc5e2a4e851a5eaf3,
+    github::prolfqua/saintexpress,
     github::prolfqua/saintexpressbin
 RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
