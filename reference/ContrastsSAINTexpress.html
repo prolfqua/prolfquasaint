@@ -305,6 +305,7 @@ effect size this backend reports</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 d vs Control       d Control</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 e vs Control       e Control</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">cse</span><span class="op">$</span><span class="fu">get_contrasts</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">236</span>,<span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> dim(cse$get_contrasts()) == c(236, 7) are not all TRUE</span>
 <span class="r-in"><span><span class="va">cse</span><span class="op">$</span><span class="fu">get_linfct</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span><span class="va">pl</span> <span class="op">&lt;-</span> <span class="va">cse</span><span class="op">$</span><span class="fu">get_Plotter</span><span class="op">(</span><span class="op">)</span></span></span>

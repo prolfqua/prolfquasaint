@@ -277,6 +277,7 @@ cse$get_contrast_sides()
 #> 3 d vs Control       d Control
 #> 4 e vs Control       e Control
 stopifnot(dim(cse$get_contrasts()) == c(236,7))
+#> Error: dim(cse$get_contrasts()) == c(236, 7) are not all TRUE
 cse$get_linfct()
 #> NULL
 pl <- cse$get_Plotter()
