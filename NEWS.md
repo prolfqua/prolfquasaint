@@ -1,5 +1,10 @@
 # prolfquasaint 0.99.0
 
+* SAINT contrast tables now carry `estimate_type = "observed"`, like every other
+  modelling backend. SAINTexpress imputes nothing, so the column was absent
+  entirely, and a downstream consumer asking to exclude imputed estimates had no
+  way to tell "nothing was imputed" from "provenance unknown".
+
 * Development installs and CI now follow the current `saintexpress` repository instead of requesting a pinned historical commit.
 
 * `get_rank()` now accepts `score = NULL` to mean "use the effect size this

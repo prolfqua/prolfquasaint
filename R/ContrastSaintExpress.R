@@ -59,14 +59,18 @@ ContrastsSAINTexpress <- R6::R6Class(
           dplyr::mutate(
             log2_EFCs = log2(FoldChange),
             avgAbd = log2(AvgIntensity),
-            modelName = modelName
+            modelName = modelName,
+            # SAINTexpress imputes nothing: every value it reports is measured.
+            estimate_type = "observed"
           )
       } else {
         self$contrast_result <- contrastsdf |>
           dplyr::mutate(
             log2_EFCs = log2(FoldChange),
             avgAbd = log2(AvgSpec),
-            modelName = modelName
+            modelName = modelName,
+            # SAINTexpress imputes nothing: every value it reports is measured.
+            estimate_type = "observed"
           )
       }
     },
@@ -101,6 +105,7 @@ ContrastsSAINTexpress <- R6::R6Class(
           tidyselect::all_of(c(
             self$subject_id,
             "modelName",
+            "estimate_type",
             "Bait",
             "avgAbd",
             "log2_EFCs",
