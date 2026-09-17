@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">prolfquasaint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,11 @@
       <small>Source: <a href="https://github.com/prolfqua/prolfquasaint/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.0" id="prolfquasaint-0990">prolfquasaint 0.99.0<a class="anchor" aria-label="anchor" href="#prolfquasaint-0990"></a></h2>
+<ul><li><p>Development installs and CI now follow the current <code>saintexpress</code> repository instead of requesting a pinned historical commit.</p></li>
+<li><p><code>get_rank()</code> now accepts <code>score = NULL</code> to mean “use the effect size this backend reports”, as the <code>ContrastsInterface</code> contract defines it. Passing <code>NULL</code> previously selected no column at all and produced a rank table with no score, which broke callers that let the backend choose its own rank.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.6" id="prolfquasaint-016">prolfquasaint 0.1.6<a class="anchor" aria-label="anchor" href="#prolfquasaint-016"></a></h2>
 <ul><li>Require the SAINTexpress control-variance fix so container installations cannot reuse an older <code>saintexpress</code> revision that fails on constant control profiles.</li>

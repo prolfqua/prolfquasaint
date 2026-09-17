@@ -203,13 +203,14 @@ get signed rank-list input table for enrichment tools.
 
 #### Usage
 
-    ContrastsSAINTexpress$get_rank(score = "log2_EFCs")
+    ContrastsSAINTexpress$get_rank(score = NULL)
 
 #### Arguments
 
 - `score`:
 
-  column to use as rank score
+  column to use as rank score, or NULL for the effect size this backend
+  reports
 
 #### Returns
 

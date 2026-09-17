@@ -251,13 +251,14 @@ because SAINTexpress has no p-value)
 
 #### Usage
 
-    ContrastsSAINTFacade$get_rank(score = "log2_EFCs")
+    ContrastsSAINTFacade$get_rank(score = NULL)
 
 #### Arguments
 
 - `score`:
 
-  column to use as rank score
+  column to use as rank score, or NULL for the effect size this backend
+  reports
 
 ------------------------------------------------------------------------
 
@@ -305,7 +306,7 @@ ContrastsSAINTFacade
 #>     to_wide: function (...) 
 #>     get_missing: function () 
 #>     get_ora: function (up = TRUE, FDR_threshold = 0.05, diff_threshold = 1) 
-#>     get_rank: function (score = "log2_EFCs") 
+#>     get_rank: function (score = NULL) 
 #>     extra_artifacts: function () 
 #>     clone: function (deep = FALSE) 
 #>   Parent env: <environment: namespace:prolfquasaint>
