@@ -14,7 +14,7 @@
 #' cse <- ContrastsSAINTexpress$new(seout$list)
 #' stopifnot(dim(cse$to_wide()) == c(64,13))
 #' cse$get_contrast_sides()
-#' stopifnot(dim(cse$get_contrasts()) == c(236,7))
+#' stopifnot(dim(cse$get_contrasts()) == c(236,8))
 #' cse$get_linfct()
 #' pl <- cse$get_Plotter()
 #' stopifnot(c("gg", "ggplot") %in% class(pl$volcano()$FDR))
