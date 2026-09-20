@@ -112,7 +112,7 @@ summary_table
 #> 5 SaintScore 5521   0.9999919   0.0001206303         0.004
 #> 6  OddsScore 5521   0.9999870   0.0256140192         0.086
 #> 7 FoldChange 5521   0.9999250   0.0336111212        11.946
-#> 8       BFDR 5521   0.9999847   0.0003912335         0.020
+#> 8       BFDR 5521   0.9999847   0.0003908712         0.020
 ```
 
 ``` r
@@ -220,7 +220,7 @@ sessionInfo()
 #>  [55] matrixStats_1.5.0      vctrs_0.7.3            boot_1.3-32           
 #>  [58] glmnet_5.0             Matrix_1.7-5           jsonlite_2.0.0        
 #>  [61] saintexpressbin_0.0.1  hms_1.1.4              IRanges_2.46.0        
-#>  [64] GetoptLong_1.1.1       S4Vectors_0.50.2       bit64_4.8.6           
+#>  [64] GetoptLong_1.1.1       S4Vectors_0.50.3       bit64_4.8.6           
 #>  [67] mitml_0.4-5            ggrepel_0.9.8          clue_0.3-68           
 #>  [70] foreach_1.5.2          plotly_4.12.1          limma_3.68.5          
 #>  [73] tidyr_1.3.2            glue_1.8.1             pan_2.0               
