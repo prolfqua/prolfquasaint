@@ -21,7 +21,9 @@ test_that("ContrastsSAINTexpress carries a SAINT-flavoured config", {
   expect_equal(cfg$effect_col, "log2_EFCs")
   expect_equal(cfg$score_col, "SaintScore")
   expect_equal(cfg$fdr_col, "BFDR")
-  expect_true(is.na(cfg$pvalue_col))
+  # SAINT produces no p-value; the absent column is stored as "" so the
+  # configuration survives serialization into the AnnData artifact.
+  expect_equal(cfg$pvalue_col, "")
   expect_false(cfg$has_pvalue())
   expect_false(cfg$supports_dea_qc)
   expect_true(cfg$needs_saint_annotation)
