@@ -10,7 +10,7 @@
 #' @return An R6 class generator.
 #'
 #' @examples
-#' seout <- prolfqua::prolfqua_data("data_SAINTe_output")
+#' seout <- prolfqua::prolfqua_data("data_SAINTe_output", package = "prolfquasaint")
 #' cse <- ContrastsSAINTexpress$new(seout$list)
 #' stopifnot(dim(cse$to_wide()) == c(64,13))
 #' cse$get_contrast_sides()
@@ -96,7 +96,7 @@ ContrastsSAINTexpress <- R6::R6Class(
 
     #' @description
     #' get contrasts
-    #' @seealso \code{\link[prolfqua]{summary_ROPECA_median_p.scaled}}
+    #' @seealso \code{\link[prolfqua]{summary_ROPECA_median_p_scaled}}
     #' @param all should all columns be returned (default FALSE)
     #' @param global use a global linear function (determined by get_linfct)
     get_contrasts = function(all = FALSE) {

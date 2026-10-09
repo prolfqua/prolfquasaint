@@ -15,7 +15,7 @@ Wrapper to results produced by SAINTexpress
 SAINTexpress writes
 }
 \examples{
-seout <- prolfqua::prolfqua_data("data_SAINTe_output")
+seout <- prolfqua::prolfqua_data("data_SAINTe_output", package = "prolfquasaint")
 cse <- ContrastsSAINTexpress$new(seout$list)
 stopifnot(dim(cse$to_wide()) == c(64,13))
 cse$get_contrast_sides()
@@ -25,7 +25,7 @@ pl <- cse$get_Plotter()
 stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$FDR))
 }
 \seealso{
-\code{\link[prolfqua]{summary_ROPECA_median_p.scaled}}
+\code{\link[prolfqua]{summary_ROPECA_median_p_scaled}}
 
 Other modelling: 
 \code{\link{ContrastsSAINTFacade}}

@@ -1,5 +1,7 @@
 # prolfquasaint 0.99.0
 
+* The example datasets `data_SAINTe_output` and `data_IonstarProtein_subsetNorm` now ship with prolfquasaint (they were removed from prolfqua 1.9.0); load them with `prolfqua::prolfqua_data(<name>, package = "prolfquasaint")`.
+
 * SAINT contrast tables now carry `estimate_type = "observed"`, like every other
   modelling backend. SAINTexpress imputes nothing, so the column was absent
   entirely, and a downstream consumer asking to exclude imputed estimates had no
