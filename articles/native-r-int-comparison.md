@@ -112,7 +112,7 @@ summary_table
 #> 5 SaintScore 5521   0.9999919   0.0001206303         0.004
 #> 6  OddsScore 5521   0.9999870   0.0256140192         0.086
 #> 7 FoldChange 5521   0.9999250   0.0336111212        11.946
-#> 8       BFDR 5521   0.9999847   0.0003908712         0.020
+#> 8       BFDR 5521   0.9999847   0.0003912335         0.020
 ```
 
 ``` r
@@ -202,7 +202,7 @@ sessionInfo()
 #>   [1] tidyselect_1.2.1       viridisLite_0.4.3      dplyr_1.2.1           
 #>   [4] farver_2.1.2           S7_0.2.2               prolfquasaint_0.99.0  
 #>   [7] fastmap_1.2.0          rpart_4.1.27           digest_0.6.39         
-#>  [10] prolfqua_1.7.0         lifecycle_1.0.5        cluster_2.1.8.2       
+#>  [10] prolfqua_1.9.0         lifecycle_1.0.5        cluster_2.1.8.2       
 #>  [13] survival_3.8-6         statmod_1.5.2          magrittr_2.0.5        
 #>  [16] compiler_4.6.1         rlang_1.3.0            tools_4.6.1           
 #>  [19] yaml_2.3.12            data.table_1.18.6.1    knitr_1.52            
@@ -218,7 +218,7 @@ sessionInfo()
 #>  [49] httr_1.4.9             rjson_0.2.23           minqa_1.2.8           
 #>  [52] operator.tools_1.6.3.1 splines_4.6.1          parallel_4.6.1        
 #>  [55] matrixStats_1.5.0      vctrs_0.7.3            boot_1.3-32           
-#>  [58] glmnet_5.0             Matrix_1.7-5           jsonlite_2.0.0        
+#>  [58] glmnet_5.1             Matrix_1.7-5           jsonlite_2.0.0        
 #>  [61] saintexpressbin_0.0.1  hms_1.1.4              IRanges_2.46.0        
 #>  [64] GetoptLong_1.1.1       S4Vectors_0.50.3       bit64_4.8.6           
 #>  [67] mitml_0.4-5            ggrepel_0.9.8          clue_0.3-68           

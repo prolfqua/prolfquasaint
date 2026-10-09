@@ -14,7 +14,7 @@ SAINTexpress writes
 
 ## See also
 
-[`summary_ROPECA_median_p.scaled`](https://wolski.github.io/prolfqua/reference/summary_ROPECA_median_p.scaled.html)
+[`summary_ROPECA_median_p_scaled`](https://wolski.github.io/prolfqua/reference/summary_ROPECA_median_p_scaled.html)
 
 Other modelling:
 [`ContrastsSAINTFacade`](https://prolfqua.github.io/prolfquasaint/reference/ContrastsSAINTFacade.md)
@@ -267,7 +267,7 @@ The objects of this class are cloneable with this method.
 ## Examples
 
 ``` r
-seout <- prolfqua::prolfqua_data("data_SAINTe_output")
+seout <- prolfqua::prolfqua_data("data_SAINTe_output", package = "prolfquasaint")
 cse <- ContrastsSAINTexpress$new(seout$list)
 stopifnot(dim(cse$to_wide()) == c(64,13))
 cse$get_contrast_sides()

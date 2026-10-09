@@ -132,7 +132,7 @@ add_protein_lengths(
 #> 1         P1              8
 
 
-bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm')
+bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm', package = 'prolfquasaint')
 bb$config <- bb$config$clone(deep = TRUE)
 xx <- prolfqua::LFQData$new(bb$data, bb$config)
 exampleDat <- xx$data_long() |>
