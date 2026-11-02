@@ -39,7 +39,6 @@ Remotes:
     github::fgcz/prolfqua,
     github::prolfqua/saintexpress,
     github::prolfqua/saintexpressbin
-RoxygenNote: 7.3.3
 Roxygen: list(r6 = TRUE)
 VignetteBuilder: quarto
 SystemRequirements: quarto
@@ -47,3 +46,4 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 4.5.0)
 biocViews: MassSpectrometry, Proteomics, Metabolomics, ExperimentHubSoftware, Normalization, Preprocessing, QualityControl
+Config/roxygen2/version: 8.1.1

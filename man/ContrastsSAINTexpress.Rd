@@ -7,11 +7,6 @@
 An R6 class generator.
 }
 \description{
-Wrapper to results produced by SAINTexpress
-
-Wrapper to results produced by SAINTexpress
-}
-\details{
 SAINTexpress writes
 }
 \examples{
@@ -27,7 +22,7 @@ stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$FDR))
 \seealso{
 \code{\link[prolfqua]{summary_ROPECA_median_p_scaled}}
 
-Other modelling: 
+Other modelling:
 \code{\link{ContrastsSAINTFacade}}
 }
 \concept{modelling}
@@ -35,221 +30,230 @@ Other modelling:
 \code{\link[prolfqua:ContrastsInterface]{prolfqua::ContrastsInterface}} -> \code{ContrastsSAINTexpress}
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{contrast_result}}{data.frame with the contrast computation results}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{contrast_result}}{data.frame with the contrast computation results}
 
-\item{\code{modelName}}{model name}
+    \item{\code{modelName}}{model name}
 
-\item{\code{subject_id}}{subject id defualt 'Prey'}
-}
-\if{html}{\out{</div>}}
+    \item{\code{subject_id}}{subject id defualt 'Prey'}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ContrastsSAINTexpress-new}{\code{ContrastsSAINTexpress$new()}}
-\item \href{#method-ContrastsSAINTexpress-get_contrast_sides}{\code{ContrastsSAINTexpress$get_contrast_sides()}}
-\item \href{#method-ContrastsSAINTexpress-get_linfct}{\code{ContrastsSAINTexpress$get_linfct()}}
-\item \href{#method-ContrastsSAINTexpress-get_contrasts}{\code{ContrastsSAINTexpress$get_contrasts()}}
-\item \href{#method-ContrastsSAINTexpress-get_Plotter}{\code{ContrastsSAINTexpress$get_Plotter()}}
-\item \href{#method-ContrastsSAINTexpress-to_wide}{\code{ContrastsSAINTexpress$to_wide()}}
-\item \href{#method-ContrastsSAINTexpress-get_rank}{\code{ContrastsSAINTexpress$get_rank()}}
-\item \href{#method-ContrastsSAINTexpress-get_ora}{\code{ContrastsSAINTexpress$get_ora()}}
-\item \href{#method-ContrastsSAINTexpress-clone}{\code{ContrastsSAINTexpress$clone()}}
+  \itemize{
+    \item \href{#method-ContrastsSAINTexpress-initialize}{\code{ContrastsSAINTexpress$new()}}
+    \item \href{#method-ContrastsSAINTexpress-get_contrast_sides}{\code{ContrastsSAINTexpress$get_contrast_sides()}}
+    \item \href{#method-ContrastsSAINTexpress-get_linfct}{\code{ContrastsSAINTexpress$get_linfct()}}
+    \item \href{#method-ContrastsSAINTexpress-get_contrasts}{\code{ContrastsSAINTexpress$get_contrasts()}}
+    \item \href{#method-ContrastsSAINTexpress-get_Plotter}{\code{ContrastsSAINTexpress$get_Plotter()}}
+    \item \href{#method-ContrastsSAINTexpress-to_wide}{\code{ContrastsSAINTexpress$to_wide()}}
+    \item \href{#method-ContrastsSAINTexpress-get_rank}{\code{ContrastsSAINTexpress$get_rank()}}
+    \item \href{#method-ContrastsSAINTexpress-get_ora}{\code{ContrastsSAINTexpress$get_ora()}}
+    \item \href{#method-ContrastsSAINTexpress-clone}{\code{ContrastsSAINTexpress$clone()}}
+  }
 }
-}
-\if{html}{\out{
-<details><summary>Inherited methods</summary>
+\if{html}{\out{<details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="column_description"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-column_description'><code>prolfqua::ContrastsInterface$column_description()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="contrast_summary_table"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-contrast_summary_table'><code>prolfqua::ContrastsInterface$contrast_summary_table()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="extra_artifacts"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-extra_artifacts'><code>prolfqua::ContrastsInterface$extra_artifacts()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="filter_significant"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-filter_significant'><code>prolfqua::ContrastsInterface$filter_significant()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_config"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_config'><code>prolfqua::ContrastsInterface$get_config()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_missing"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_missing'><code>prolfqua::ContrastsInterface$get_missing()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="column_description"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-column_description'><code>prolfqua::ContrastsInterface$column_description()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="contrast_summary_table"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-contrast_summary_table'><code>prolfqua::ContrastsInterface$contrast_summary_table()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="extra_artifacts"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-extra_artifacts'><code>prolfqua::ContrastsInterface$extra_artifacts()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="filter_significant"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-filter_significant'><code>prolfqua::ContrastsInterface$filter_significant()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_config"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_config'><code>prolfqua::ContrastsInterface$get_config()</code></a></span></li>
+  <li><span class="pkg-link" data-pkg="prolfqua" data-topic="ContrastsInterface" data-id="get_missing"><a href='../../prolfqua/html/ContrastsInterface.html#method-ContrastsInterface-get_missing'><code>prolfqua::ContrastsInterface$get_missing()</code></a></span></li>
 </ul>
-</details>
-}}
+</details>}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ContrastsSAINTexpress-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-new}{}}}
-\subsection{Method \code{new()}}{
-initialize
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$new(
+\if{html}{\out{<a id="method-ContrastsSAINTexpress-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-initialize}{}}}
+\subsection{\code{ContrastsSAINTexpress$new()}}{
+  initialize
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$new(
   contrastsdf,
   subject_id = "Prey",
   modelName = "ContrastSaint"
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{contrastsdf}}{return value of \code{\link{runSaint}}}
+      \item{\code{subject_id}}{default "Prey"}
+      \item{\code{modelName}}{name of model}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{contrastsdf}}{return value of \code{\link{runSaint}}}
-
-\item{\code{subject_id}}{default "Prey"}
-
-\item{\code{modelName}}{name of model}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_contrast_sides"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_contrast_sides}{}}}
-\subsection{Method \code{get_contrast_sides()}}{
-show contrasts
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_contrast_sides()}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$get_contrast_sides()}}{
+  show contrasts
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_contrast_sides()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    data.frame
+  }
 }
 
-\subsection{Returns}{
-data.frame
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_linfct"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_linfct}{}}}
-\subsection{Method \code{get_linfct()}}{
-no available for SaintExpress
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_linfct()}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$get_linfct()}}{
+  no available for SaintExpress
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_linfct()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_contrasts"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_contrasts}{}}}
-\subsection{Method \code{get_contrasts()}}{
-get contrasts
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_contrasts(all = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$get_contrasts()}}{
+  get contrasts
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_contrasts(all = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{all}}{should all columns be returned (default FALSE)}
+      \item{\code{global}}{use a global linear function (determined by get_linfct)}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{all}}{should all columns be returned (default FALSE)}
-
-\item{\code{global}}{use a global linear function (determined by get_linfct)}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_Plotter"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_Plotter}{}}}
-\subsection{Method \code{get_Plotter()}}{
-get \code{\link[prolfqua]{ContrastsPlotter}}
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_Plotter(
+\subsection{\code{ContrastsSAINTexpress$get_Plotter()}}{
+  get \code{\link[prolfqua]{ContrastsPlotter}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_Plotter(
   fc_threshold = 1,
   SaintScore = 0.75,
   bfdr_threshold = 0.1
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{fc_threshold}}{fold change threshold to show}
+      \item{\code{SaintScore}}{SaintScore threshold to show in the heatmap.}
+      \item{\code{bfdr_threshold}}{BFDR threshold}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    \code{\link[prolfqua]{ContrastsPlotter}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{fc_threshold}}{fold change threshold to show}
-
-\item{\code{SaintScore}}{SaintScore threshold to show in the heatmap.}
-
-\item{\code{bfdr_threshold}}{BFDR threshold}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{\link[prolfqua]{ContrastsPlotter}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-to_wide"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-to_wide}{}}}
-\subsection{Method \code{to_wide()}}{
-convert to wide format
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$to_wide(columns = c("SaintScore", "BFDR"))}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$to_wide()}}{
+  convert to wide format
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$to_wide(columns = c("SaintScore", "BFDR"))}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{columns}}{value column default SaintScore, BFDR}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    data.frame
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{columns}}{value column default SaintScore, BFDR}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-data.frame
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_rank"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_rank}{}}}
-\subsection{Method \code{get_rank()}}{
-get signed rank-list input table for enrichment tools.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_rank(score = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$get_rank()}}{
+  get signed rank-list input table for enrichment tools.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_rank(score = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{score}}{column to use as rank score, or NULL for the
+effect size this backend reports}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    data.frame with subject id, contrast, and score columns.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{score}}{column to use as rank score, or NULL for the
-effect size this backend reports}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-data.frame with subject id, contrast, and score columns.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-get_ora"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-get_ora}{}}}
-\subsection{Method \code{get_ora()}}{
-get SAINT ORA input table.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$get_ora(
+\subsection{\code{ContrastsSAINTexpress$get_ora()}}{
+  get SAINT ORA input table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$get_ora(
   up = TRUE,
   FDR_threshold = 0.05,
   diff_threshold = 1
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{up}}{if TRUE return bait-enriched prey, otherwise negative effects}
+      \item{\code{FDR_threshold}}{BFDR threshold}
+      \item{\code{diff_threshold}}{log2 EFC threshold}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    filtered SAINT contrast data.frame for ORA input.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{up}}{if TRUE return bait-enriched prey, otherwise negative effects}
-
-\item{\code{FDR_threshold}}{BFDR threshold}
-
-\item{\code{diff_threshold}}{log2 EFC threshold}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-filtered SAINT contrast data.frame for ORA input.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ContrastsSAINTexpress-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ContrastsSAINTexpress-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ContrastsSAINTexpress$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ContrastsSAINTexpress$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ContrastsSAINTexpress$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

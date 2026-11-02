@@ -13,7 +13,7 @@ A list with `data`, a data frame with 3260 rows (columns
 PRIDE PXD003881
 }
 \usage{
-data_IonstarProtein_subsetNorm
+data(data_IonstarProtein_subsetNorm)
 }
 \description{
 Median-polish protein abundances of a subset of the IonStar E. coli spike-in
@@ -21,7 +21,7 @@ dilution series (PRIDE PXD003881), normalized. Used by the examples of
 \code{\link{protein_2localSaint}}. Moved here from prolfqua 1.9.0.
 }
 \seealso{
-Other data: 
+Other data:
 \code{\link{data_SAINTe_output}}
 }
 \concept{data}

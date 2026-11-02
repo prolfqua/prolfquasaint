@@ -10,14 +10,14 @@ A list of three data frames: `listFile` (path of the SAINTexpress
   console output of the run, one line per row).
 }
 \usage{
-data_SAINTe_output
+data(data_SAINTe_output)
 }
 \description{
 Output of a SAINTexpress run, used by the examples of
 \code{\link{ContrastsSAINTexpress}}. Moved here from prolfqua 1.9.0.
 }
 \seealso{
-Other data: 
+Other data:
 \code{\link{data_IonstarProtein_subsetNorm}}
 }
 \concept{data}
