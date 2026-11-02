@@ -9,7 +9,7 @@ Moved here from prolfqua 1.9.0.
 ## Usage
 
 ``` r
-data_IonstarProtein_subsetNorm
+data(data_IonstarProtein_subsetNorm)
 ```
 
 ## Format
@@ -17,7 +17,7 @@ data_IonstarProtein_subsetNorm
 A list with \`data\`, a data frame with 3260 rows (columns
 \`protein_Id\`, \`sampleName\`, \`dilution.\`, \`run_Id\`, \`raw.file\`,
 \`isotope\`, \`medpolish\`), and \`config\`, its
-[`AnalysisConfiguration`](https://wolski.github.io/prolfqua/reference/AnalysisConfiguration.html).
+[`AnalysisConfiguration`](https://fgcz.github.io/prolfqua/reference/AnalysisConfiguration.html).
 
 ## Source
 

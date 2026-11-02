@@ -7,7 +7,7 @@ Moved here from prolfqua 1.9.0.
 ## Usage
 
 ``` r
-data_SAINTe_output
+data(data_SAINTe_output)
 ```
 
 ## Format

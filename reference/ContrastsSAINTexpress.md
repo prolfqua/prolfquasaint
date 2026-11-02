@@ -1,27 +1,21 @@
 # Wrapper to results produced by SAINTexpress
 
-Wrapper to results produced by SAINTexpress
-
-Wrapper to results produced by SAINTexpress
+SAINTexpress writes
 
 ## Value
 
 An R6 class generator.
 
-## Details
-
-SAINTexpress writes
-
 ## See also
 
-[`summary_ROPECA_median_p_scaled`](https://wolski.github.io/prolfqua/reference/summary_ROPECA_median_p_scaled.html)
+[`summary_ROPECA_median_p_scaled`](https://fgcz.github.io/prolfqua/reference/summary_ROPECA_median_p_scaled.html)
 
 Other modelling:
 [`ContrastsSAINTFacade`](https://prolfqua.github.io/prolfquasaint/reference/ContrastsSAINTFacade.md)
 
 ## Super class
 
-[`prolfqua::ContrastsInterface`](https://wolski.github.io/prolfqua/reference/ContrastsInterface.html)
+[`prolfqua::ContrastsInterface`](https://fgcz.github.io/prolfqua/reference/ContrastsInterface.html)
 -\> `ContrastsSAINTexpress`
 
 ## Public fields
@@ -42,7 +36,7 @@ Other modelling:
 
 ### Public methods
 
-- [`ContrastsSAINTexpress$new()`](#method-ContrastsSAINTexpress-new)
+- [`ContrastsSAINTexpress$new()`](#method-ContrastsSAINTexpress-initialize)
 
 - [`ContrastsSAINTexpress$get_contrast_sides()`](#method-ContrastsSAINTexpress-get_contrast_sides)
 
@@ -71,7 +65,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ContrastsSAINTexpress$new()`
 
 initialize
 
@@ -100,7 +94,7 @@ initialize
 
 ------------------------------------------------------------------------
 
-### Method `get_contrast_sides()`
+### `ContrastsSAINTexpress$get_contrast_sides()`
 
 show contrasts
 
@@ -114,7 +108,7 @@ data.frame
 
 ------------------------------------------------------------------------
 
-### Method `get_linfct()`
+### `ContrastsSAINTexpress$get_linfct()`
 
 no available for SaintExpress
 
@@ -124,7 +118,7 @@ no available for SaintExpress
 
 ------------------------------------------------------------------------
 
-### Method `get_contrasts()`
+### `ContrastsSAINTexpress$get_contrasts()`
 
 get contrasts
 
@@ -144,10 +138,10 @@ get contrasts
 
 ------------------------------------------------------------------------
 
-### Method `get_Plotter()`
+### `ContrastsSAINTexpress$get_Plotter()`
 
 get
-[`ContrastsPlotter`](https://wolski.github.io/prolfqua/reference/ContrastsPlotter.html)
+[`ContrastsPlotter`](https://fgcz.github.io/prolfqua/reference/ContrastsPlotter.html)
 
 #### Usage
 
@@ -173,11 +167,11 @@ get
 
 #### Returns
 
-[`ContrastsPlotter`](https://wolski.github.io/prolfqua/reference/ContrastsPlotter.html)
+[`ContrastsPlotter`](https://fgcz.github.io/prolfqua/reference/ContrastsPlotter.html)
 
 ------------------------------------------------------------------------
 
-### Method `to_wide()`
+### `ContrastsSAINTexpress$to_wide()`
 
 convert to wide format
 
@@ -197,7 +191,7 @@ data.frame
 
 ------------------------------------------------------------------------
 
-### Method `get_rank()`
+### `ContrastsSAINTexpress$get_rank()`
 
 get signed rank-list input table for enrichment tools.
 
@@ -218,7 +212,7 @@ data.frame with subject id, contrast, and score columns.
 
 ------------------------------------------------------------------------
 
-### Method `get_ora()`
+### `ContrastsSAINTexpress$get_ora()`
 
 get SAINT ORA input table.
 
@@ -250,7 +244,7 @@ filtered SAINT contrast data.frame for ORA input.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ContrastsSAINTexpress$clone()`
 
 The objects of this class are cloneable with this method.
 

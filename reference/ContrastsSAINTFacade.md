@@ -1,15 +1,5 @@
 # SAINTexpress contrast analysis facade
 
-SAINTexpress contrast analysis facade
-
-SAINTexpress contrast analysis facade
-
-## Value
-
-An R6 class generator.
-
-## Details
-
 Encapsulates the SAINTexpress pipeline so that it can be reached through
 the same facade-registry dispatch as the prolfqua built-in methods (lm,
 limma, firth, ...). Wraps
@@ -32,6 +22,10 @@ Differs from LM-style facades in three ways:
 - The facade carries SAINT input tables and the raw SAINTexpress result
   via `extra_artifacts()` for downstream report rendering.
 
+## Value
+
+An R6 class generator.
+
 ## See also
 
 Other modelling:
@@ -39,7 +33,7 @@ Other modelling:
 
 ## Super class
 
-[`prolfqua::ContrastsInterface`](https://wolski.github.io/prolfqua/reference/ContrastsInterface.html)
+[`prolfqua::ContrastsInterface`](https://fgcz.github.io/prolfqua/reference/ContrastsInterface.html)
 -\> `ContrastsSAINTFacade`
 
 ## Public fields
@@ -74,7 +68,7 @@ Other modelling:
 
 ### Public methods
 
-- [`ContrastsSAINTFacade$new()`](#method-ContrastsSAINTFacade-new)
+- [`ContrastsSAINTFacade$new()`](#method-ContrastsSAINTFacade-initialize)
 
 - [`ContrastsSAINTFacade$get_contrasts()`](#method-ContrastsSAINTFacade-get_contrasts)
 
@@ -102,7 +96,7 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ContrastsSAINTFacade$new()`
 
 initialize
 
@@ -122,7 +116,7 @@ initialize
 - `lfqdata`:
 
   aggregated
-  [`LFQData`](https://wolski.github.io/prolfqua/reference/LFQData.html)
+  [`LFQData`](https://fgcz.github.io/prolfqua/reference/LFQData.html)
   object with bait / control columns in the annotation
 
 - `modelstr`:
@@ -152,7 +146,7 @@ initialize
 
 ------------------------------------------------------------------------
 
-### Method `get_contrasts()`
+### `ContrastsSAINTFacade$get_contrasts()`
 
 get contrast results from the wrapped
 [`ContrastsSAINTexpress`](https://prolfqua.github.io/prolfquasaint/reference/ContrastsSAINTexpress.md);
@@ -170,7 +164,7 @@ adds a `facade` column matching the lm/limma facade convention.
 
 ------------------------------------------------------------------------
 
-### Method `get_Plotter()`
+### `ContrastsSAINTFacade$get_Plotter()`
 
 plotter for SAINT contrasts (delegates)
 
@@ -186,7 +180,7 @@ plotter for SAINT contrasts (delegates)
 
 ------------------------------------------------------------------------
 
-### Method `to_wide()`
+### `ContrastsSAINTFacade$to_wide()`
 
 wide format (delegates)
 
@@ -202,7 +196,7 @@ wide format (delegates)
 
 ------------------------------------------------------------------------
 
-### Method `get_missing()`
+### `ContrastsSAINTFacade$get_missing()`
 
 protein × bait pairs absent from SAINT output
 
@@ -216,7 +210,7 @@ data.frame with hierarchy and bait columns
 
 ------------------------------------------------------------------------
 
-### Method `get_ora()`
+### `ContrastsSAINTFacade$get_ora()`
 
 ORA input table (delegates)
 
@@ -244,7 +238,7 @@ ORA input table (delegates)
 
 ------------------------------------------------------------------------
 
-### Method `get_rank()`
+### `ContrastsSAINTFacade$get_rank()`
 
 rank table for enrichment tools (delegates; default score is `log2_EFCs`
 because SAINTexpress has no p-value)
@@ -262,7 +256,7 @@ because SAINTexpress has no p-value)
 
 ------------------------------------------------------------------------
 
-### Method `extra_artifacts()`
+### `ContrastsSAINTFacade$extra_artifacts()`
 
 SAINT-specific artifacts to surface in downstream reports. Returns a
 named list with the SAINT input tables and the raw result `list`.
@@ -273,7 +267,7 @@ named list with the SAINT input tables and the raw result `list`.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ContrastsSAINTFacade$clone()`
 
 The objects of this class are cloneable with this method.
 
