@@ -69,8 +69,8 @@ via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
 \pkg{saintexpress}.}
 
 \item{optimizer}{optimizer for \code{engine = "r"}. \code{"base"} uses
-\code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
-\pkg{nloptr} is installed.}
+\code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA and needs
+the \pkg{nloptr} package.}
 }
 \value{
 `intdata` with an added `protein.length` column.

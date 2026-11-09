@@ -134,8 +134,8 @@ protein_2localSaint <- function(
 #'   via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
 #'   \pkg{saintexpress}.
 #' @param optimizer optimizer for \code{engine = "r"}. \code{"base"} uses
-#'   \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA when
-#'   \pkg{nloptr} is installed.
+#'   \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA and needs
+#'   the \pkg{nloptr} package.
 #' @return list with SAINTexpress `listFile`, parsed `list`, and run `out`.
 runSaint <- function(
   si,

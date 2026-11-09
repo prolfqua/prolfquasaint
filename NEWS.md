@@ -1,5 +1,7 @@
 # prolfquasaint 0.99.0
 
+* `runSaint(engine = "r", optimizer = "nloptr")` stops with an error when nloptr is not installed, as saintexpress 0.99.4 does, instead of using `optim` without notice.
+
 * The example datasets `data_SAINTe_output` and `data_IonstarProtein_subsetNorm` now ship with prolfquasaint (they were removed from prolfqua 1.9.0); load them with `prolfqua::prolfqua_data(<name>, package = "prolfquasaint")`.
 
 * SAINT contrast tables now carry `estimate_type = "observed"`, like every other
