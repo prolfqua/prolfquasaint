@@ -111,7 +111,7 @@ runSaint(
 
   optimizer for `engine = "r"`. `"base"` uses
   [`optim`](https://rdrr.io/r/stats/optim.html); `"nloptr"` uses NLopt
-  COBYLA when nloptr is installed.
+  COBYLA and needs the nloptr package.
 
 ## Value
 
