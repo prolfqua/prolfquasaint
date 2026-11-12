@@ -39,7 +39,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.99.0" id="prolfquasaint-0990">prolfquasaint 0.99.0<a class="anchor" aria-label="anchor" href="#prolfquasaint-0990"></a></h2>
 <ul><li><p>The pure-R engine (<code>runSaint(engine = "r")</code>) comes from the package SAINTexpress, the new name of saintexpress since its 1.0.0 CRAN release.</p></li>
-<li><p>Installing prolfquasaint from GitHub (<code>pak::pak("prolfqua/prolfquasaint")</code>, CI) finds SAINTexpress in the <code>prolfqua/saintexpress</code> repository again; after the rename the install stopped with “Can’t find package called SAINTexpress”.</p></li>
+<li><p>Installing prolfquasaint from GitHub (<code>pak::pak("prolfqua/prolfquasaint")</code>, CI) finds SAINTexpress in the renamed <code>prolfqua/SAINTexpress</code> repository; after the rename the install stopped with “Can’t find package called SAINTexpress”.</p></li>
 <li><p><code>runSaint(engine = "r", optimizer = "nloptr")</code> stops with an error when nloptr is not installed, as saintexpress 0.99.4 does, instead of using <code>optim</code> without notice.</p></li>
 <li><p>The example datasets <code>data_SAINTe_output</code> and <code>data_IonstarProtein_subsetNorm</code> now ship with prolfquasaint (they were removed from prolfqua 1.9.0); load them with <code>prolfqua::prolfqua_data(&lt;name&gt;, package = "prolfquasaint")</code>.</p></li>
 <li><p>SAINT contrast tables now carry <code>estimate_type = "observed"</code>, like every other modelling backend. SAINTexpress imputes nothing, so the column was absent entirely, and a downstream consumer asking to exclude imputed estimates had no way to tell “nothing was imputed” from “provenance unknown”.</p></li>
