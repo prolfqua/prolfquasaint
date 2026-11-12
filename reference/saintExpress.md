@@ -2,7 +2,7 @@
 
 Executes SAINTexpress on prepared input data. Delegates to the
 saintexpressbin package for the native binary / Docker engine, and to
-the saintexpress package for the pure-R engine. If \`engine = "binary"\`
+the SAINTexpress package for the pure-R engine. If \`engine = "binary"\`
 is requested but saintexpressbin is not installed, a warning is issued
 and the call falls back to the R engine.
 
@@ -105,7 +105,7 @@ runSaint(
 - engine:
 
   execution engine. `"binary"` runs bundled SAINTexpress via
-  saintexpressbin; `"r"` runs the R implementation via saintexpress.
+  saintexpressbin; `"r"` runs the R implementation via SAINTexpress.
 
 - optimizer:
 

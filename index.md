@@ -51,7 +51,7 @@ The user-facing surface is stable:
   — run SAINTexpress. `engine = "binary"` delegates to
   [`saintexpressbin::saintexpress_run()`](https://rdrr.io/pkg/saintexpressbin/man/saintexpress_run.html);
   `engine = "r"` delegates to
-  [`saintexpress::run_saint()`](https://prolfqua.github.io/saintexpress/reference/run_saint.html).
+  [`SAINTexpress::run_saint()`](https://rdrr.io/pkg/SAINTexpress/man/run_saint.html).
 - `ContrastsSAINTexpress`, `ContrastsSAINTFacade` — prolfqua R6 adapters
   that expose SAINT results through the prolfqua contrast interface.
 

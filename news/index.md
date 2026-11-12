@@ -2,6 +2,15 @@
 
 ## prolfquasaint 0.99.0
 
+- The pure-R engine (`runSaint(engine = "r")`) comes from the package
+  SAINTexpress, the new name of saintexpress since its 1.0.0 CRAN
+  release.
+
+- Installing prolfquasaint from GitHub
+  (`pak::pak("prolfqua/prolfquasaint")`, CI) finds SAINTexpress in the
+  `prolfqua/saintexpress` repository again; after the rename the install
+  stopped with “Can’t find package called SAINTexpress”.
+
 - `runSaint(engine = "r", optimizer = "nloptr")` stops with an error
   when nloptr is not installed, as saintexpress 0.99.4 does, instead of
   using `optim` without notice.
