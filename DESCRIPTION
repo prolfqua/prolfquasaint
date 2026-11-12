@@ -18,7 +18,7 @@ Imports:
     prolfqua,
     purrr,
     rlang,
-    saintexpress,
+    SAINTexpress,
     stringr
 Suggests:
     covr,

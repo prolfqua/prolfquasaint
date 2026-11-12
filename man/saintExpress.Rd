@@ -66,7 +66,7 @@ FALSE forces native execution.}
 
 \item{engine}{execution engine. \code{"binary"} runs bundled SAINTexpress
 via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
-\pkg{saintexpress}.}
+\pkg{SAINTexpress}.}
 
 \item{optimizer}{optimizer for \code{engine = "r"}. \code{"base"} uses
 \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA and needs
@@ -82,7 +82,7 @@ list with SAINTexpress `listFile`, parsed `list`, and run `out`.
 \description{
 Executes SAINTexpress on prepared input data. Delegates to the
 \pkg{saintexpressbin} package for the native binary / Docker engine, and to
-the \pkg{saintexpress} package for the pure-R engine. If `engine = "binary"`
+the \pkg{SAINTexpress} package for the pure-R engine. If `engine = "binary"`
 is requested but \pkg{saintexpressbin} is not installed, a warning is issued
 and the call falls back to the R engine.
 }

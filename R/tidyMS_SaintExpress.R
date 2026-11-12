@@ -117,7 +117,7 @@ protein_2localSaint <- function(
 #'
 #' Executes SAINTexpress on prepared input data. Delegates to the
 #' \pkg{saintexpressbin} package for the native binary / Docker engine, and to
-#' the \pkg{saintexpress} package for the pure-R engine. If `engine = "binary"`
+#' the \pkg{SAINTexpress} package for the pure-R engine. If `engine = "binary"`
 #' is requested but \pkg{saintexpressbin} is not installed, a warning is issued
 #' and the call falls back to the R engine.
 #'
@@ -132,7 +132,7 @@ protein_2localSaint <- function(
 #'   FALSE forces native execution.
 #' @param engine execution engine. \code{"binary"} runs bundled SAINTexpress
 #'   via \pkg{saintexpressbin}; \code{"r"} runs the R implementation via
-#'   \pkg{saintexpress}.
+#'   \pkg{SAINTexpress}.
 #' @param optimizer optimizer for \code{engine = "r"}. \code{"base"} uses
 #'   \code{\link[stats]{optim}}; \code{"nloptr"} uses NLopt COBYLA and needs
 #'   the \pkg{nloptr} package.
@@ -160,7 +160,7 @@ runSaint <- function(
 
   if (engine == "r") {
     type <- if (isTRUE(spc)) "spc" else "int"
-    res <- saintexpress::run_saint(si, mode = type, optimizer = optimizer)
+    res <- SAINTexpress::run_saint(si, mode = type, optimizer = optimizer)
     implementation <- if (type == "spc") "spectral-count" else "intensity"
     return(list(
       listFile = data.frame(listFile = NA_character_),

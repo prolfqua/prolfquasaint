@@ -46,7 +46,7 @@ The user-facing surface is stable:
 - `runSaint(si, ..., engine = c("binary", "r"), optimizer = c("base", "nloptr"))`
   — run SAINTexpress. `engine = "binary"` delegates to
   `saintexpressbin::saintexpress_run()`; `engine = "r"` delegates to
-  `saintexpress::run_saint()`.
+  `SAINTexpress::run_saint()`.
 - `ContrastsSAINTexpress`, `ContrastsSAINTFacade` — prolfqua R6 adapters that
   expose SAINT results through the prolfqua contrast interface.
 
