@@ -16,6 +16,9 @@ test_that("ContrastsSAINTexpress provides rank and ORA input tables", {
   expect_named(volcano, "FDR")
   expect_s3_class(volcano$FDR, "ggplot")
   expect_equal(volcano$FDR$labels$y, "-log10(BFDR)")
+  histograms <- plotter$histogram()
+  expect_named(histograms, c("BFDR", "SaintScore"))
+  expect_equal(histograms$BFDR$layers[[1]]$stat_params$breaks, seq(0, 1, by = 0.05))
 
   rank_table <- contrasts$get_rank()
   expect_named(rank_table, c("Prey", "contrast", "score"))

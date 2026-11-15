@@ -136,8 +136,8 @@ ContrastsSAINTexpress <- R6::R6Class(
           thresh = bfdr_threshold
         )),
         histogram = list(
-          list(score = "BFDR", xlim = c(0, 1, 0.05)),
-          list(score = "SaintScore", xlim = c(0, 1, 0.05))
+          list(score = "BFDR", breaks = seq(0, 1, by = 0.05)),
+          list(score = "SaintScore", breaks = seq(0, 1, by = 0.05))
         ),
         score = list(list(score = "SaintScore", thresh = SaintScore)),
         modelName = "modelName",

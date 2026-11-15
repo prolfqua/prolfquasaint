@@ -1,5 +1,6 @@
 # prolfquasaint 0.99.0
 
+* SAINT plots give histogram bins as `breaks`, the name prolfqua 1.9.2 uses for a `ContrastsPlotter` histogram spec (it was `xlim`); requires prolfqua >= 1.9.2.
 * The pure-R engine (`runSaint(engine = "r")`) comes from the package SAINTexpress, the new name of saintexpress since its 1.0.0 CRAN release.
 
 * Installing prolfquasaint from GitHub (`pak::pak("prolfqua/prolfquasaint")`, CI) finds SAINTexpress in the renamed `prolfqua/SAINTexpress` repository; after the rename the install stopped with "Can't find package called SAINTexpress".
