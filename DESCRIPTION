@@ -29,12 +29,14 @@ Suggests:
     lintr,
     nloptr,
     pkgdown,
+    plotly,
     quarto,
     rcmdcheck,
     readr,
     roxygen2,
     saintexpressbin,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    UpSetR
 Remotes:
     github::fgcz/prolfqua,
     github::prolfqua/SAINTexpress,
