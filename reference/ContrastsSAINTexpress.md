@@ -8,7 +8,7 @@ An R6 class generator.
 
 ## See also
 
-[`summary_ROPECA_median_p_scaled`](https://fgcz.github.io/prolfqua/reference/summary_ROPECA_median_p_scaled.html)
+[`summary_ropeca_median_p_scaled`](https://fgcz.github.io/prolfqua/reference/summary_ropeca_median_p_scaled.html)
 
 Other modelling:
 [`ContrastsSAINTFacade`](https://prolfqua.github.io/prolfquasaint/reference/ContrastsSAINTFacade.md)

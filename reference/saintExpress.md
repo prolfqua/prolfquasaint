@@ -135,6 +135,7 @@ add_protein_lengths(
 bb <- prolfqua::prolfqua_data('data_IonstarProtein_subsetNorm', package = 'prolfquasaint')
 bb$config <- bb$config$clone(deep = TRUE)
 xx <- prolfqua::LFQData$new(bb$data, bb$config)
+#> Response `medpolish`: dropped attributes names; prolfqua uses the numeric values only.
 exampleDat <- xx$data_long() |>
   dplyr::mutate(CorT = dplyr::case_when(dilution. == "a" ~ "C", TRUE ~ "T"))
 # sample protein lengths
