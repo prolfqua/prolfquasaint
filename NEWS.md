@@ -1,5 +1,6 @@
 # prolfquasaint 0.99.0
 
+* Requires prolfqua >= 1.9.5 and uses its renamed simulator argument `n_proteins`.
 * SAINT plots give histogram bins as `breaks`, the name prolfqua 1.9.2 uses for a `ContrastsPlotter` histogram spec (it was `xlim`); requires prolfqua >= 1.9.2.
 * The pure-R engine (`runSaint(engine = "r")`) comes from the package SAINTexpress, the new name of saintexpress since its 1.0.0 CRAN release.
 

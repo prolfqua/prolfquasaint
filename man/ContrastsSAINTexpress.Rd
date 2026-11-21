@@ -20,7 +20,7 @@ pl <- cse$get_Plotter()
 stopifnot(c("gg", "ggplot") \%in\% class(pl$volcano()$FDR))
 }
 \seealso{
-\code{\link[prolfqua]{summary_ROPECA_median_p_scaled}}
+\code{\link[prolfqua]{summary_ropeca_median_p_scaled}}
 
 Other modelling:
 \code{\link{ContrastsSAINTFacade}}

@@ -15,7 +15,7 @@ Encoding: UTF-8
 Imports:
     dplyr,
     logger,
-    prolfqua (>= 1.9.2),
+    prolfqua (>= 1.9.5),
     purrr,
     rlang,
     SAINTexpress,

@@ -78,7 +78,7 @@ test_that("ContrastsSAINTFacade runs end-to-end via the R engine", {
 
   set.seed(31)
   istar <- prolfqua::sim_lfq_data_protein_config(
-    Nprot = 8,
+    n_proteins = 8,
     with_missing = FALSE,
     seed = 31
   )
