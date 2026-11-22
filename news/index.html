@@ -38,7 +38,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.99.0" id="prolfquasaint-0990">prolfquasaint 0.99.0<a class="anchor" aria-label="anchor" href="#prolfquasaint-0990"></a></h2>
-<ul><li><p>Requires prolfqua &gt;= 1.9.5 and uses its renamed simulator argument <code>n_proteins</code>.</p></li>
+<ul><li><p>The SAINTexpress report counts proteins from the first column of <code>hierarchy_counts()</code>, and the <code>MissingInformation</code> sheet comes without the <code>isotopeLabel</code> column; prolfqua 1.9.5 is label-free only.</p></li>
+<li><p>Requires prolfqua &gt;= 1.9.5 and uses its renamed simulator argument <code>n_proteins</code>.</p></li>
 <li><p>SAINT plots give histogram bins as <code>breaks</code>, the name prolfqua 1.9.2 uses for a <code>ContrastsPlotter</code> histogram spec (it was <code>xlim</code>); requires prolfqua &gt;= 1.9.2.</p></li>
 <li><p>The pure-R engine (<code>runSaint(engine = "r")</code>) comes from the package SAINTexpress, the new name of saintexpress since its 1.0.0 CRAN release.</p></li>
 <li><p>Installing prolfquasaint from GitHub (<code>pak::pak("prolfqua/prolfquasaint")</code>, CI) finds SAINTexpress in the renamed <code>prolfqua/SAINTexpress</code> repository; after the rename the install stopped with “Can’t find package called SAINTexpress”.</p></li>

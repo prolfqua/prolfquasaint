@@ -2,6 +2,10 @@
 
 ## prolfquasaint 0.99.0
 
+- The SAINTexpress report counts proteins from the first column of
+  `hierarchy_counts()`, and the `MissingInformation` sheet comes without
+  the `isotopeLabel` column; prolfqua 1.9.5 is label-free only.
+
 - Requires prolfqua \>= 1.9.5 and uses its renamed simulator argument
   `n_proteins`.
 
