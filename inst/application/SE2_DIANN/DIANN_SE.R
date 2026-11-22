@@ -182,7 +182,6 @@ RESULTS$InputData <- lfqdata$to_wide()$data
 
 gs <- lfqdata$get_Summariser()
 RESULTS$MissingInformation <- gs$interaction_missing_stats()$data
-RESULTS$MissingInformation$isotopeLabel <- NULL
 RESULTS$listFile <- NULL
 
 
