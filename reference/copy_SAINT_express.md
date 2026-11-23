@@ -20,15 +20,13 @@ copy_SAINT_express(workdir = getwd(), run_script = FALSE)
 
 ## Value
 
-return value from \`prolfqua::script_copy_helper_vec()\`.
+paths of the copied files; a file that cannot be copied gives a warning
+and is left out.
 
 ## Examples
 
 ``` r
 copy_SAINT_express(workdir = tempdir(), run_script = FALSE)
-#> copy /home/runner/work/_temp/Library/prolfquasaint/application/bibliography.bib to /tmp/RtmpKEpusM/bibliography.bib
-#> copy /home/runner/work/_temp/Library/prolfquasaint/application/SE2/SaintExpressReportMsFragger.Rmd to /tmp/RtmpKEpusM/SaintExpressReportMsFragger.Rmd
-#> your working directory now should contain: 2 new files:
-#> [1] "/tmp/RtmpKEpusM/bibliography.bib"               
-#> [2] "/tmp/RtmpKEpusM/SaintExpressReportMsFragger.Rmd"
+#> [1] "/tmp/RtmpHCqDCI/bibliography.bib"               
+#> [2] "/tmp/RtmpHCqDCI/SaintExpressReportMsFragger.Rmd"
 ```

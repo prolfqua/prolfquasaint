@@ -2,6 +2,12 @@
 
 ## prolfquasaint 0.99.0
 
+- [`copy_SAINT_express()`](https://prolfqua.github.io/prolfquasaint/reference/copy_SAINT_express.md)
+  copies the report template with its own helper instead of
+  [`prolfqua::script_copy_helper_vec()`](https://fgcz.github.io/prolfqua/reference/script_copy_helper_vec.html),
+  which prolfqua 1.9.5 deprecates; it no longer prints a message per
+  copied file.
+
 - The SAINTexpress report counts proteins from the first column of
   `hierarchy_counts()`, and the `MissingInformation` sheet comes without
   the `isotopeLabel` column; prolfqua 1.9.5 is label-free only.
