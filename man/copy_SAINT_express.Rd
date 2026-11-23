@@ -12,7 +12,7 @@ copy_SAINT_express(workdir = getwd(), run_script = FALSE)
 \item{run_script}{if TRUE, also copy the R run scripts}
 }
 \value{
-return value from `prolfqua::script_copy_helper_vec()`.
+paths of the copied files; a file that cannot be copied gives a warning and is left out.
 }
 \description{
 copy Markdown and runscript for DIANN diann-output.tsv

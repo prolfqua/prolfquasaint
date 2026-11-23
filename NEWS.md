@@ -1,5 +1,6 @@
 # prolfquasaint 0.99.0
 
+* `copy_SAINT_express()` copies the report template with its own helper instead of `prolfqua::script_copy_helper_vec()`, which prolfqua 1.9.5 deprecates; it no longer prints a message per copied file.
 * The SAINTexpress report counts proteins from the first column of `hierarchy_counts()`, and the `MissingInformation` sheet comes without the `isotopeLabel` column; prolfqua 1.9.5 is label-free only.
 * Requires prolfqua >= 1.9.5 and uses its renamed simulator argument `n_proteins`.
 * SAINT plots give histogram bins as `breaks`, the name prolfqua 1.9.2 uses for a `ContrastsPlotter` histogram spec (it was `xlim`); requires prolfqua >= 1.9.2.
