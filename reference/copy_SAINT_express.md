@@ -27,6 +27,6 @@ and is left out.
 
 ``` r
 copy_SAINT_express(workdir = tempdir(), run_script = FALSE)
-#> [1] "/tmp/RtmpHCqDCI/bibliography.bib"               
-#> [2] "/tmp/RtmpHCqDCI/SaintExpressReportMsFragger.Rmd"
+#> [1] "/tmp/Rtmp4GvQyi/bibliography.bib"               
+#> [2] "/tmp/Rtmp4GvQyi/SaintExpressReportMsFragger.Rmd"
 ```

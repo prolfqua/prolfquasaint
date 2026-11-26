@@ -2,6 +2,10 @@
 
 ## prolfquasaint 0.99.0
 
+- `data_IonstarProtein_subsetNorm` carries a configuration built with
+  prolfqua 1.9.11, without the removed `ident_q_value`; its data is
+  unchanged.
+
 - [`copy_SAINT_express()`](https://prolfqua.github.io/prolfquasaint/reference/copy_SAINT_express.md)
   copies the report template with its own helper instead of
   [`prolfqua::script_copy_helper_vec()`](https://fgcz.github.io/prolfqua/reference/script_copy_helper_vec.html),
